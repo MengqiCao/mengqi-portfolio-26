@@ -4,4 +4,3 @@ dist/
 .env
 .env.*
 *.log
-assets/soundmap/carousel-1.mov
