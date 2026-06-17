@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ariana Cao is a UX designer building quiet, editorial digital experiences."
+    />
+    <title>Ariana Cao - UX Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Noto+Serif+JP:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="site-nav" aria-label="Primary navigation">
+        <a class="identity" href="#top" aria-label="Ariana Cao home">
+          <img src="mengqi-logo.svg" alt="Mengqi logo" class="identity__logo" />
+        </a>
+
+        <nav class="nav-links">
+          <a href="#work" class="is-active">Work</a>
+          <a href="#about">About</a>
+          <a href="#archive">Archive</a>
+          <a href="mailto:hello@example.com">Contact</a>
+        </nav>
+
+        <div class="nav-meta">
+          <p>Based in New York</p>
+          <p>Version 0.2</p>
+        </div>
+      </aside>
+
+      <main class="portfolio" id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <p class="label">Selected work / product design / research</p>
+          <h1 id="hero-title">
+            Hi, I’m Mengqi. I own complexity, align teams, and think in systems
+          </h1>
+          <p class="hero__text">
+            I am Ariana Cao, a UX designer interested in calm interfaces,
+            editorial rhythm, and the small decisions that make digital products
+            feel more considered.
+          </p>
+        </section>
+
+        <section
+          class="section work-section"
+          id="work"
+          aria-labelledby="work-title"
+        >
+          <div class="section__title">
+            <h2 id="work-title">Vibe coding projects</h2>
+          </div>
+
+          <div class="work-grid">
+            <article class="project-card">
+              <button
+                class="project-trigger"
+                type="button"
+                data-project="the-council"
+                aria-label="Open The Council showcase"
+              >
+                <div class="project-image project-video-thumb" aria-hidden="true">
+                  <video
+                    src="assets/the-council/council-sage-chat.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+                <div class="project-card__meta">
+                  <span>01</span>
+                  <span>AI conversation</span>
+                </div>
+                <h3>The Council</h3>
+                <p>
+                  A vibe-coded interface for gathering multiple perspectives
+                  through a quiet conversational ritual.
+                </p>
+              </button>
+            </article>
+
+            <article class="project-card">
+              <button
+                class="project-trigger"
+                type="button"
+                data-project="sunwalk"
+                aria-label="Open Sunwalk showcase"
+              >
+                <div class="project-image project-video-thumb" aria-hidden="true">
+                  <video
+                    src="assets/sunwalk/carousel-2.mp4"
+                    autoplay
+                    muted
+                    playsinline
+                    data-stop-cover-time="2"
+                  ></video>
+                </div>
+                <div class="project-card__meta">
+                  <span>02</span>
+                  <span>Sunlight tracker</span>
+                </div>
+                <h3>Sunwalk</h3>
+                <p>
+                  A mobile app that makes sunlight visible, tracking daily
+                  exposure and guiding people outside when they need it most.
+                </p>
+              </button>
+            </article>
+
+            <article class="project-card">
+              <button
+                class="project-trigger"
+                type="button"
+                data-project="soundmap"
+                aria-label="Open Soundmap showcase"
+              >
+                <div
+                  class="project-image project-video-thumb project-video-thumb--soundmap"
+                  aria-hidden="true"
+                >
+                  <video
+                    src="assets/soundmap/carousel-1.mov"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+                <div class="project-card__meta">
+                  <span>03</span>
+                  <span>Spotify map</span>
+                </div>
+                <h3>Soundmap</h3>
+                <p>
+                  A website that maps a Spotify playlist onto a world map based
+                  on where each artist is from.
+                </p>
+              </button>
+            </article>
+          </div>
+
+          <div class="section__title section__title--featured">
+            <h2>Featured works</h2>
+          </div>
+
+          <div class="featured-list" aria-label="Featured portfolio work">
+            <article class="featured-card">
+              <a
+                href="featured-signal-room.html"
+                aria-label="Open Signal Room featured case study"
+              >
+                <div
+                  class="featured-image project-image project-image--grid"
+                  aria-hidden="true"
+                >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="featured-card__body">
+                  <div class="project-card__meta">
+                    <span>01</span>
+                    <span>Featured case study</span>
+                  </div>
+                  <h3>Signal Room</h3>
+                  <p>
+                    A visual direction for turning operational complexity into
+                    a readable daily ritual.
+                  </p>
+                </div>
+              </a>
+            </article>
+
+            <article class="featured-card">
+              <a
+                href="featured-paper-studio.html"
+                aria-label="Open Paper Studio featured case study"
+              >
+                <div
+                  class="featured-image project-image project-image--block"
+                  aria-hidden="true"
+                >
+                  <span></span>
+                </div>
+                <div class="featured-card__body">
+                  <div class="project-card__meta">
+                    <span>02</span>
+                    <span>Editorial web system</span>
+                  </div>
+                  <h3>Paper Studio</h3>
+                  <p>
+                    A portfolio and publishing surface built around quiet
+                    typography, restrained motion, and careful reading paths.
+                  </p>
+                </div>
+              </a>
+            </article>
+
+            <article class="featured-card">
+              <a
+                href="featured-room-index.html"
+                aria-label="Open Room Index featured case study"
+              >
+                <div
+                  class="featured-image project-image project-image--lines"
+                  aria-hidden="true"
+                >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="featured-card__body">
+                  <div class="project-card__meta">
+                    <span>03</span>
+                    <span>Product design</span>
+                  </div>
+                  <h3>Room Index</h3>
+                  <p>
+                    A structured workspace for collecting references, decisions,
+                    and project context across a design team.
+                  </p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <section
+          class="section section--reading"
+          id="about"
+          aria-labelledby="about-title"
+        >
+          <p class="label">About</p>
+          <h2 id="about-title">Perspective</h2>
+          <p>
+            My work begins with attention: listening closely, naming what feels
+            unclear, and shaping interfaces that help people orient themselves.
+            I am drawn to products that need structure, restraint, and a sense
+            of emotional intelligence.
+          </p>
+          <p>
+            I think of design as editing. The goal is not to add more surface,
+            but to make the right things legible at the right moment.
+          </p>
+        </section>
+
+        <section class="section" id="archive" aria-labelledby="archive-title">
+          <div class="section__header">
+            <p class="label">Archive</p>
+            <h2 id="archive-title">Notes and studies</h2>
+          </div>
+
+          <div class="archive-list">
+            <a href="#">
+              <span>Experiment</span>
+              <strong>Quiet onboarding patterns</strong>
+              <span>2026</span>
+            </a>
+            <a href="#">
+              <span>Reference</span>
+              <strong>Museum catalog spacing study</strong>
+              <span>2026</span>
+            </a>
+            <a href="#">
+              <span>Process</span>
+              <strong>Research synthesis wall</strong>
+              <span>2025</span>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="showcase-modal" id="showcase-modal" aria-hidden="true">
+      <div class="showcase-modal__backdrop" aria-hidden="true"></div>
+      <section
+        class="showcase-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="showcase-title"
+      >
+        <button
+          class="modal-close"
+          type="button"
+          data-modal-close
+          aria-label="Close showcase"
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="showcase-hero">
+          <p class="label" id="showcase-kind">Vibe coding project</p>
+          <div>
+            <h2 id="showcase-title">The Council</h2>
+            <p id="showcase-summary">
+              A lightweight product experiment exploring how a council of
+              voices can help a user think through a question.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="showcase-carousel"
+          data-project-carousel="the-council"
+          aria-label="Scrollable project media"
+        >
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/the-council/carousel-1.png"
+              alt="Three mobile screens from The Council prototype shown over a mountain landscape"
+            />
+            <figcaption>Prototype overview / 01</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/the-council/carousel-2.png"
+              alt="The Council saved verdict screen displayed on a phone"
+            />
+            <figcaption>Verdict and saved wisdom / 02</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/the-council/carousel-3.png"
+              alt="Socrate sage selection screen displayed on a phone"
+            />
+            <figcaption>Sage selection / 03</figcaption>
+          </figure>
+        </div>
+
+        <div
+          class="showcase-carousel is-hidden"
+          data-project-carousel="sunwalk"
+          aria-label="Scrollable Sunwalk media"
+        >
+          <figure class="carousel-slide carousel-slide--wide">
+            <video
+              class="showcase-carousel-image showcase-carousel-video"
+              src="assets/sunwalk/carousel-1.mov"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+            <figcaption>Sunwalk / 01</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <video
+              class="showcase-carousel-image showcase-carousel-video"
+              src="assets/sunwalk/carousel-2.mp4"
+              autoplay
+              muted
+              playsinline
+              data-stop-cover-time="2"
+            ></video>
+            <figcaption>Sunny route planning / 02</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/sunwalk/carousel-3.png"
+              alt="Sunwalk mobile interface screen"
+            />
+            <figcaption>Map view / 03</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/sunwalk/carousel-4.png"
+              alt="Sunwalk mobile interface detail"
+            />
+            <figcaption>Prefrences setting / 04</figcaption>
+          </figure>
+        </div>
+
+        <div
+          class="showcase-carousel is-hidden"
+          data-project-carousel="soundmap"
+          aria-label="Scrollable Soundmap media"
+        >
+          <figure class="carousel-slide carousel-slide--wide">
+            <video
+              class="showcase-carousel-image showcase-carousel-video"
+              src="assets/soundmap/carousel-1.mov"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+            <figcaption>Playlist mapping / 01</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/soundmap/carousel-2.png"
+              alt="Soundmap playlist interface mapped to a world map"
+            />
+            <figcaption>World map overview / 02</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/soundmap/carousel-3.png"
+              alt="Soundmap mapped track detail"
+            />
+            <figcaption>Mapped tracks / 03</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <img
+              class="showcase-carousel-image"
+              src="assets/soundmap/carousel-4.png"
+              alt="Soundmap unmapped track state"
+            />
+            <figcaption>Origin confidence / 04</figcaption>
+          </figure>
+        </div>
+
+        <div
+          class="showcase-carousel is-hidden"
+          data-project-carousel="generic"
+          aria-label="Scrollable project media placeholders"
+        >
+          <figure class="carousel-slide carousel-slide--wide">
+            <div class="media-placeholder">
+              <span>Project hero placeholder</span>
+            </div>
+            <figcaption>Prototype overview / 01</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <div class="media-placeholder">
+              <span>Interface detail placeholder</span>
+            </div>
+            <figcaption>Interaction detail / 02</figcaption>
+          </figure>
+          <figure class="carousel-slide carousel-slide--wide">
+            <div class="media-placeholder">
+              <span>Process visual placeholder</span>
+            </div>
+            <figcaption>Process note / 03</figcaption>
+          </figure>
+        </div>
+
+        <section class="council-overview is-hidden" data-council-overview>
+          <aside>
+            <p class="pull-quote">
+              “One of the most thoughtful student projects to come out of this
+              semester. Beautifully executed from concept to prototype, with so
+              many careful interaction details that reveal the depth of thinking
+              behind it.”
+            </p>
+            <div class="testimonial-author council-overview__author">
+              <img
+                src="assets/the-council/pamela-avatar.png"
+                alt="Illustrated avatar for Pamela Pavliscak"
+              />
+              <p>
+                <a
+                  href="https://www.linkedin.com/in/pamelapavliscak?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAACBjcMBR7m_S-i08xevcm9KSEnfmyI3x4c"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Pamela Pavliscak
+                </a>
+                <em>Author of All the Feels</em>
+              </p>
+            </div>
+            <p class="caption">Role / Product design, visual</p>
+            <p class="caption">Timeline / 1 month</p>
+            <p class="caption">Tool / Figma Make, Claude Code</p>
+            <p class="caption">Team / 3 product designers</p>
+          </aside>
+          <div>
+            <h3>Overview</h3>
+            <p>
+              The Council is a reflective AI prototype for people who are stuck
+              with a question but do not want a direct answer. Instead of
+              mirroring the user back to themselves, it invites multiple
+              philosophical perspectives into the conversation so users can
+              examine a dilemma from different angles.
+            </p>
+            <a
+              class="text-link"
+              href="https://mince-plot-58702048.figma.site"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View prototype
+            </a>
+            <p class="prototype-note">Choose iPhone 16 for the best experience.</p>
+          </div>
+        </section>
+
+        <div class="council-story is-hidden" data-council-story>
+          <section class="council-section council-section--intro">
+            <div class="council-intro-copy">
+              <p class="section-kicker">Core problem</p>
+              <h3>
+                People use AI when they are stuck, but they do not always want
+                answers.
+              </h3>
+              <p>
+                The Council began with a simple tension: people ask AI for help
+                with work, life, and unnamed spirals, yet many do not want a
+                therapist, coach, or oracle. They want to see their situation from
+                different angles and reach their own understanding.
+              </p>
+              <p class="council-question">
+                How might an AI experience help people think more clearly without
+                telling them what to think?
+              </p>
+            </div>
+            <figure class="core-problem-visual">
+              <img
+                src="assets/the-council/core-problem-visual.png"
+                alt="Illustration of a person surrounded by tangled thoughts and competing responsibilities"
+              />
+            </figure>
+          </section>
+
+          <section class="council-section">
+            <div class="council-copy">
+              <p class="section-kicker">Introducing The Council</p>
+              <h3>A place to think out loud and hear something unexpected.</h3>
+              <p>
+                Users bring a dilemma they have been circling, then meet it
+                through philosophical characters. Socrates, the Stoics, the
+                Absurdists, and others each respond with distinct rhythms,
+                obsessions, and useful friction.
+              </p>
+            </div>
+            <figure class="council-image">
+              <img
+                src="assets/the-council/introduce-council.png"
+                alt="Three onboarding screens introducing The Council"
+              />
+            </figure>
+          </section>
+
+          <section class="council-section">
+            <p class="section-kicker">Research</p>
+            <h3>The neutrality paradox</h3>
+            <p>
+              The opportunity was not to make AI more authoritative, but to make
+              its perspective intentionally situated and easier to push against.
+            </p>
+            <div class="insight-grid">
+              <article>
+                <img
+                  class="insight-avatar"
+                  src="assets/the-council/neutrality-safe.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <strong>Neutrality can feel safe.</strong>
+                <p>
+                  Some users value AI because it does not bring social bias or a
+                  personal agenda into difficult decisions.
+                </p>
+              </article>
+              <article>
+                <img
+                  class="insight-avatar"
+                  src="assets/the-council/neutrality-thin.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <strong>Neutrality can also feel thin.</strong>
+                <p>
+                  Others said advice from AI can feel generic because it lacks
+                  lived experience, opinion, and texture.
+                </p>
+              </article>
+            </div>
+            <div class="research-detail">
+              <h4>The need for agency</h4>
+              <p>
+                Across early interviews, the strongest pattern was not a desire
+                for the AI to decide. People wanted help staying with a dilemma
+                long enough to reach their own conclusion.
+              </p>
+              <blockquote>
+                “It is less about getting a clear answer, and more about finding
+                a way to see the situation differently through something that
+                feels relatable and meaningful.”
+              </blockquote>
+              <p>
+                A second pattern was validation. Advice-seeking often began
+                after users had already formed a preference, but needed language,
+                friction, or perspective to understand why.
+              </p>
+              <blockquote>
+                “I do not just want options. I would like it to help me commit
+                to one of them.”
+              </blockquote>
+            </div>
+          </section>
+
+          <section class="council-section">
+            <div class="council-copy">
+              <p class="section-kicker">Ideation</p>
+              <h3>Not everyone wants to be challenged by a machine.</h3>
+              <p>
+                But they might take it from Socrates, Laozi, or Kierkegaard.
+                Philosopher personas made the same idea land differently
+                depending on who delivered it.
+              </p>
+              <p>
+                Our goal was to use AI to surface perspectives that felt
+                genuinely refreshing: not neutral advice, but distinct voices
+                that could spark reflection, critical thinking, and a little
+                productive resistance.
+              </p>
+            </div>
+            <figure class="council-video-block">
+              <video
+                src="assets/the-council/council-quote.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+              ></video>
+            </figure>
+          </section>
+
+          <section class="council-section">
+            <p class="section-kicker">Prototype walkthrough</p>
+            <h3>Two paths: one voice or many.</h3>
+            <p>
+              The entry asks users to begin with a question or a messy thought.
+              From there, they choose a Sage for a one-on-one reflective session
+              or a Council to watch several philosophers debate the dilemma.
+            </p>
+            <div class="walkthrough-reveal" data-walkthrough>
+              <div class="walkthrough-copy-list">
+                <article
+                  class="walkthrough-copy is-active"
+                  data-walkthrough-step="sage"
+                >
+                  <p class="section-kicker">01 / The sage</p>
+                  <h4>The Sage</h4>
+                  <p>
+                    A one-on-one path turns the conversation inward. The Sage
+                    listens, asks, and slows the user down without resolving the
+                    question too quickly.
+                  </p>
+                </article>
+                <article class="walkthrough-copy" data-walkthrough-step="council">
+                  <p class="section-kicker">02 / The council</p>
+                  <h4>The Council</h4>
+                  <p>
+                    The Council path makes disagreement visible. Philosophers
+                    respond from different assumptions, giving the user a set of
+                    lenses to accept, reject, or sit with.
+                  </p>
+                </article>
+                <article class="walkthrough-copy" data-walkthrough-step="quiz">
+                  <p class="section-kicker">03 / Quiz</p>
+                  <h4>Quiz</h4>
+                  <p>
+                    If the user does not know who to speak with, a short quiz
+                    helps match them with a philosopher or mode of reflection
+                    without turning the moment into onboarding.
+                  </p>
+                </article>
+                <article class="walkthrough-copy" data-walkthrough-step="output">
+                  <p class="section-kicker">04 / Output</p>
+                  <h4>Output</h4>
+                  <p>
+                    Instead of a final answer, the output becomes a quote,
+                    verdict, or saved thought the user can return to later.
+                  </p>
+                </article>
+              </div>
+
+              <div class="walkthrough-stage" aria-hidden="true">
+                <div class="walkthrough-visual is-active" data-walkthrough-visual="sage">
+                  <video
+                    src="assets/the-council/walkthrough-sage.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+                <div class="walkthrough-visual" data-walkthrough-visual="council">
+                  <video
+                    src="assets/the-council/walkthrough-council.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+                <div class="walkthrough-visual" data-walkthrough-visual="quiz">
+                  <video
+                    src="assets/the-council/walkthrough-quiz.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+                <div class="walkthrough-visual" data-walkthrough-visual="output">
+                  <video
+                    src="assets/the-council/walkthrough-output.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="council-section council-section--compact">
+            <p class="section-kicker">Conclusion</p>
+            <div class="conclusion-copy">
+              <h3>Meaning came from conditions, not conclusions.</h3>
+              <p>
+                The Council works by being a little strange, dry, and
+                deliberately uninterested in giving wellness-app advice. It
+                creates the conditions for users to think critically on their
+                own.
+              </p>
+              <ul class="council-list">
+                <li>One question at a time keeps the interaction focused.</li>
+                <li>Vivid personas give users a specific lens to push against.</li>
+                <li>Sideways observations can be more useful than direct advice.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <section class="sunwalk-overview is-hidden" data-sunwalk-overview>
+          <aside>
+            <p class="pull-quote">
+              “Sunlight is not a productivity metric. It is a quiet
+              environmental cue that changes how the day feels.”
+            </p>
+            <p class="caption">Timeline / 3 days, FigBuild Hackathon 2026</p>
+            <p class="caption">
+              Role / Product design, UX, Figma Make front-end build
+            </p>
+            <p class="caption">Tools / Figma, Figma Make</p>
+          </aside>
+          <div>
+            <h3>Overview</h3>
+            <p>
+              Sunwalk is a mobile prototype that helps people notice how much
+              sunlight they receive throughout the day, then nudges them toward
+              small outdoor moments when their body might need them most.
+            </p>
+            <p>
+              Built during a three-day hackathon, the project explores a simple
+              question: what if sunlight could feel as trackable and gently
+              actionable as steps?
+            </p>
+            <a
+              class="text-link"
+              href="https://footer-basil-30524456.figma.site"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View Sunwalk prototype"
+            >
+              View prototype
+            </a>
+            <p class="prototype-note">Choose iPhone 16 for the best experience.</p>
+          </div>
+        </section>
+
+        <div class="sunwalk-story is-hidden" data-sunwalk-story>
+          <section class="council-section sunwalk-two-column sunwalk-two-column--center">
+            <div class="council-copy">
+              <p class="section-kicker">Problem</p>
+              <h3>
+                Sunlight affects how we feel, but most of us do not notice it.
+              </h3>
+              <p>
+                Imagine waking up tired, struggling to focus, and noticing your
+                mood feels lower than usual. Nothing seems obviously wrong. You
+                might blame stress, or assume you did not sleep well.
+              </p>
+              <p>
+                Sometimes the reason is simpler: you have not had enough
+                sunlight.
+              </p>
+            </div>
+            <figure class="council-image sunwalk-wide-placeholder">
+              <img
+                src="assets/sunwalk/problem-visual.png"
+                alt="Illustration for Sunwalk's sunlight and mood problem"
+              />
+            </figure>
+          </section>
+
+          <section class="council-section">
+            <p class="section-kicker">Research</p>
+            <h3>People spend most of the day indoors, often without noticing.</h3>
+            <div class="sunwalk-research-grid">
+              <article>
+                <img
+                  src="assets/sunwalk/research1.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <strong>42% of Americans</strong>
+                <p>
+                  are vitamin D deficient. Sunlight is the body’s primary
+                  source, and most people do not know they are low.
+                </p>
+              </article>
+              <article>
+                <img
+                  src="assets/sunwalk/resaerch2.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <strong>1 extra hour outside</strong>
+                <p>
+                  can lower depression risk and raise self-reported happiness,
+                  according to a large UK study.
+                </p>
+              </article>
+              <article>
+                <img
+                  src="assets/sunwalk/research3.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <strong>90% of our time</strong>
+                <p>
+                  is spent indoors. We have quietly lost contact with something
+                  our bodies depend on every day.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section class="council-section sunwalk-two-column sunwalk-two-column--center">
+            <div class="council-copy">
+              <p class="section-kicker">Design approach</p>
+              <h3>
+                What if you could sense your sunlight intake the way a fitness
+                tracker counts your steps?
+              </h3>
+              <p>
+                The interface needed to feel gentle, not clinical. Instead of
+                turning sunlight into another performance score, Sunwalk frames
+                exposure as a daily rhythm: something to understand, plan around,
+                and return to with curiosity.
+              </p>
+            </div>
+            <figure class="council-image sunwalk-wide-placeholder">
+              <img
+                src="assets/sunwalk/whatif-visual.png"
+                alt="Sunwalk concept illustration about sensing sunlight intake"
+              />
+            </figure>
+          </section>
+
+          <section class="council-section">
+            <div class="council-copy">
+              <p class="section-kicker">Solution</p>
+              <h3>Introducing Sunwalk</h3>
+              <p>
+                An app that helps people understand how much sunlight they
+                receive throughout the day, and guides them to step outside when
+                they need it most.
+              </p>
+            </div>
+            <figure class="council-image sunwalk-wide-placeholder">
+              <img
+                src="assets/sunwalk/introducing-visual.png"
+                alt="Sunwalk prototype overview showing app screens and sunlight guidance"
+              />
+            </figure>
+          </section>
+
+          <section class="council-section sunwalk-solution">
+            <div class="sunwalk-solution-copy">
+              <article class="sunwalk-step is-active" data-sunwalk-step="route">
+                <p class="section-kicker">Solution</p>
+                <img
+                  class="sunwalk-avatar"
+                  src="assets/sunwalk/forariana-visual.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <p>
+                  For Ariana, the walk home from the office is often the only
+                  time spent outside all day. Recently, she has been trying to
+                  get a bit more sunlight whenever possible.
+                </p>
+                <p>
+                  Sunwalk helps decide which route home offers the best sunlight
+                  along the way.
+                </p>
+              </article>
+              <article class="sunwalk-step" data-sunwalk-step="weather">
+                <p class="section-kicker">Solution</p>
+                <img
+                  class="sunwalk-avatar"
+                  src="assets/sunwalk/forariana-visual.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <p>
+                  When New York is about to get a full week of snow, Sunwalk
+                  helps notice the remaining sunny windows and plan a small
+                  outdoor moment before they disappear.
+                </p>
+              </article>
+              <article class="sunwalk-step" data-sunwalk-step="wander">
+                <p class="section-kicker">Solution</p>
+                <img
+                  class="sunwalk-avatar"
+                  src="assets/sunwalk/forariana-visual.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <p>
+                  Casual Walk encourages people to step outside, slow down, and
+                  wander a little based on their mood and preferences.
+                </p>
+              </article>
+            </div>
+
+            <div class="sunwalk-sticky-visual" aria-hidden="true">
+              <div
+                class="sunwalk-visual is-active"
+                data-sunwalk-visual="route"
+              >
+                <div class="sunwalk-video-frame">
+                  <video
+                    src="assets/sunwalk/solution1.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+              </div>
+              <div class="sunwalk-visual" data-sunwalk-visual="weather">
+                <div class="sunwalk-video-frame">
+                  <video
+                    src="assets/sunwalk/solution2.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+              </div>
+              <div class="sunwalk-visual" data-sunwalk-visual="wander">
+                <div class="sunwalk-video-frame">
+                  <video
+                    src="assets/sunwalk/solution3.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                  ></video>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="council-section sunwalk-two-column sunwalk-two-column--center">
+            <div class="conclusion-copy">
+              <p class="section-kicker">Conclusion</p>
+              <h3>Three days forced clarity.</h3>
+              <p>
+                Sunwalk taught me where AI-assisted building is genuinely useful:
+                generating UI, iterating copy, and moving from concept to
+                prototype without a traditional handoff.
+              </p>
+              <p>
+                With more time, I would return to the fundamentals: talk to real
+                users, test whether the sunlight metaphor lands, and give Casual
+                Walk the depth it deserves. AI can accelerate execution, but the
+                judgment calls are still the designer’s job.
+              </p>
+            </div>
+            <figure class="council-image sunwalk-conclusion-visual">
+              <img
+                src="assets/sunwalk/conclusion-visual.png"
+                alt="Small cyclist illustration for Sunwalk conclusion"
+              />
+            </figure>
+          </section>
+        </div>
+
+        <section class="soundmap-overview is-hidden" data-soundmap-overview>
+          <aside>
+            <p class="pull-quote">
+              “Genres do not start in a vacuum, they start in a city, a
+              climate, a language.”
+            </p>
+            <p class="caption">Role / Product design, engineer</p>
+            <p class="caption">Tools / Codex, Vercel</p>
+          </aside>
+          <div>
+            <h3>Overview</h3>
+            <p>
+              I love listening to music. I build playlists around mood and
+              scene, and the tracks I pull together always seem to come from
+              different corners of the world. That made me curious: where is my
+              favorite music actually from? Is the sound of a track connected to
+              where it came from?
+            </p>
+            <p>
+              That curiosity led me to build Soundmap, a tool that maps your
+              Spotify playlist onto a world map based on where each artist is
+              from.
+            </p>
+            <h3>What changed</h3>
+            <p>
+              Spotify does not expose artist origin data, so I had the agent
+              search for it live each time a playlist loads. Early results were
+              inconsistent, often picking up a featured collaborator instead of
+              the primary artist. I eventually scoped the search to MusicBrainz
+              and the main artist only.
+            </p>
+            <p>
+              When origin data is missing, the interface says which tracks
+              mapped successfully and which did not, so what appears on the map
+              stays accurate. Deployment is still in progress, and I will add
+              the live demo link once the Vercel formatting issues are resolved.
+            </p>
+          </div>
+        </section>
+
+        <div class="showcase-content">
+          <aside>
+            <p class="pull-quote" id="showcase-quote">
+              “A small weekend build became a study in clarity, timing, and
+              restraint.”
+            </p>
+            <p class="caption">Role / Product design, prototyping</p>
+            <p class="caption">Timeline / Placeholder sprint</p>
+          </aside>
+          <div>
+            <h3>Overview</h3>
+            <p id="showcase-overview">
+              Placeholder copy for a concise project story. This section will
+              describe the initial idea, the constraint, and the moment the
+              prototype became useful enough to share.
+            </p>
+            <h3>What changed</h3>
+            <p id="showcase-detail">
+              Placeholder copy for design decisions, interface details, and
+              small interaction choices. The tone should stay lightweight and
+              readable, like a project note rather than a full case study.
+            </p>
+            <a class="text-link" href="#" id="showcase-link">
+              View prototype
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js?v=soundmap-project"></script>
+  </body>
+</html>

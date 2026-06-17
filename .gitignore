@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+dist/
+.env
+.env.*
+*.log
+assets/soundmap/carousel-1.mov
