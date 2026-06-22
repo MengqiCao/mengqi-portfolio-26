@@ -11,8 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Noto+Serif+JP:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;800&family=Noto+Serif+JP:wght@400&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -26,27 +30,96 @@
         <nav class="nav-links">
           <a href="#work" class="is-active">Work</a>
           <a href="#about">About</a>
-          <a href="#archive">Archive</a>
           <a href="mailto:hello@example.com">Contact</a>
         </nav>
 
-        <div class="nav-meta">
-          <p>Based in New York</p>
-          <p>Version 0.2</p>
+        <div class="nav-actions">
+          <a
+            class="resume-link"
+            href="https://drive.google.com/file/d/14xrcUuPpTKA2lGNBKkolx32Emp5p1jqU/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Resume
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
+          <div class="social-links" aria-label="Social links">
+            <a
+              href="https://www.linkedin.com/in/mengqicao/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+            >
+              <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+            </a>
+            <a
+              href="https://medium.com/@arianacao18"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Medium"
+            >
+              <i class="fa-brands fa-medium" aria-hidden="true"></i>
+            </a>
+            <a
+              href="https://github.com/MengqiCao"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+            >
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
       </aside>
 
       <main class="portfolio" id="top">
         <section class="hero" aria-labelledby="hero-title">
-          <p class="label">Selected work / product design / research</p>
+          <p class="label status-label">
+            <span class="status-dot" aria-hidden="true"></span>
+            Open to work
+          </p>
           <h1 id="hero-title">
-            Hi, I’m Mengqi. I own complexity, align teams, and think in systems
+            Hi, I’m
+            <span class="hero-name">
+              Mengqi
+              <svg
+                class="hero-name__sparkle hero-name__sparkle--1"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 0c0.6 4.8 1.6 7.7 3 9.1 1.4 1.4 4.3 2.4 9 3-4.7 0.6-7.6 1.6-9 3-1.4 1.4-2.4 4.3-3 9.1-0.6-4.8-1.6-7.7-3-9.1-1.4-1.4-4.3-2.4-9-3 4.7-0.6 7.6-1.6 9-3 1.4-1.4 2.4-4.3 3-9.1z"
+                />
+              </svg>
+              <svg
+                class="hero-name__sparkle hero-name__sparkle--2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 0c0.6 4.8 1.6 7.7 3 9.1 1.4 1.4 4.3 2.4 9 3-4.7 0.6-7.6 1.6-9 3-1.4 1.4-2.4 4.3-3 9.1-0.6-4.8-1.6-7.7-3-9.1-1.4-1.4-4.3-2.4-9-3 4.7-0.6 7.6-1.6 9-3 1.4-1.4 2.4-4.3 3-9.1z"
+                />
+              </svg>
+            </span>
           </h1>
           <p class="hero__text">
-            I am Ariana Cao, a UX designer interested in calm interfaces,
-            editorial rhythm, and the small decisions that make digital products
-            feel more considered.
+            I'm a product designer with 3 years across B2B and B2C. I design calm, structured systems for complex products, and use AI to vibe-code my ideas before they're real.
           </p>
+          <div
+            class="oneko-divider-widget"
+            data-oneko-divider
+            aria-label="Interactive cat and ball divider"
+          >
+            <div class="oneko-cat" data-oneko-cat aria-hidden="true"></div>
+            <button
+              class="oneko-ball"
+              type="button"
+              data-oneko-ball
+              aria-label="Launch the ball for the cat"
+            ></button>
+          </div>
         </section>
 
         <section
@@ -77,7 +150,7 @@
                 </div>
                 <div class="project-card__meta">
                   <span>01</span>
-                  <span>AI conversation</span>
+                  <span>AI Chatbot</span>
                 </div>
                 <h3>The Council</h3>
                 <p>
@@ -105,7 +178,7 @@
                 </div>
                 <div class="project-card__meta">
                   <span>02</span>
-                  <span>Sunlight tracker</span>
+                  <span>Wellness UX</span>
                 </div>
                 <h3>Sunwalk</h3>
                 <p>
@@ -127,7 +200,7 @@
                   aria-hidden="true"
                 >
                   <video
-                    src="assets/soundmap/carousel-1.mov"
+                    src="assets/soundmap/cover.mp4"
                     autoplay
                     muted
                     loop
@@ -136,7 +209,7 @@
                 </div>
                 <div class="project-card__meta">
                   <span>03</span>
-                  <span>Spotify map</span>
+                  <span>Data Visualization</span>
                 </div>
                 <h3>Soundmap</h3>
                 <p>
@@ -154,29 +227,28 @@
           <div class="featured-list" aria-label="Featured portfolio work">
             <article class="featured-card">
               <a
-                href="featured-signal-room.html"
-                aria-label="Open Signal Room featured case study"
+                href="featured-amazon-music.html"
+                aria-label="Open Amazon Music featured case study"
               >
-                <div
-                  class="featured-image project-image project-image--grid"
-                  aria-hidden="true"
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="featured-image featured-image--media">
+                  <video
+                    src="assets/amazon%20music/am-thumbnail.mov"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    aria-label="Amazon Music EchoSoul concept preview"
+                  ></video>
                 </div>
                 <div class="featured-card__body">
                   <div class="project-card__meta">
                     <span>01</span>
-                    <span>Featured case study</span>
+                    <span>Retention Strategy</span>
                   </div>
-                  <h3>Signal Room</h3>
+                  <h3>Amazon Music</h3>
                   <p>
-                    A visual direction for turning operational complexity into
-                    a readable daily ritual.
+                    A one-month design sprint exploring emotional engagement
+                    and long-term retention for Amazon Music.
                   </p>
                 </div>
               </a>
@@ -184,24 +256,24 @@
 
             <article class="featured-card">
               <a
-                href="featured-paper-studio.html"
-                aria-label="Open Paper Studio featured case study"
+                href="featured-wikipedia.html"
+                aria-label="Open Wikipedia accessibility audit featured case study"
               >
-                <div
-                  class="featured-image project-image project-image--block"
-                  aria-hidden="true"
-                >
-                  <span></span>
+                <div class="featured-image featured-image--media">
+                  <img
+                    src="assets/wikipedia/overview-visual.png"
+                    alt="Wikipedia accessibility audit overview screens"
+                  />
                 </div>
                 <div class="featured-card__body">
                   <div class="project-card__meta">
                     <span>02</span>
-                    <span>Editorial web system</span>
+                    <span>Digital Accessibility</span>
                   </div>
-                  <h3>Paper Studio</h3>
+                  <h3>Wikipedia Accessibility Audit</h3>
                   <p>
-                    A portfolio and publishing surface built around quiet
-                    typography, restrained motion, and careful reading paths.
+                    A WCAG 2.2 audit and redesign of Wikipedia's iOS discovery
+                    experience.
                   </p>
                 </div>
               </a>
@@ -209,26 +281,24 @@
 
             <article class="featured-card">
               <a
-                href="featured-room-index.html"
-                aria-label="Open Room Index featured case study"
+                href="featured-pourover.html"
+                aria-label="Open Pour Over Design System featured case study"
               >
-                <div
-                  class="featured-image project-image project-image--lines"
-                  aria-hidden="true"
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                <div class="featured-image featured-image--media">
+                  <img
+                    src="assets/pourover/Thumbnail.png"
+                    alt="Pour Over design system overview"
+                  />
                 </div>
                 <div class="featured-card__body">
                   <div class="project-card__meta">
                     <span>03</span>
-                    <span>Product design</span>
+                    <span>Design Systems</span>
                   </div>
-                  <h3>Room Index</h3>
+                  <h3>Pour Over Design System</h3>
                   <p>
-                    A structured workspace for collecting references, decisions,
-                    and project context across a design team.
+                    A unified UI kit and documentation system for Blue Bottle
+                    Coffee's digital experience.
                   </p>
                 </div>
               </a>
@@ -237,46 +307,86 @@
         </section>
 
         <section
-          class="section section--reading"
+          class="section section--reading section--about"
           id="about"
           aria-labelledby="about-title"
         >
           <p class="label">About</p>
-          <h2 id="about-title">Perspective</h2>
-          <p>
-            My work begins with attention: listening closely, naming what feels
-            unclear, and shaping interfaces that help people orient themselves.
-            I am drawn to products that need structure, restraint, and a sense
-            of emotional intelligence.
-          </p>
-          <p>
-            I think of design as editing. The goal is not to add more surface,
-            but to make the right things legible at the right moment.
-          </p>
+          <h2 id="about-title">Beyond the portfolio</h2>
+
+          <div class="about-grid">
+            <div class="about-copy">
+              <p>
+                I'm Mengqi &mdash; a designer who loves creative tools and the
+                small moments that make a product feel delightful.
+              </p>
+              <p>
+                Outside of design, I'm probably solving beta on a bouldering
+                wall, building weird little projects with code, shooting
+                through a disposable camera, or watching the sunset.
+              </p>
+            </div>
+
+            <figure class="about-photo">
+              <span class="about-sticker about-sticker--boulder" aria-hidden="true">
+                🧗 send the beta
+              </span>
+              <span class="about-sticker about-sticker--camera" aria-hidden="true">
+                📷 disposable cam
+              </span>
+              <span class="about-sticker about-sticker--sunset" aria-hidden="true">
+                🌇 golden hour
+              </span>
+
+              <div class="figma-frame">
+                <span class="figma-frame__tag" aria-hidden="true">
+                  <span class="figma-frame__tag-icon"></span>
+                  Mengqi.jpg
+                </span>
+                <img src="assets/mengqi.jpg" alt="Photo of Mengqi" />
+                <span class="figma-frame__handle figma-frame__handle--tl" aria-hidden="true"></span>
+                <span class="figma-frame__handle figma-frame__handle--tr" aria-hidden="true"></span>
+                <span class="figma-frame__handle figma-frame__handle--bl" aria-hidden="true"></span>
+                <span class="figma-frame__handle figma-frame__handle--br" aria-hidden="true"></span>
+                <span class="figma-frame__dimension" aria-hidden="true">
+                  <svg class="figma-frame__crosshair" viewBox="0 0 16 16">
+                    <circle cx="8" cy="8" r="4.6" />
+                    <path d="M8 0v3.4M8 12.6V16M0 8h3.4M12.6 8H16" />
+                  </svg>
+                  1696 &times; 1749
+                </span>
+              </div>
+            </figure>
+          </div>
         </section>
 
-        <section class="section" id="archive" aria-labelledby="archive-title">
+        <section class="section" id="experience" aria-labelledby="experience-title">
           <div class="section__header">
-            <p class="label">Archive</p>
-            <h2 id="archive-title">Notes and studies</h2>
+            <p class="label">Experience</p>
+            <h2 id="experience-title">Experiences that shaped me</h2>
           </div>
 
-          <div class="archive-list">
-            <a href="#">
-              <span>Experiment</span>
-              <strong>Quiet onboarding patterns</strong>
-              <span>2026</span>
-            </a>
-            <a href="#">
-              <span>Reference</span>
-              <strong>Museum catalog spacing study</strong>
-              <span>2026</span>
-            </a>
-            <a href="#">
-              <span>Process</span>
-              <strong>Research synthesis wall</strong>
+          <div class="experience-list">
+            <article>
+              <h3>Design Consultant - Pratt Digital Experiences Center</h3>
+              <span>2025-2026</span>
+            </article>
+            <article>
+              <h3>Product Design Intern - Age Brilliantly</h3>
               <span>2025</span>
-            </a>
+            </article>
+            <article>
+              <h3>Teaching Assistant - UC Davis Psychology Department</h3>
+              <span>2023</span>
+            </article>
+            <article>
+              <h3>Founding Product Designer - Roastpic</h3>
+              <span>2022-2024</span>
+            </article>
+            <article>
+              <h3>UX Designer - University of California, Davis</h3>
+              <span>2022-2023</span>
+            </article>
           </div>
         </section>
       </main>

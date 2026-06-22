@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pour Over Design System - Case Study</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="case-page">
+    <aside class="case-progress" aria-label="Design process progress">
+      <a class="case-brand" href="index.html" aria-label="Mengqi Cao home">
+        <img src="mengqi-logo.svg" alt="Mengqi logo" />
+      </a>
+      <a class="back-link" href="index.html#work">
+        <span aria-hidden="true">&lt;-</span>
+        Back to projects
+      </a>
+      <strong>Pour Over</strong>
+      <nav>
+        <a href="#overview" class="is-active">Overview</a>
+        <a href="#context">Context</a>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#process">Process</a>
+        <a href="#challenge">Challenge</a>
+        <a href="#testing">Testing</a>
+        <a href="#outcome">Outcome</a>
+        <a href="#conclusion">Conclusion</a>
+      </nav>
+    </aside>
+
+    <main class="case-study">
+      <header class="case-hero case-hero--editorial" id="overview">
+        <p class="label">Design system / Blue Bottle Coffee</p>
+        <h1>
+          Pour Over Design System: Bring care and precision back to Blue Bottle
+          Coffee digital experience
+        </h1>
+        <p class="case-deck">
+          Building a unified design system for Blue Bottle Coffee, bringing the
+          brand's core values of care, precision, and quality back to its
+          digital experience.
+        </p>
+        <div class="case-meta-grid">
+          <div>
+            <p class="label">Team</p>
+            <p>3 Product Designers</p>
+          </div>
+          <div>
+            <p class="label">Timeline</p>
+            <p>Jan - May 2026</p>
+          </div>
+          <div>
+            <p class="label">Role</p>
+            <p>Variables, components, documentation, usability testing</p>
+          </div>
+          <div>
+            <p class="label">Output</p>
+            <p>Figma UI kit + Zeroheight documentation</p>
+          </div>
+        </div>
+        <figure class="case-media case-media--hero">
+          <img
+            src="assets/pourover/Thumbnail.png"
+            alt="Pour Over design system overview for Blue Bottle Coffee"
+          />
+        </figure>
+      </header>
+
+      <section class="case-section" id="context">
+        <p class="label">What is Blue Bottle Coffee</p>
+        <h2>A specialty coffee brand known for quality and care</h2>
+        <p>
+          Blue Bottle Coffee was founded in Oakland in 2002 and has since grown
+          into a well-recognized brand in the specialty coffee space. They're
+          known for their pour-over brewing method, sourcing fresh beans, and a
+          focused approach to the coffee experience. Pour Over is an unofficial
+          design system we built for Blue Bottle to make its digital experience
+          consistent, intuitive, and inclusive.
+        </p>
+      </section>
+
+      <section class="case-section" id="problem">
+        <p class="label">Problem</p>
+        <h2>Visual inconsistencies across the site</h2>
+        <p>
+          When we looked more closely at the Blue Bottle website, we noticed the
+          interface had accumulated a lot of inconsistencies across components,
+          layouts, and interaction patterns. Together they made the experience
+          feel unpolished and confusing for users to navigate.
+        </p>
+        <figure class="case-media case-media--wide">
+          <img
+            src="assets/pourover/problem.png"
+            alt="Examples of inconsistencies found across the Blue Bottle website"
+          />
+        </figure>
+      </section>
+
+      <section class="case-section" id="solution">
+        <p class="label">Solution</p>
+        <h2>We built Pour Over: a UI kit and documentation site</h2>
+        <p>
+          To address these issues at scale, we created two artifacts that work
+          together: a Figma UI kit that designers can build with directly, and a
+          Zeroheight documentation site that explains how to use it correctly.
+        </p>
+        <div class="pourover-solution-grid">
+          <article>
+            <div>
+              <p class="label">Figma UI Kit</p>
+              <h3>Reusable foundations, components, and page patterns</h3>
+            </div>
+            <img
+              src="assets/pourover/solution-ui%20kit.png"
+              alt="Pour Over Figma UI kit overview"
+            />
+            <a
+              class="outlink-button"
+              href="https://www.figma.com/community/file/1625919054627980827"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View UI Kit
+              <span aria-hidden="true">-></span>
+            </a>
+          </article>
+          <article>
+            <div>
+              <p class="label">Documentation</p>
+              <h3>A shared source of truth for usage and accessibility</h3>
+            </div>
+            <img
+              src="assets/pourover/solution-zeroheight.png"
+              alt="Pour Over Zeroheight documentation overview"
+            />
+            <a
+              class="outlink-button"
+              href="https://zeroheight.com/57587199d"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View Documentation
+              <span aria-hidden="true">-></span>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" id="process">
+        <p class="label">Process</p>
+        <h2>From audit to system</h2>
+        <p>
+          We worked through four stages: deconstructing what existed, finding
+          patterns in what we saw, building the foundations, and then assembling
+          components and patterns on top.
+        </p>
+
+        <article class="pourover-step">
+          <p class="label">Step 01 - Deconstruction</p>
+          <h3>Taking the site apart before touching anything</h3>
+          <p>
+            Before any design work, we did a full audit of the Blue Bottle
+            website: every page, every component, every interaction state. The
+            goal was to understand what already existed and where the
+            inconsistencies came from.
+          </p>
+          <figure class="case-media case-media--wide">
+            <img
+              src="assets/pourover/deconstruction.png"
+              alt="Blue Bottle website deconstruction audit"
+            />
+          </figure>
+          <h3>What the audit told us</h3>
+          <p>
+            The audit showed recurring inconsistencies in component structure,
+            spacing, media ratios, and interaction behavior. The issue was not a
+            single broken component; it was a lack of shared rules.
+          </p>
+          <div class="pourover-finding-grid">
+            <article>
+              <img
+                src="assets/pourover/deconstruct%20finding%20-01.png"
+                alt="Deconstruction finding about inconsistent component structure"
+              />
+              <p>
+                Cards, buttons, and footers changed structure depending on where
+                they appeared.
+              </p>
+            </article>
+            <article>
+              <img
+                src="assets/pourover/deconstruct%20finding%20-%2002.png"
+                alt="Deconstruction finding about inconsistent image treatment"
+              />
+              <p>
+                Image treatments shifted between content types, making the site
+                feel assembled from separate systems.
+              </p>
+            </article>
+            <article>
+              <img
+                src="assets/pourover/deconstruct%20finding%20-%2003.png"
+                alt="Deconstruction finding about inconsistent interaction logic"
+              />
+              <p>
+                Menus, filters, and product controls used different interaction
+                logic across pages.
+              </p>
+            </article>
+          </div>
+        </article>
+
+        <article class="pourover-step">
+          <p class="label">Step 02 - Foundations</p>
+          <h3>Turning brand qualities into system rules</h3>
+          <p>
+            We translated the brand's calm, precise feeling into tokens for
+            color, typography, spacing, and photography. These foundations made
+            the system feel like Blue Bottle before any page was assembled.
+          </p>
+          <div class="pourover-token-grid">
+            <figure>
+              <img
+                src="assets/pourover/tokens%20-%20color.png"
+                alt="Pour Over color token system"
+              />
+              <figcaption>Color</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/pourover/tokens%20-%20typography.png"
+                alt="Pour Over typography token system"
+              />
+              <figcaption>Typography</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/pourover/tokens%20-%20spacing.png"
+                alt="Pour Over spacing token system"
+              />
+              <figcaption>Spacing</figcaption>
+            </figure>
+          </div>
+          <div class="pourover-challenge" id="challenge">
+            <p>
+              The hardest part of this project was that there was no single
+              right way to build a token system. This was the step we spent the
+              most time on, and the one that generated the most debate. Unlike
+              components, where we can look at the interface and make decisions,
+              token structure is invisible. We're making architectural choices
+              that affect everything downstream, and there is no obvious right
+              answer.
+            </p>
+            <div class="pourover-challenge-media">
+              <img
+                src="assets/pourover/tokens-photo.png"
+                alt="Team working through token structure on a whiteboard"
+              />
+              <img
+                src="assets/pourover/tokens-pyramid.png"
+                alt="Token hierarchy pyramid for Pour Over"
+              />
+            </div>
+            <aside class="pourover-question-card">
+              <h4>Some of the questions we kept going back to:</h4>
+              <ul>
+                <li>
+                  When should we reuse a token across components, and when does
+                  a component need its own?
+                </li>
+                <li>
+                  Should we name a separate token for every interaction state -
+                  hover, active, disabled - or handle those at the component
+                  level?
+                </li>
+                <li>
+                  How deep should the naming hierarchy go before it becomes
+                  harder to use than a flat list?
+                </li>
+              </ul>
+            </aside>
+            <p>
+              We resolved this by committing to a pyramid model, four tiers,
+              each with a clear responsibility. Once we agreed on what each
+              level was for, most of the individual naming decisions answered
+              themselves.
+            </p>
+          </div>
+        </article>
+
+        <article class="pourover-step">
+          <p class="label">Step 03 - Components</p>
+          <h3>Standardizing the decisions designers repeat most</h3>
+          <p>
+            After foundations, we built the high-frequency components that shape
+            the commerce experience: buttons, image ratios, dropdowns, product
+            cards, navigation, and footers.
+          </p>
+          <div class="pourover-component-row">
+            <div>
+              <p class="label">Buttons</p>
+              <h3>Three button types across three sizes</h3>
+              <p>
+                Buttons are the most consequential component on a commerce site.
+                I standardized three button types across three sizes, with Figma
+                variables covering every interaction state.
+              </p>
+            </div>
+            <img
+              class="pourover-component-image"
+              src="assets/pourover/components%20-%20buttons.png"
+              alt="Pour Over button component system"
+            />
+          </div>
+
+          <div class="pourover-component-row">
+            <div>
+              <p class="label">Media</p>
+              <h3>Mapped image aspect ratios to content types</h3>
+              <p>
+                Blue Bottle is image-heavy. Inconsistent ratios create visual
+                noise, so I mapped eight aspect ratios to specific content types
+                to remove ambiguity around cropping and display.
+              </p>
+            </div>
+            <img
+              class="pourover-component-image"
+              src="assets/pourover/components%20-%20media.png"
+              alt="Pour Over media ratio component system"
+            />
+          </div>
+
+          <div class="pourover-component-row">
+            <div>
+              <p class="label">Dropdowns</p>
+              <h3>One dropdown logic for six different contexts</h3>
+              <p>
+                The existing site had six dropdown styles. I replaced them with
+                one component that handles every context through two variables:
+                style and label.
+              </p>
+            </div>
+            <img
+              class="pourover-component-image"
+              src="assets/pourover/components%20-%20dropdown.png"
+              alt="Pour Over dropdown component system"
+            />
+          </div>
+        </article>
+
+        <article class="pourover-step">
+          <p class="label">Step 04 - Patterns</p>
+          <h3>From atoms to molecules: page patterns</h3>
+          <p>
+            Once the component library was stable, we assembled commonly used
+            page patterns: hero sections, content banners, product card grids,
+            navigation bars, and footers. Designers do not usually build from
+            individual atoms up; they reach for whole sections first. Patterns
+            made page building faster without forcing layout decisions from
+            scratch each time.
+          </p>
+          <figure class="case-media case-media--wide">
+            <img
+              src="assets/pourover/patterns.png"
+              alt="Pour Over page pattern examples"
+            />
+            <figcaption>Page patterns</figcaption>
+          </figure>
+        </article>
+      </section>
+
+      <section class="case-section" id="testing">
+        <p class="label">Testing</p>
+        <h2>Testing with designers</h2>
+        <p>
+          A design system's users are other designers. So we tested it with
+          designers, asking them to recreate Blue Bottle pages using Pour Over
+          from scratch, without any instructions beyond "use the kit."
+        </p>
+        <div class="pourover-testing-media">
+          <img
+            src="assets/pourover/testing-01.png"
+            alt="Designer testing Pour Over design system"
+          />
+          <img
+            src="assets/pourover/testing-02.png"
+            alt="Testing output made with Pour Over components"
+          />
+        </div>
+        <div class="pourover-observation-table" aria-label="Testing observations">
+          <p class="label">What we observed</p>
+          <div class="pourover-observation-table__header">
+            <span>Observation</span>
+            <span>What it pointed to</span>
+            <span>What we changed</span>
+          </div>
+          <article>
+            <div>
+              <strong>Designers kept looking for full layouts</strong>
+              <p>
+                They reached for hero sections and banners rather than
+                assembling from individual components
+              </p>
+            </div>
+            <p>The system only had atoms &mdash; no assembled patterns</p>
+            <p>Added a pattern library with pre-composed page sections</p>
+          </article>
+          <article>
+            <div>
+              <strong>Spacing decisions caused hesitation every time</strong>
+              <p>
+                The tokens existed but there were no rules for when to use
+                which value
+              </p>
+            </div>
+            <p>Usage documentation was missing for spacing</p>
+            <p>
+              Wrote explicit spacing guidelines; updated token names to reflect
+              context
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" id="outcome">
+        <p class="label">Outcome</p>
+        <h2>Meet Pour Over</h2>
+        <p>
+          Pour Over is a complete design system for Blue Bottle Coffee. It
+          includes a Figma UI kit with 14 documented components and 9 page
+          patterns, plus a Zeroheight documentation site that serves as the
+          team's single source of truth.
+        </p>
+        <figure class="case-media case-media--wide">
+          <video
+            src="assets/pourover/outcome-documentation.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+          <figcaption>Documentation walkthrough</figcaption>
+        </figure>
+        <div class="stat-grid">
+          <div>
+            <strong>14</strong>
+            <span>Components with usage guidelines and accessibility specs</span>
+          </div>
+          <div>
+            <strong>9</strong>
+            <span>Page patterns built from the component library</span>
+          </div>
+          <div>
+            <strong>1</strong>
+            <span>Source of truth for tokens, components, and guidelines</span>
+          </div>
+        </div>
+        <p>
+          The system is guided by four principles that reflect Blue Bottle's
+          brand values and helped us make decisions when the right answer was
+          not obvious.
+        </p>
+        <div class="pourover-principles">
+          <article>
+            <img src="assets/pourover/principle-care.png" alt="" />
+            <span>01</span>
+            <h3>Care and Intention</h3>
+            <p>
+              Restrained layouts, precise spacing, and purposeful reuse.
+              Designed with intention and built to scale.
+            </p>
+          </article>
+          <article>
+            <img src="assets/pourover/principle-calm.png" alt="" />
+            <span>02</span>
+            <h3>Calm Clarity</h3>
+            <p>
+              Clear hierarchy and simple structure reduce cognitive load and
+              make experiences easy to use.
+            </p>
+          </article>
+          <article>
+            <img src="assets/pourover/principle-cafe.png" alt="" />
+            <span>03</span>
+            <h3>Cafe Warmth</h3>
+            <p>
+              Approachable language and thoughtful details create comfort, trust,
+              and connection.
+            </p>
+          </article>
+          <article>
+            <img src="assets/pourover/principle-design.png" alt="" />
+            <span>04</span>
+            <h3>Designed for All</h3>
+            <p>
+              Accessibility is built in from the start, creating clear and
+              inclusive experiences for everyone.
+            </p>
+          </article>
+        </div>
+        <h3>Building pages faster with the system</h3>
+        <p>
+          Pour Over makes building pages quick, easy, and without confusion.
+          Watch as our designer builds the homepage of Blue Bottle in 3 minutes.
+          Video played on 1.6x speed.
+        </p>
+        <figure class="case-media case-media--wide">
+          <video
+            src="assets/pourover/bluebottle-demo.mp4"
+            controls
+            muted
+            playsinline
+          ></video>
+          <figcaption>Homepage build demo</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section" id="conclusion">
+        <p class="label">Conclusion</p>
+        <h2>Presenting the system</h2>
+        <p>
+          At the end of the project, we pitched Pour Over to a panel of product
+          designers acting as Blue Bottle stakeholders. The pitch covered the
+          problem we set out to solve, how the system addresses it, and how it
+          could be maintained and extended over time.
+        </p>
+        <figure class="case-media case-media--wide">
+          <img
+            src="assets/pourover/conclusion.png"
+            alt="Presentation of the Pour Over design system"
+          />
+        </figure>
+        <div class="pourover-takeaways" aria-label="What I took away">
+          <p class="label">What I took away</p>
+          <article>
+            <span>01</span>
+            <div>
+              <h3>Alignment before building saves time later</h3>
+              <p>
+                A lot of our early debates were about things that felt small -
+                token naming, whether a certain component needed an extra
+                variant, how to organize the Figma file. They were not small.
+                Getting aligned on principles and logic upfront meant we stopped
+                having those debates mid-project and could just apply a shared
+                framework.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <h3>
+                There is not a "correct" token structure - pick one and stick
+                with it
+              </h3>
+              <p>
+                We spent a lot of time researching token conventions before
+                realizing there is no universal standard. Every approach has
+                trade-offs. The most important thing was agreeing on a logic
+                that our team could reason about consistently, then using that
+                logic to answer edge cases rather than debating each one.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <h3>Testing revealed things building never would have</h3>
+              <p>
+                We felt good about the kit when we finished it. Watching someone
+                use it for the first time showed us how much knowledge we had
+                accumulated that was not in the documentation. The spacing
+                guidelines are the clearest example: the tokens existed, but the
+                rules for applying them did not.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>04</span>
+            <div>
+              <h3>A Figma-only system is half a system</h3>
+              <p>
+                Pour Over is solid at the design layer, but a design system does
+                not fully land until it is implemented in code and adopted by an
+                engineering team. This project made me want to go deeper into
+                handoff: how tokens map to CSS variables, how component variants
+                translate to props, and how to write documentation that
+                developers can actually act on.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js?v=pourover-case"></script>
+  </body>
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wikipedia Accessibility Audit - Case Study</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="case-page">
+    <aside class="case-progress" aria-label="Design process progress">
+      <a class="case-brand" href="index.html" aria-label="Mengqi Cao home">
+        <img src="mengqi-logo.svg" alt="Mengqi logo" />
+      </a>
+      <a class="back-link" href="index.html#work">
+        <span aria-hidden="true">&lt;-</span>
+        Back to projects
+      </a>
+      <strong>Wikipedia</strong>
+      <nav>
+        <a href="#context" class="is-active">Context</a>
+        <a href="#method">Method</a>
+        <a href="#finding-1">Solution</a>
+        <a href="#handoff">Handoff</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+    </aside>
+
+    <main class="case-study">
+      <header class="case-hero case-hero--editorial">
+        <p class="label">Accessibility audit / Wikipedia iOS</p>
+        <h1>Enhancing Accessibility in Wikipedia's Discovery Experience</h1>
+        <p class="case-deck">
+          A WCAG 2.2 accessibility audit and redesign of the Wikipedia iOS app,
+          focused on VoiceOver, cognition, and the Explore surfaces people use
+          to discover knowledge.
+        </p>
+        <div class="case-meta-grid">
+          <div>
+            <p class="label">Timeline</p>
+            <p>4 weeks</p>
+          </div>
+          <div>
+            <p class="label">Client</p>
+            <p>Wikimedia via Pratt DX Center</p>
+          </div>
+          <div>
+            <p class="label">Role</p>
+            <p>Product designer<br />Accessibility researcher</p>
+          </div>
+          <div>
+            <p class="label">Team</p>
+            <p>4 product designers</p>
+          </div>
+        </div>
+        <figure class="case-media case-media--hero">
+          <img
+            src="assets/wikipedia/overview-visual.png"
+            alt="Wikipedia accessibility audit overview screens"
+          />
+        </figure>
+      </header>
+
+      <section class="case-section" id="context">
+        <p class="label">Context</p>
+        <h2>
+          Accessibility issues grew as Wikipedia adopted iOS 26 and Liquid Glass.
+        </h2>
+        <p>
+          After Wikipedia's iOS app adopted Liquid Glass under iOS 26, Wikimedia
+          began hearing from people who rely on assistive technology that parts
+          of the redesigned interface had become harder to use. Our team was
+          brought in to understand where discovery broke down and what could be
+          improved without rebuilding the whole product.
+        </p>
+      </section>
+
+      <section class="case-section" id="method">
+        <p class="label">Method</p>
+        <div class="case-two-up case-two-up--balanced">
+          <div class="case-note">
+            <h3>Goal</h3>
+            <p>
+              Audit accessibility across the four surfaces people use most to
+              find content: Explore, Places, Saved, and Activity.
+            </p>
+          </div>
+          <div class="case-note">
+            <h3>Method</h3>
+            <p>
+              User personas, WCAG compliance review, iOS 26 integration
+              assessment, audit findings, and a prioritized recommendation
+              framework.
+            </p>
+          </div>
+        </div>
+
+        <div class="audit-method-panel" aria-label="Accessibility audit methods">
+          <article>
+            <span class="audit-method-icon">
+              <img src="assets/wikipedia/mic.svg" alt="" />
+            </span>
+            <h3>VoiceOver Audit</h3>
+            <p>
+              Evaluated navigation, focus order, labels, and screen reader
+              announcements.
+            </p>
+          </article>
+          <article>
+            <span class="audit-method-icon">
+              <img src="assets/wikipedia/visibility.svg" alt="" />
+            </span>
+            <h3>Visual audit</h3>
+            <p>
+              Assessed color contrast, visual hierarchy, touch targets, and
+              interface clarity.
+            </p>
+          </article>
+          <article>
+            <span class="audit-method-icon">
+              <img src="assets/wikipedia/format_letter_spacing_2.svg" alt="" />
+            </span>
+            <h3>Dynamic Type audit</h3>
+            <p>
+              Tested text scalability, layout reflow, and content legibility at
+              larger sizes.
+            </p>
+          </article>
+        </div>
+
+        <div class="case-carousel" aria-label="Wikipedia accessibility personas">
+          <figure>
+            <img src="assets/wikipedia/persona%201.png" alt="Persona 1" />
+          </figure>
+          <figure>
+            <img src="assets/wikipedia/persona%202.png" alt="Persona 2" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section" id="finding-1">
+        <p class="label">Finding 1</p>
+        <h2>Long Explore feeds made orientation fragile.</h2>
+        <p>
+          People using VoiceOver or cognitive support could move through content,
+          but they had little sense of where the feed began, ended, or changed
+          by day. The interaction problem was less about reading individual
+          cards and more about staying oriented across time.
+        </p>
+
+        <figure class="case-media case-media--wide">
+          <video
+            src="assets/wikipedia/finding%201%20-%20issue.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+          <figcaption>Issue</figcaption>
+        </figure>
+
+        <div class="case-narrative-block">
+          <p class="label">Iteration</p>
+          <h3>I tried three ways to make time visible without adding friction.</h3>
+          <p>
+            Collapsible day sections shortened the feed, but asked users to keep
+            opening and closing content. A Load More pattern created pauses, but
+            still hid where someone was in the timeline. I chose the side day
+            panel because it preserved the continuous reading flow while giving
+            people a stable orientation tool: jump by day, understand position,
+            and keep moving.
+          </p>
+        </div>
+
+        <div class="iteration-choices" aria-label="Finding 1 iteration options">
+          <article class="iteration-choice">
+            <div class="iteration-number">01</div>
+            <img
+              class="iteration-asset"
+              src="assets/wikipedia/01%20-%20Collapsible%20sections.png"
+              alt="Collapsible sections concept"
+            />
+            <p class="iteration-status">Set aside</p>
+            <h3>Collapsible sections</h3>
+            <p>
+              Reduced scroll length, but added a repeated tap for every older
+              day.
+            </p>
+          </article>
+
+          <article class="iteration-choice is-chosen">
+            <div class="iteration-number">02</div>
+            <img
+              class="iteration-asset"
+              src="assets/wikipedia/02%20-%20side%20bar.png"
+              alt="Side day calendar panel concept"
+            />
+            <p class="iteration-status">Chosen</p>
+            <h3>Day-jump timeline</h3>
+            <p>
+              Solved orientation, continuity, and fatigue without rebuilding
+              the feed.
+            </p>
+          </article>
+
+          <article class="iteration-choice">
+            <div class="iteration-number">03</div>
+            <img
+              class="iteration-asset"
+              src="assets/wikipedia/03%20-%20load%20more.png"
+              alt="Load More at end of day concept"
+            />
+            <p class="iteration-status">Set aside</p>
+            <h3>Load More button</h3>
+            <p>
+              Broke up the feed, but gave no clear sense of position.
+            </p>
+          </article>
+        </div>
+
+        <figure class="case-media case-media--wide">
+          <img
+            src="assets/wikipedia/finding%201%20-%20screenshoots.png"
+            alt="Screens showing the selected day-jump timeline direction"
+          />
+        </figure>
+
+        <div class="case-narrative-block">
+          <p class="label">Final direction</p>
+          <h3>The selected pattern became a lightweight day-jump timeline.</h3>
+          <p>
+            The redesign keeps the article feed intact, but adds a persistent
+            side control that lets users understand the date structure at a
+            glance. For VoiceOver users, the control also creates a more
+            predictable way to move between older and newer discovery moments.
+          </p>
+        </div>
+
+        <figure class="case-media case-media--wide">
+          <video
+            src="assets/wikipedia/finding1-redesign%20video.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+          <figcaption>Solution</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <p class="label">Finding 2</p>
+        <h2>Visual hierarchy needed to hold up under assistive navigation.</h2>
+        <p>
+          Several discovery modules relied on visual weight and placement to
+          communicate importance. We redesigned the treatment so labels,
+          grouping, and reading order carried the meaning even when visual cues
+          were reduced.
+        </p>
+        <figure class="case-media case-media--wide">
+          <img
+            src="assets/wikipedia/finding2-issue.png"
+            alt="Finding 2 issue screen"
+          />
+          <figcaption>Issue</figcaption>
+        </figure>
+        <figure class="case-media case-media--wide">
+          <img
+            src="assets/wikipedia/finding2-redesign.png"
+            alt="Finding 2 redesigned screen"
+          />
+          <figcaption>Redesign</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section">
+        <p class="label">Finding 3</p>
+        <h2>Motion and transparency needed clearer fallbacks.</h2>
+        <p>
+          Liquid Glass introduced moments where contrast, layering, and motion
+          became harder to parse. The recommendation focused on practical
+          fallbacks: stronger contrast, simpler layering, and visible states
+          that do not depend on animation alone.
+        </p>
+        <figure class="case-media case-media--wide">
+          <video
+            src="assets/wikipedia/finding%203%20-%20issue.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+          <figcaption>Issue</figcaption>
+        </figure>
+        <figure class="case-media case-media--wide">
+          <img
+            src="assets/wikipedia/finding%203%20-%20redesign.png"
+            alt="Finding 3 redesigned interface"
+          />
+          <figcaption>Redesign</figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section" id="handoff">
+        <p class="label">Handoff</p>
+        <h2>A prioritized framework for implementation.</h2>
+        <p>
+          We translated the audit into a handoff package that separated quick
+          fixes from larger product decisions. Each recommendation named the
+          affected surface, WCAG concern, user impact, and implementation
+          priority.
+        </p>
+        <div class="case-carousel" aria-label="Wikipedia handoff slides">
+          <figure>
+            <img src="assets/wikipedia/handoff%201.png" alt="Handoff slide 1" />
+          </figure>
+          <figure>
+            <img src="assets/wikipedia/handoff2.png" alt="Handoff slide 2" />
+          </figure>
+          <figure>
+            <img src="assets/wikipedia/handoff3.png" alt="Handoff slide 3" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section" id="reflection">
+        <p class="label">Reflection</p>
+        <h2>Accessibility work is strongest when it becomes product language.</h2>
+        <p>
+          This project clarified that accessibility recommendations need to be
+          more than a checklist. The most useful handoff connected standards to
+          everyday design decisions: hierarchy, pacing, grouping, contrast, and
+          the small orientation cues that help people keep reading.
+        </p>
+      </section>
+    </main>
+
+    <script src="script.js?v=wikipedia-case"></script>
+  </body>
+</html>

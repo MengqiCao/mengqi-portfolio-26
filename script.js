@@ -453,3 +453,256 @@ if (sunwalkSteps.length && sunwalkVisuals.length) {
 
   sunwalkSteps.forEach((step) => sunwalkObserver.observe(step));
 }
+
+(() => {
+  const widget = document.querySelector("[data-oneko-divider]");
+  const cat = document.querySelector("[data-oneko-cat]");
+  const ball = document.querySelector("[data-oneko-ball]");
+
+  if (!widget || !cat || !ball) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const catSize = 40;
+  const spriteFrameSize = 40;
+  const ballSize = 16;
+  const spriteSets = {
+    idle: [[-3, -3]],
+    scratchSelf: [
+      [-5, 0],
+      [-6, 0],
+      [-7, 0],
+    ],
+    sleeping: [
+      [-2, 0],
+      [-2, -1],
+    ],
+    E: [
+      [-3, 0],
+      [-3, -1],
+    ],
+    W: [
+      [-4, -2],
+      [-4, -3],
+    ],
+  };
+
+  const state = {
+    width: 0,
+    homeX: 0,
+    catX: 0,
+    ballX: 0,
+    ballY: 0,
+    ballVX: 0,
+    ballVY: 0,
+    bounces: 0,
+    launched: false,
+    ballResting: true,
+    catMode: "idle",
+    pauseUntil: 0,
+    lastTime: performance.now(),
+    lastSpriteAt: 0,
+    walkFrame: 0,
+    idleTicks: 0,
+    idleAnimation: null,
+    idleAnimationFrame: 0,
+    initialBallPlaced: false,
+  };
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function setSprite(name, frame = 0) {
+    const sprite = spriteSets[name][frame % spriteSets[name].length];
+    cat.style.backgroundPosition = `${sprite[0] * spriteFrameSize}px ${
+      sprite[1] * spriteFrameSize
+    }px`;
+  }
+
+  function positionElements() {
+    cat.style.transform = `translate3d(${Math.round(state.catX)}px, 0, 0)`;
+    ball.style.transform = `translate3d(${Math.round(state.ballX)}px, ${Math.round(
+      -state.ballY,
+    )}px, 0)`;
+  }
+
+  function measure() {
+    const rect = widget.getBoundingClientRect();
+    const previousWidth = state.width || rect.width;
+    const previousHomeRatio = previousWidth ? state.homeX / previousWidth : 0.1;
+    state.width = rect.width;
+    const maxHomeX = Math.max(24, state.width - catSize - 80);
+    state.homeX = clamp(
+      Math.round(state.width * previousHomeRatio || state.width * 0.1),
+      24,
+      maxHomeX,
+    );
+
+    if (state.catMode === "idle") {
+      state.catX = state.homeX;
+    } else {
+      state.catX = clamp(state.catX, 0, state.width - catSize);
+    }
+
+    if (state.ballResting && !state.launched && !state.initialBallPlaced) {
+      state.ballX = clamp(state.homeX + 64, 0, state.width - ballSize);
+      state.ballY = 0;
+      state.initialBallPlaced = true;
+    } else {
+      state.ballX = clamp(state.ballX, 0, state.width - ballSize);
+    }
+
+    positionElements();
+  }
+
+  function resetIdleAnimation() {
+    state.idleAnimation = null;
+    state.idleAnimationFrame = 0;
+    state.idleTicks = 0;
+  }
+
+  function runIdleSprite(now) {
+    if (now - state.lastSpriteAt < 180) return;
+
+    state.lastSpriteAt = now;
+    state.idleTicks += 1;
+
+    if (!state.idleAnimation && state.idleTicks > 18 && Math.random() < 0.18) {
+      state.idleAnimation = Math.random() < 0.55 ? "sleeping" : "scratchSelf";
+      state.idleAnimationFrame = 0;
+    }
+
+    if (state.idleAnimation === "sleeping") {
+      setSprite("sleeping", Math.floor(state.idleAnimationFrame / 4));
+      state.idleAnimationFrame += 1;
+
+      if (state.idleAnimationFrame > 80) resetIdleAnimation();
+      return;
+    }
+
+    if (state.idleAnimation === "scratchSelf") {
+      setSprite("scratchSelf", state.idleAnimationFrame);
+      state.idleAnimationFrame += 1;
+
+      if (state.idleAnimationFrame > 9) resetIdleAnimation();
+      return;
+    }
+
+    setSprite("idle", 0);
+  }
+
+  function stepBall(dt) {
+    if (!state.launched) return;
+
+    state.ballVY -= 1600 * dt;
+    state.ballX += state.ballVX * dt;
+    state.ballY += state.ballVY * dt;
+
+    if (state.ballX <= 0) {
+      state.ballX = 0;
+      state.ballVX = Math.abs(state.ballVX) * 0.82;
+    } else if (state.ballX >= state.width - ballSize) {
+      state.ballX = state.width - ballSize;
+      state.ballVX = -Math.abs(state.ballVX) * 0.82;
+    }
+
+    if (state.ballY <= 0) {
+      state.ballY = 0;
+
+      if (state.ballVY < 0 && state.bounces < 4 && Math.abs(state.ballVY) > 130) {
+        state.ballVY = -state.ballVY * 0.5;
+        state.ballVX *= 0.82;
+        state.bounces += 1;
+      } else if (state.bounces >= 2 || Math.abs(state.ballVY) <= 130) {
+        state.ballVY = 0;
+        state.ballVX = 0;
+        state.launched = false;
+        state.ballResting = true;
+      }
+    }
+  }
+
+  function stepCat(dt, now) {
+    if (state.catMode === "idle") {
+      runIdleSprite(now);
+      return;
+    }
+
+    const speed = 280;
+    const targetX = clamp(
+      state.ballX - Math.round((catSize - ballSize) / 2),
+      0,
+      state.width - catSize,
+    );
+    const distance = targetX - state.catX;
+
+    if (Math.abs(distance) <= speed * dt) {
+      state.catX = targetX;
+
+      if (state.catMode === "chasing" && state.ballResting) {
+        state.catMode = "pausing";
+        state.pauseUntil = now + 550;
+        setSprite("idle", 0);
+      }
+    } else {
+      state.catX += Math.sign(distance) * speed * dt;
+    }
+
+    if (state.catMode === "pausing") {
+      setSprite("idle", 0);
+      if (now >= state.pauseUntil) {
+        state.homeX = state.catX;
+        state.catMode = "idle";
+        resetIdleAnimation();
+      }
+      return;
+    }
+
+    if (now - state.lastSpriteAt > 120) {
+      state.lastSpriteAt = now;
+      state.walkFrame += 1;
+      setSprite(distance >= 0 ? "E" : "W", state.walkFrame);
+    }
+  }
+
+  function tick(now) {
+    const dt = Math.min((now - state.lastTime) / 1000, 0.033);
+    state.lastTime = now;
+
+    if (!reduceMotion.matches) {
+      stepBall(dt);
+      stepCat(dt, now);
+      positionElements();
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  function launchBall() {
+    if (reduceMotion.matches) {
+      return;
+    }
+
+    const towardRight =
+      state.ballX < state.width * 0.72 && (Math.random() > 0.35 || state.ballX < 80);
+
+    state.launched = true;
+    state.ballResting = false;
+    state.bounces = 0;
+    state.ballVX = (towardRight ? 1 : -1) * (240 + Math.random() * 140);
+    state.ballVY = 560 + Math.random() * 110;
+    state.catMode = "chasing";
+    state.pauseUntil = 0;
+    resetIdleAnimation();
+  }
+
+  ball.addEventListener("click", launchBall);
+  window.addEventListener("resize", measure);
+
+  measure();
+  setSprite("idle", 0);
+  requestAnimationFrame((now) => {
+    state.lastTime = now;
+    requestAnimationFrame(tick);
+  });
+})();
