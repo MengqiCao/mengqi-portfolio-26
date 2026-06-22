@@ -2224,9 +2224,9 @@ figcaption,
 
 .amazon-outcome-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.7fr);
-  gap: var(--space-4);
-  align-items: start;
+  grid-template-columns: 1fr;
+  max-width: var(--reading);
+  gap: var(--space-3);
   margin: var(--space-4) 0 0;
 }
 
