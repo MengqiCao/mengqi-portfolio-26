@@ -3121,7 +3121,7 @@ figcaption,
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-display-sans);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.45;
   letter-spacing: 0;
@@ -3130,10 +3130,22 @@ figcaption,
 .experience-list span {
   color: var(--color-caption);
   font-family: var(--font-display-sans);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.45;
   text-align: right;
+}
+
+.site-footer {
+  padding: var(--space-3) 0;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--color-meta);
+  font-size: 13px;
+  letter-spacing: 0.04em;
 }
 
 @media (prefers-reduced-motion: reduce) {
