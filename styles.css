@@ -471,7 +471,13 @@ h1 {
 }
 
 .section__title--featured {
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.work-divider {
+  grid-column: 2 / span 10;
+  margin: var(--space-4) 0 0;
+  border-top: 1px solid var(--color-border);
 }
 
 h2 {

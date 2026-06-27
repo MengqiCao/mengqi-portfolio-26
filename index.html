@@ -29,6 +29,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css" />
+    <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
+    <script>
+      new Lenis({ lerp: 0.1, anchors: true, autoRaf: true });
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -43,7 +48,7 @@
           <a href="#about">About</a>
           <a href="mailto:hello@example.com">Contact</a>
         </nav>
-
+ 
         <div class="nav-actions">
           <a
             class="resume-link"
@@ -136,10 +141,97 @@
         <section
           class="section work-section"
           id="work"
-          aria-labelledby="work-title"
+          aria-label="Work"
         >
-          <div class="section__title">
-            <h2 id="work-title">Vibe coding projects</h2>
+          <div class="section__title" id="featured">
+            <h2>Featured works</h2>
+          </div>
+
+          <div class="featured-list" aria-label="Featured portfolio work">
+            <article class="featured-card">
+              <a
+                href="featured-amazon-music.html"
+                aria-label="Open Amazon Music featured case study"
+              >
+                <div class="featured-image featured-image--media">
+                  <video
+                    src="assets/amazon%20music/am-thumbnail.mov"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    aria-label="Amazon Music EchoSoul concept preview"
+                  ></video>
+                </div>
+                <div class="featured-card__body">
+                  <div class="project-card__meta">
+                    <span>01</span>
+                    <span>Retention Strategy</span>
+                  </div>
+                  <h3>Amazon Music</h3>
+                  <p>
+                    A one-month design sprint exploring emotional engagement
+                    and long-term retention for Amazon Music.
+                  </p>
+                </div>
+              </a>
+            </article>
+
+            <article class="featured-card">
+              <a
+                href="featured-wikipedia.html"
+                aria-label="Open Wikipedia accessibility audit featured case study"
+              >
+                <div class="featured-image featured-image--media">
+                  <img
+                    src="assets/wikipedia/overview-visual.png"
+                    alt="Wikipedia accessibility audit overview screens"
+                  />
+                </div>
+                <div class="featured-card__body">
+                  <div class="project-card__meta">
+                    <span>02</span>
+                    <span>Digital Accessibility</span>
+                  </div>
+                  <h3>Wikipedia Accessibility Audit</h3>
+                  <p>
+                    A WCAG 2.2 audit and redesign of Wikipedia's iOS discovery
+                    experience.
+                  </p>
+                </div>
+              </a>
+            </article>
+
+            <article class="featured-card">
+              <a
+                href="featured-pourover.html"
+                aria-label="Open Pour Over Design System featured case study"
+              >
+                <div class="featured-image featured-image--media">
+                  <img
+                    src="assets/pourover/Thumbnail.png"
+                    alt="Pour Over design system overview"
+                  />
+                </div>
+                <div class="featured-card__body">
+                  <div class="project-card__meta">
+                    <span>03</span>
+                    <span>Design Systems</span>
+                  </div>
+                  <h3>Pour Over Design System</h3>
+                  <p>
+                    A unified UI kit and documentation system for Blue Bottle
+                    Coffee's digital experience.
+                  </p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="work-divider" aria-hidden="true"></div>
+
+          <div class="section__title section__title--featured" id="vibe-coding">
+            <h2>Vibe coding projects</h2>
           </div>
 
           <div class="work-grid">
@@ -228,91 +320,6 @@
                   on where each artist is from.
                 </p>
               </button>
-            </article>
-          </div>
-
-          <div class="section__title section__title--featured">
-            <h2>Featured works</h2>
-          </div>
-
-          <div class="featured-list" aria-label="Featured portfolio work">
-            <article class="featured-card">
-              <a
-                href="featured-amazon-music.html"
-                aria-label="Open Amazon Music featured case study"
-              >
-                <div class="featured-image featured-image--media">
-                  <video
-                    src="assets/amazon%20music/am-thumbnail.mov"
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                    aria-label="Amazon Music EchoSoul concept preview"
-                  ></video>
-                </div>
-                <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>01</span>
-                    <span>Retention Strategy</span>
-                  </div>
-                  <h3>Amazon Music</h3>
-                  <p>
-                    A one-month design sprint exploring emotional engagement
-                    and long-term retention for Amazon Music.
-                  </p>
-                </div>
-              </a>
-            </article>
-
-            <article class="featured-card">
-              <a
-                href="featured-wikipedia.html"
-                aria-label="Open Wikipedia accessibility audit featured case study"
-              >
-                <div class="featured-image featured-image--media">
-                  <img
-                    src="assets/wikipedia/overview-visual.png"
-                    alt="Wikipedia accessibility audit overview screens"
-                  />
-                </div>
-                <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>02</span>
-                    <span>Digital Accessibility</span>
-                  </div>
-                  <h3>Wikipedia Accessibility Audit</h3>
-                  <p>
-                    A WCAG 2.2 audit and redesign of Wikipedia's iOS discovery
-                    experience.
-                  </p>
-                </div>
-              </a>
-            </article>
-
-            <article class="featured-card">
-              <a
-                href="featured-pourover.html"
-                aria-label="Open Pour Over Design System featured case study"
-              >
-                <div class="featured-image featured-image--media">
-                  <img
-                    src="assets/pourover/Thumbnail.png"
-                    alt="Pour Over design system overview"
-                  />
-                </div>
-                <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>03</span>
-                    <span>Design Systems</span>
-                  </div>
-                  <h3>Pour Over Design System</h3>
-                  <p>
-                    A unified UI kit and documentation system for Blue Bottle
-                    Coffee's digital experience.
-                  </p>
-                </div>
-              </a>
             </article>
           </div>
         </section>
@@ -414,6 +421,7 @@
         role="dialog"
         aria-modal="true"
         aria-labelledby="showcase-title"
+        data-lenis-prevent
       >
         <button
           class="modal-close"

@@ -173,6 +173,26 @@ const modalTriggers = document.querySelectorAll("[data-project]");
 const closeButtons = document.querySelectorAll("[data-modal-close]");
 let openedAt = 0;
 
+const showcasePanel = modal ? modal.querySelector(".showcase-modal__panel") : null;
+
+if (showcasePanel && window.Lenis) {
+  const showcaseScrollLayer = document.createElement("div");
+  showcaseScrollLayer.className = "showcase-modal__scroll";
+
+  Array.from(showcasePanel.children)
+    .filter((child) => !child.hasAttribute("data-modal-close"))
+    .forEach((child) => showcaseScrollLayer.appendChild(child));
+
+  showcasePanel.appendChild(showcaseScrollLayer);
+
+  new Lenis({
+    wrapper: showcasePanel,
+    content: showcaseScrollLayer,
+    lerp: 0.1,
+    autoRaf: true,
+  });
+}
+
 const coverTimeVideos = document.querySelectorAll("[data-stop-cover-time]");
 
 coverTimeVideos.forEach((video) => {
