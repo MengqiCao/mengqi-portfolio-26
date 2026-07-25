@@ -474,9 +474,17 @@ h1 {
   margin-top: var(--space-5);
 }
 
+.work-section {
+  padding-top: var(--space-5);
+}
+
+.work-section .section__title--featured:first-child {
+  margin-top: 0;
+}
+
 .work-divider {
   grid-column: 2 / span 10;
-  margin: var(--space-4) 0 0;
+  margin: var(--space-5) 0 var(--space-5);
   border-top: 1px solid var(--color-border);
 }
 
@@ -1630,6 +1638,7 @@ figcaption,
 
 .case-progress nav a {
   position: relative;
+  font-size: 11px;
 }
 
 .case-progress nav a::before {
@@ -3260,6 +3269,14 @@ figcaption,
 
   .section {
     padding: var(--space-4) 0;
+  }
+
+  .work-section {
+    padding-top: var(--space-4);
+  }
+
+  .work-divider {
+    margin: var(--space-4) 0 var(--space-4);
   }
 
   .about-grid {
