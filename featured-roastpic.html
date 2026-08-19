@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64EBPEZY2Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-64EBPEZY2Y');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="RoastPic uses computer vision to measure bean size, roast color, and visible defects from a single photo, making physical coffee analysis accessible to smaller roasteries."
+    />
+    <title>RoastPic - Case Study</title>
+    <link rel="icon" type="image/svg+xml" href="mengqi-logo-only.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;800&family=Noto+Serif+JP:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css" />
+    <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
+    <script>
+      new Lenis({ lerp: 0.1, anchors: true, autoRaf: true });
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="case-page rp-page">
+    <aside class="case-progress" aria-label="Design process progress">
+      <a class="case-brand" href="index.html" aria-label="Mengqi Cao home">
+        <img src="mengqi-logo.svg" alt="Mengqi logo" />
+      </a>
+      <a class="back-link" href="index.html#work">
+        <span aria-hidden="true">&lt;-</span>
+        Back to projects
+      </a>
+      <strong>RoastPic</strong>
+      <nav>
+        <a href="#overview" class="is-active">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#mvp">MVP</a>
+        <a href="#gap">Testing</a>
+        <a href="#research">Research</a>
+        <a href="#ia">Structure</a>
+        <a href="#design">Design</a>
+        <a href="#outcome">Outcome</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+    </aside>
+
+    <main class="case-study">
+      <!-- ============================================================
+           OVERVIEW
+      ============================================================= -->
+      <header class="case-hero case-hero--editorial" id="overview">
+        <p class="label">Computer vision / Specialty coffee / 0 to 1</p>
+        <h1>RoastPic: Making coffee quality data accessible to small roasters</h1>
+        <p class="case-deck">
+          RoastPic uses computer vision to measure bean size, roast color, and visible defects from a single photo, making physical coffee analysis more accessible to smaller roasteries.
+        </p>
+
+        <div class="case-meta-grid">
+          <div>
+            <p class="label">Role</p>
+            <p>Sole product designer, collaborating with engineers and the CEO</p>
+          </div>
+          <div>
+            <p class="label">Scope</p>
+            <p>Research, IA, end-to-end product design</p>
+          </div>
+          <div>
+            <p class="label">Timeline</p>
+            <p>July 2022 &ndash; June 2024</p>
+          </div>
+        </div>
+
+        <figure class="rp-hero-shot">
+          <img
+            src="assets/roastpic/cover.png"
+            width="2400"
+            height="1350"
+            alt="Five RoastPic screens in sequence: capturing beans, the measured result, saving it to a coffee, the measurement history for that lot, and a comparison between two roasts."
+          />
+        </figure>
+
+        <div class="rp-role-impact">
+          <p class="label">Role &amp; impact</p>
+          <p>
+            As the sole product designer, I took RoastPic from its initial MVP into a more persistent visual QC experience. After our early pilots, I led research to understand where RoastPic’s measurements fit within roasters’ broader quality workflow, defined the direction for the next release, and translated those findings into a new information architecture, database, history, and comparison experience.
+          </p>
+        </div>
+      </header>
+
+      <!-- ============================================================
+           MVP
+      ============================================================= -->
+      <section class="case-section" id="problem">
+        <div class="rp-phase-marker">
+          <span class="rp-phase-marker__index">MVP</span>
+          <span class="rp-phase-marker__rule" aria-hidden="true"></span>
+          <span class="rp-phase-marker__name">Getting a measurement out of one photo</span>
+        </div>
+
+        <p class="label">Problem</p>
+        <h2>Coffee quality checks take time, labor, and specialized equipment</h2>
+        <p>
+          For coffee professionals, understanding a bean goes beyond tasting it. Physical characteristics such as size, roast color, and defects provide important signals for evaluating consistency and quality.
+        </p>
+        <p>
+          Traditionally, collecting this data requires separate processes—from manual grading and defect inspection to dedicated roast-color equipment. For smaller roasteries, that can mean more labor, higher costs, and a fragmented workflow.
+        </p>
+
+        <p>
+          RoastPic started with a simple question:
+        </p>
+
+        <div class="rp-statement">
+          <p>
+            What if roasters could get these measurements from the camera already
+            in their pocket?
+          </p>
+        </div>
+
+        <!-- Side-by-side: traditional bench vs one RoastPic capture -->
+        <figure class="rp-compare">
+          <div class="rp-compare__side rp-compare__side--traditional">
+            <div class="rp-compare__head">
+              <h3>Traditional workflow</h3>
+              <p>Each check needs its own tool and leaves its own record.</p>
+            </div>
+            <div class="rp-compare__items">
+              <div class="rp-compare__item">
+                <span class="rp-compare__art">
+                  <img
+                    src="assets/roastpic/trad-size.png"
+                    alt="A roaster hand-sorting beans across a grading sieve"
+                  />
+                </span>
+                <span class="rp-compare__label">Size</span>
+                <p class="rp-compare__desc">Sorting beans by hand through sieves</p>
+              </div>
+              <div class="rp-compare__item">
+                <span class="rp-compare__art">
+                  <img
+                    src="assets/roastpic/trad-color.png"
+                    alt="A roaster operating a benchtop roast-color instrument"
+                  />
+                </span>
+                <span class="rp-compare__label">Color</span>
+                <p class="rp-compare__desc">A dedicated benchtop colour reader</p>
+              </div>
+              <div class="rp-compare__item">
+                <span class="rp-compare__art">
+                  <img
+                    src="assets/roastpic/trad-defect.png"
+                    alt="A roaster inspecting beans for defects with a magnifier"
+                  />
+                </span>
+                <span class="rp-compare__label">Defect</span>
+                <p class="rp-compare__desc">Checking bean by bean against a chart</p>
+              </div>
+            </div>
+            <div class="rp-compare__tags">
+              <span class="rp-cost">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 11V7a5 5 0 0110 0v4" />
+                  <rect x="5" y="11" width="14" height="9" rx="2" />
+                </svg>
+                Manual
+              </span>
+              <span class="rp-cost">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M14.5 9.3A2.7 2.7 0 0012 8c-1.5 0-2.6.8-2.6 2s1.1 1.8 2.6 2 2.6.8 2.6 2-1.1 2-2.6 2a2.7 2.7 0 01-2.5-1.3M12 6.4v11.2" />
+                </svg>
+                Expensive
+              </span>
+              <span class="rp-cost">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 7v5l3.2 1.9" />
+                </svg>
+                Labor intensive
+              </span>
+            </div>
+          </div>
+
+          <div class="rp-compare__side rp-compare__side--roastpic">
+            <div class="rp-compare__head">
+              <h3>RoastPic workflow</h3>
+              <p>All three checks come out of a single photo.</p>
+            </div>
+            <div class="rp-compare__items">
+              <div class="rp-compare__item">
+                <span class="rp-compare__art">
+                  <img
+                    src="assets/roastpic/rp-photo.png"
+                    alt="A roaster photographing beans laid out on a calibrated Photosheet"
+                  />
+                </span>
+                <span class="rp-compare__label">Take one photo</span>
+                <p class="rp-compare__desc">Beans on a printed reference sheet</p>
+              </div>
+              <div class="rp-compare__item">
+                <span class="rp-compare__art">
+                  <img
+                    src="assets/roastpic/rp-analysis.png"
+                    alt="A phone analyzing the captured bean image"
+                  />
+                </span>
+                <span class="rp-compare__label">RoastPic analysis</span>
+                <p class="rp-compare__desc">The app reads the beans against the sheet</p>
+              </div>
+              <div class="rp-compare__item">
+                <span class="rp-compare__art">
+                  <img
+                    src="assets/roastpic/rp-outputs.png"
+                    alt="Size, color, and defect results returned together"
+                  />
+                </span>
+                <span class="rp-compare__label">All three results</span>
+                <p class="rp-compare__desc">Size, colour and damage, all at once</p>
+              </div>
+            </div>
+            <div class="rp-compare__tags">
+              <span class="rp-cost">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+                  <path d="M10.5 5.5h3" />
+                </svg>
+                One device
+              </span>
+              <span class="rp-cost">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 7v5l3.2 1.9" />
+                </svg>
+                Seconds
+              </span>
+              <span class="rp-cost">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h16M4 12h16M4 17h10" />
+                </svg>
+                One record
+              </span>
+            </div>
+          </div>
+        </figure>
+
+      </section>
+
+      <!-- ============================================================
+           MVP
+      ============================================================= -->
+      <section class="case-section" id="mvp">
+        <p class="label">The MVP</p>
+        <h2>Turning one photo into a usable measurement</h2>
+        <p>
+          The core technology was already working: with a calibrated Photosheet as a reference, RoastPic could turn a smartphone photo into measurements of bean size, roast color, and defects.
+        </p>
+        <p>
+          My goal at this stage was to turn that capability into a usable MVP—from taking a photo to receiving a result—while making the process feel simple enough for everyday use and reliable enough for roasters to trust.
+        </p>
+        <p>
+         I defined three principles to guide the first experience:
+        </p>
+
+        <div class="rp-card-grid rp-card-grid--3">
+          <article class="rp-card">
+            <span class="rp-card__index">01</span>
+            <span class="rp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="6" width="18" height="13" rx="2" />
+                <circle cx="12" cy="12.5" r="3.5" />
+                <path d="M8.5 6l1.2-2h4.6l1.2 2" />
+              </svg>
+            </span>
+            <h3>Keep it as easy as a photo</h3>
+            <p>
+              Taking a measurement should feel like using a camera, not operating
+              an instrument.
+            </p>
+          </article>
+          <article class="rp-card">
+            <span class="rp-card__index">02</span>
+            <span class="rp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8" />
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+              </svg>
+            </span>
+            <h3>Protect the accuracy</h3>
+            <p>
+              Lighting and bean placement change the result, so the app had to
+              steer people towards a good photo without turning into a manual.
+            </p>
+          </article>
+          <article class="rp-card">
+            <span class="rp-card__index">03</span>
+            <span class="rp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 8.5-4.1-.9-7-4.3-7-8.5V6l7-3z" />
+                <path d="M9 12l2.2 2.2L15.5 10" />
+              </svg>
+            </span>
+            <h3>Make the result believable</h3>
+            <p>
+              Numbers on their own are easy to doubt. People needed to see enough
+              of the process to trust what came back.
+            </p>
+          </article>
+        </div>
+
+        <!-- Interactive: MVP capture flow -->
+        <figure class="rp-screens">
+          <div class="rp-screens__list" data-rp-group="mvp" data-rp-autoplay="5000" role="tablist">
+            <button type="button" class="rp-screen-tab is-active" data-rp-tab="capture" role="tab">
+              <span class="rp-screen-tab__track" aria-hidden="true"><span class="rp-screen-tab__fill"></span></span>
+              <span class="rp-screen-tab__name">Guided capture</span>
+              <span class="rp-screen-tab__note">
+                A single framing hint does the work of an instruction manual.
+              </span>
+            </button>
+            <button type="button" class="rp-screen-tab" data-rp-tab="lowlight" role="tab">
+              <span class="rp-screen-tab__track" aria-hidden="true"><span class="rp-screen-tab__fill"></span></span>
+              <span class="rp-screen-tab__name">Caught before it counts</span>
+              <span class="rp-screen-tab__note">
+                Bad lighting is flagged at capture, not discovered in the result.
+              </span>
+            </button>
+            <button type="button" class="rp-screen-tab" data-rp-tab="analyzing" role="tab">
+              <span class="rp-screen-tab__track" aria-hidden="true"><span class="rp-screen-tab__fill"></span></span>
+              <span class="rp-screen-tab__name">Visible analysis</span>
+              <span class="rp-screen-tab__note">
+                Showing the work makes the measurement feel earned.
+              </span>
+            </button>
+            <button type="button" class="rp-screen-tab" data-rp-tab="results" role="tab">
+              <span class="rp-screen-tab__track" aria-hidden="true"><span class="rp-screen-tab__fill"></span></span>
+              <span class="rp-screen-tab__name">Results with context</span>
+              <span class="rp-screen-tab__note">
+                Size, color, and defects each broken down, not just scored.
+              </span>
+            </button>
+          </div>
+
+          <div class="rp-screens__stage" data-rp-group-panels="mvp">
+            <div class="rp-panel is-active" data-rp-panel="capture" role="tabpanel">
+              <img
+                src="assets/roastpic/mvp-1-capture.png"
+                alt="RoastPic capture screen with a framing tip for the photo sheet"
+              />
+            </div>
+            <div class="rp-panel" data-rp-panel="lowlight" role="tabpanel">
+              <img
+                src="assets/roastpic/mvp-2-lowlight.png"
+                alt="RoastPic capture screen showing a low light warning"
+              />
+            </div>
+            <div class="rp-panel" data-rp-panel="analyzing" role="tabpanel">
+              <img
+                src="assets/roastpic/mvp-3-analyzing.png"
+                alt="RoastPic analyzing the captured beans"
+              />
+            </div>
+            <div class="rp-panel" data-rp-panel="results" role="tabpanel">
+              <img
+                src="assets/roastpic/mvp-4-results.png"
+                alt="RoastPic results screen with size, color, and defect breakdowns"
+              />
+            </div>
+          </div>
+        </figure>
+
+      </section>
+
+      <!-- ============================================================
+           THE GAP
+      ============================================================= -->
+      <section class="case-section" id="gap">
+        <div class="rp-phase-marker">
+          <span class="rp-phase-marker__index">Validating the MVP</span>
+          <span class="rp-phase-marker__rule" aria-hidden="true"></span>
+        </div>
+
+        <p class="label">What testing revealed</p>
+        <h2>Testing revealed what roasters needed beyond measurement</h2>
+        <p>
+          The MVP validated the core idea: roasters could use a phone photo to capture physical measurements of size, color, and defects. Through user testing and feedback, I also found that a measurement rarely stood on its own. Roasters wanted to save results, connect them to a coffee or roast, and reference previous measurements over time.
+        </p>
+        <p>
+          Within a couple of weeks most of the pilot roasteries had stopped
+          opening it. Nobody was complaining about the numbers, and the questions
+          coming back were not about accuracy at all.
+        </p>
+
+        <figure class="rp-asks">
+          <p class="rp-asks__label">What roasters wanted to know</p>
+          <ul class="rp-asks__list">
+            <li>What coffee is this from?</li>
+            <li>Which roast was this?</li>
+            <li>What did the previous batch look like?</li>
+            <li>Is this getting more or less consistent?</li>
+          </ul>
+        </figure>
+
+        <p>
+          These needs pointed to a larger workflow beyond the measurement itself.
+        </p>
+      </section>
+
+      <!-- ============================================================
+           RESEARCH
+      ============================================================= -->
+      <section class="case-section" id="research">
+        <p class="label">Research</p>
+        <h2>Understanding where measurement fits in the larger QC workflow</h2>
+        <p>
+          To define what RoastPic should support next, I went back to our pilot roasteries and observed their quality-control workflow beyond the scan — how measurements were recorded, referenced, and used to evaluate future batches.
+        </p>
+
+        <figure class="rp-photos-figure">
+          <div class="rp-photos">
+            <figure class="rp-photos__item rp-photos__item--tall">
+              <img src="assets/roastpic/rs-cupping.jpg" width="1050" height="1400" alt="Roasters seated at a cupping table evaluating samples during a quality session." loading="lazy" />
+            </figure>
+            <figure class="rp-photos__item rp-photos__item--wide">
+              <img src="assets/roastpic/rs-sampleroast.jpg" width="1400" height="1050" alt="A roaster loading beans into a small sample roaster." loading="lazy" />
+            </figure>
+            <figure class="rp-photos__item">
+              <img src="assets/roastpic/rs-form.jpg" width="1024" height="758" alt="A handwritten paper quality-control form recording roast details and a roast curve." loading="lazy" />
+            </figure>
+            <figure class="rp-photos__item">
+              <img src="assets/roastpic/rs-profiling.jpg" width="1400" height="1050" alt="A roasting machine beside a laptop showing roast profiling software." loading="lazy" />
+            </figure>
+            <figure class="rp-photos__item">
+              <img src="assets/roastpic/rs-sacks.jpg" width="1400" height="1050" alt="Sacks of green coffee stencilled with lot, crop year and weight." loading="lazy" />
+            </figure>
+            <figure class="rp-photos__item">
+              <img src="assets/roastpic/rs-capture.jpg" width="1400" height="1050" alt="Someone photographing roasted beans laid out on the RoastPic reference sheet." loading="lazy" />
+            </figure>
+          </div>
+        </figure>
+
+        <div class="rp-block">
+          <h3>Mapping the workflow around a measurement</h3>
+          <p>
+            Across the roasteries I observed, quality control followed a recurring loop: prepare a batch, evaluate it, record the result, compare it with previous or target roasts, then use that information to adjust what comes next.
+          </p>
+          <p>RoastPic supported the evaluation step, but the measurement it produced was often carried into the rest of the workflow through paper notes, spreadsheets, or other tools.</p>
+        </div>
+
+        <!-- The full roaster workflow, all seven stages at once -->
+        <figure class="rp-map">
+          <figcaption class="rp-figure__title">Roaster&rsquo;s workflow</figcaption>
+          <p class="rp-map__hint">Scroll to see all seven stages &rarr;</p>
+
+          <div class="rp-map__scroll">
+            <div class="rp-map__track">
+              <span class="rp-map__rail" aria-hidden="true"></span>
+              <span class="rp-map__rowlabel rp-map__rowlabel--does">What roasters do</span>
+              <span class="rp-map__rowlabel rp-map__rowlabel--out">Tools / output</span>
+              <div class="rp-map__stage rp-map__stage--c1">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-1-green.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">1</span></span>
+                <span class="rp-map__name">Green coffee / lot</span>
+                <span class="rp-map__field">Select the coffee to roast</span>
+                <span class="rp-map__field rp-map__field--out">Lot / origin records</span>
+              </div>
+              <div class="rp-map__stage rp-map__stage--c2">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-2-roast.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">2</span></span>
+                <span class="rp-map__name">Roast batch</span>
+                <span class="rp-map__field">Roast toward a target profile</span>
+                <span class="rp-map__field rp-map__field--out">Roaster, time / temp data</span>
+              </div>
+              <div class="rp-map__stage rp-map__stage--c3">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-3-cool.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">3</span></span>
+                <span class="rp-map__name">Cool &amp; sample</span>
+                <span class="rp-map__field">Prepare a sample for QC</span>
+                <span class="rp-map__field rp-map__field--out">QC sample</span>
+              </div>
+              <div class="rp-map__stage rp-map__stage--c4 rp-map__stage--mvp">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-4-evaluate.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">4</span></span>
+                <span class="rp-map__name">Evaluate</span>
+                <span class="rp-map__field">Assess roast quality</span>
+                <span class="rp-map__field rp-map__field--out">Roast profile, cupping, RoastPic</span>
+              </div>
+              <div class="rp-map__stage rp-map__stage--c5 rp-map__stage--gap">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-5-log.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">5</span></span>
+                <span class="rp-map__name">Log QC result</span>
+                <span class="rp-map__field">Save findings with context</span>
+                <span class="rp-map__field rp-map__field--out">Notes, software, records</span>
+              </div>
+              <div class="rp-map__stage rp-map__stage--c6 rp-map__stage--gap">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-6-compare.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">6</span></span>
+                <span class="rp-map__name">Compare</span>
+                <span class="rp-map__field">Review against target or past roasts</span>
+                <span class="rp-map__field rp-map__field--out">Historical records</span>
+              </div>
+              <div class="rp-map__stage rp-map__stage--c7 rp-map__stage--gap">
+                <span class="rp-map__art"><img src="assets/roastpic/wf-7-decide.png" alt="" /></span>
+                <span class="rp-map__node"><span class="rp-map__num">7</span></span>
+                <span class="rp-map__name">Decide / adjust</span>
+                <span class="rp-map__field">Approve or modify the next roast</span>
+                <span class="rp-map__field rp-map__field--out">Historical records</span>
+              </div>
+
+              <span class="rp-map__band rp-map__band--mvp">RoastPic MVP</span>
+              <span class="rp-map__band rp-map__band--gap">
+                Handled outside the app &mdash; paper, spreadsheets, memory
+              </span>
+
+              <span class="rp-map__loop" aria-hidden="true"></span>
+              <span class="rp-map__looptext">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 12a8 8 0 11-2.4-5.7" />
+                  <path d="M20 3v5h-5" />
+                </svg>
+                Stage 7 feeds the next batch &mdash; the workflow is a loop
+              </span>
+            </div>
+          </div>
+        </figure>
+
+        <div class="rp-block">
+          <p>
+            A single reading describes one sample. To understand consistency, roasters needed to know what the measurement belonged to, find it again, and compare it with previous results.
+          </p>
+          <p>
+            This helped define the boundary for the next release. RoastPic did not need to replace roast-profile, cupping, or inventory tools. It needed to make its own physical measurements useful beyond the moment they were captured.
+          </p>
+        </div>
+
+        <div class="rp-block">
+          <h3>What roasters needed from a measurement</h3>
+          <p>
+            Across the roasteries I visited, the same three needs kept appearing: measurements had to stay connected to their coffee, remain easy to find, and support comparison over time. I translated those patterns into three requirements for the next phase.
+          </p>
+        </div>
+
+        <!-- Findings mapped straight to requirements, all three at once -->
+        <figure class="rp-matrix">
+          <div class="rp-matrix__head" aria-hidden="true">
+            <span></span>
+            <span>What I saw</span>
+            <span></span>
+            <span>What it meant</span>
+            <span></span>
+            <span>Requirement</span>
+          </div>
+            <div class="rp-matrix__row">
+              <div class="rp-matrix__key">
+                <span class="rp-matrix__num">01</span>
+                <span class="rp-matrix__name">Know what it belongs to</span>
+              </div>
+              <p class="rp-matrix__cell rp-matrix__cell--saw">Nobody looked at a number on its own. They always asked which coffee and which batch it came from.</p>
+              <span class="rp-matrix__arrow" aria-hidden="true"></span>
+              <p class="rp-matrix__cell rp-matrix__cell--meant">A result stops meaning anything the moment the app forgets what it was measuring.</p>
+              <span class="rp-matrix__arrow" aria-hidden="true"></span>
+              <p class="rp-matrix__cell rp-matrix__cell--req">Every measurement stays attached to its batch and its coffee.</p>
+            </div>
+            <div class="rp-matrix__row">
+              <div class="rp-matrix__key">
+                <span class="rp-matrix__num">02</span>
+                <span class="rp-matrix__name">Keep it</span>
+              </div>
+              <p class="rp-matrix__cell rp-matrix__cell--saw">People needed old results back, but they were spread across notebooks, spreadsheets and the app.</p>
+              <span class="rp-matrix__arrow" aria-hidden="true"></span>
+              <p class="rp-matrix__cell rp-matrix__cell--meant">Producing a number was only half the job. It also had to be kept and findable.</p>
+              <span class="rp-matrix__arrow" aria-hidden="true"></span>
+              <p class="rp-matrix__cell rp-matrix__cell--req">A simple record of every measurement, searchable by coffee, date or label.</p>
+            </div>
+            <div class="rp-matrix__row">
+              <div class="rp-matrix__key">
+                <span class="rp-matrix__num">03</span>
+                <span class="rp-matrix__name">Compare it</span>
+              </div>
+              <p class="rp-matrix__cell rp-matrix__cell--saw">To judge a batch, people held it up against an earlier one or against a target.</p>
+              <span class="rp-matrix__arrow" aria-hidden="true"></span>
+              <p class="rp-matrix__cell rp-matrix__cell--meant">What people wanted to know was rarely the number itself. It was what had changed.</p>
+              <span class="rp-matrix__arrow" aria-hidden="true"></span>
+              <p class="rp-matrix__cell rp-matrix__cell--req">Put any two batches side by side and show the difference.</p>
+            </div>
+        </figure>
+
+
+        <div class="rp-statement rp-statement--accent">
+          <p>
+            How might we grow RoastPic from a single-use measuring tool into a lightweight
+            physical QC record &mdash; retrievable, trustworthy, comparable.
+          </p>
+        </div>
+
+        <div class="rp-card-grid rp-card-grid--3">
+          <article class="rp-card">
+            <span class="rp-card__index">01</span>
+            <span class="rp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="M15.2 15.2L21 21" />
+              </svg>
+            </span>
+            <h3>Retrievable</h3>
+            <p>
+              Any measurement can be found again months later, by the coffee it
+              belongs to rather than the day it was taken.
+            </p>
+          </article>
+          <article class="rp-card">
+            <span class="rp-card__index">02</span>
+            <span class="rp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3l7 3v5.5c0 4.2-2.9 7.6-7 8.5-4.1-.9-7-4.3-7-8.5V6l7-3z" />
+                <path d="M9 12l2.2 2.2L15.5 10" />
+              </svg>
+            </span>
+            <h3>Trustworthy</h3>
+            <p>
+              A saved reading keeps the photo and the context it came from, so it
+              can be checked rather than taken on faith.
+            </p>
+          </article>
+          <article class="rp-card">
+            <span class="rp-card__index">03</span>
+            <span class="rp-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="5" width="7.5" height="14" rx="1.5" />
+                <rect x="13.5" y="5" width="7.5" height="14" rx="1.5" />
+              </svg>
+            </span>
+            <h3>Comparable</h3>
+            <p>
+              Two readings of the same coffee can sit side by side and be read as
+              a change, not as two unrelated numbers.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           INFORMATION ARCHITECTURE
+      ============================================================= -->
+      <section class="case-section" id="ia">
+        <p class="label">Structure</p>
+        <h2>Mapping the app to the way roasters already think</h2>
+        <p>
+          Before designing the new screens, I mapped the information structure around the way roasters already identified their work. Rather than treating every scan as a standalone result, RoastPic would organize measurements under the coffee and lot they belonged to. This gave saving, history, search, and comparison a shared structure.
+        </p>
+
+        <figure class="rp-diagram">
+          <img
+            src="assets/roastpic/ia-flow.png"
+            width="3254"
+            height="1348"
+            alt="Information architecture: the coffee library branches into coffees such as Ethiopia Guji and Colombia Huila, each coffee into its lots, and each lot into the individual measurements taken from it."
+            loading="lazy"
+          />
+          <figcaption class="rp-diagram__note">
+            Every measurement hangs off a lot, and every lot off a coffee.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================================================
+           DESIGN
+      ============================================================= -->
+      <section class="case-section" id="design">
+        <p class="label">Design</p>
+        <h2>An app where a measurement outlives the moment it was taken</h2>
+        <p>
+          Each of the three principles became its own part of the product: a way
+          to give a reading a name, a place for it to live, and a way to read two
+          of them as a change.
+        </p>
+
+        <!-- 01 — identity -->
+        <article class="rp-solution">
+          <header class="rp-solution__head">
+            <span class="rp-solution__index">01</span>
+            <div class="rp-solution__intro">
+              <h3>Giving every measurement a name</h3>
+              <p>
+                Saving happens right after a photo is analysed, while the
+                roaster still remembers what they just made. The screen asks for
+                the two things that identify a batch &mdash; which coffee it came
+                from, and which roast of that coffee it is &mdash; and fills in as
+                much of that as it can guess.
+              </p>
+            </div>
+          </header>
+
+          <div class="rp-solution__screens">
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-save.png" width="780" height="1688" alt="Save analysis sheet with a roasted or green toggle, a batch reference field and a list of coffees to save into." loading="lazy" />
+              <figcaption><span class="rp-shot__num">1</span> Save analysis</figcaption>
+            </figure>
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-roastref.png" width="780" height="1688" alt="Roast and batch reference picker showing a suggested next roast number and recent roasts in the same lot." loading="lazy" />
+              <figcaption><span class="rp-shot__num">2</span> Batch reference</figcaption>
+            </figure>
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-newcoffee.png" width="780" height="1688" alt="New coffee form with required name and lot fields and optional origin, process, tags and notes." loading="lazy" />
+              <figcaption><span class="rp-shot__num">3</span> New coffee</figcaption>
+            </figure>
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-saved.png" width="780" height="1688" alt="Confirmation dialog reading analysis saved, added to Ethiopia Guji lot A24-17 as roast number 18." loading="lazy" />
+              <figcaption><span class="rp-shot__num">4</span> Confirmation</figcaption>
+            </figure>
+          </div>
+
+          <ol class="rp-notes">
+            <li>
+              <span class="rp-notes__num">1</span>
+              <div>
+                <strong>Raw or roasted, decided first</strong>
+                <p>
+                  A coffee is measured twice in its life, green and roasted, and
+                  the same photo means different things in each case. So the app
+                  asks first.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="rp-notes__num">2</span>
+              <div>
+                <strong>A label that fills itself in</strong>
+                <p>
+                  Optional, and already filled in with the next roast in the
+                  sequence. The common save needs no typing.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="rp-notes__num">3</span>
+              <div>
+                <strong>Only two fields are required</strong>
+                <p>
+                  A coffee the app has never seen needs a name and a lot.
+                  Everything else can wait.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="rp-notes__num">4</span>
+              <div>
+                <strong>The full name read back</strong>
+                <p>
+                  The full name read back, so a misfiled measurement is caught
+                  now rather than months later.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+        </article>
+
+        <!-- 02 — continuity -->
+        <article class="rp-solution">
+          <header class="rp-solution__head">
+            <span class="rp-solution__index">02</span>
+            <div class="rp-solution__intro">
+              <h3>Somewhere for the measurements to live</h3>
+              <p>
+                Once results are being kept, they need a place a roaster can
+                walk back into. The library is organised the way roasters
+                already think &mdash; by coffee, and by the particular purchase of
+                that coffee &mdash; rather than by the day a photo happened to be
+                taken.
+              </p>
+            </div>
+          </header>
+
+          <div class="rp-solution__screens">
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-library.png" width="780" height="1688" alt="Coffee library listing coffees grouped by lot, each with a roasted or green tag and a measurement count." loading="lazy" />
+              <figcaption><span class="rp-shot__num">1</span> Coffee library</figcaption>
+            </figure>
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-lot-history.png" width="780" height="1688" alt="Measurement history for one lot, newest first, each row showing size, colour and defect rate." loading="lazy" />
+              <figcaption><span class="rp-shot__num">2</span> History</figcaption>
+            </figure>
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-lot-about.png" width="780" height="1688" alt="About tab for a coffee lot showing origin, process, altitude, date added and roaster notes." loading="lazy" />
+              <figcaption><span class="rp-shot__num">3</span> About this coffee</figcaption>
+            </figure>
+            <figure class="rp-shot">
+              <img src="assets/roastpic/ui-analysis-detail.png" width="780" height="1688" alt="A single saved measurement showing the analysed photo above size, colour and defect readings on their own scales." loading="lazy" />
+              <figcaption><span class="rp-shot__num">4</span> One measurement</figcaption>
+            </figure>
+          </div>
+
+          <ol class="rp-notes">
+            <li>
+              <span class="rp-notes__num">1</span>
+              <div>
+                <strong>Grouped by coffee, not by date</strong>
+                <p>
+                  The unit on screen matches the unit roasters talk in. Dates
+                  sit inside a coffee, not above it.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="rp-notes__num">2</span>
+              <div>
+                <strong>A history that reads as a trend</strong>
+                <p>
+                  All three numbers sit on the row, newest first, so a drift is
+                  visible without opening anything.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="rp-notes__num">3</span>
+              <div>
+                <strong>The facts that never change sit apart</strong>
+                <p>
+                  Origin, process and notes get their own tab, which keeps the
+                  history a clean list of events.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span class="rp-notes__num">4</span>
+              <div>
+                <strong>The photo stays attached to the number</strong>
+                <p>
+                  The photo stays with the reading, and each number sits on a
+                  bar marked with its normal range.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="rp-solution__aside">
+            <p class="rp-solution__aside-title">
+              A library is only as good as its worst day
+            </p>
+            <div class="rp-solution__screens rp-solution__screens--small">
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-empty.png" width="780" height="1688" alt="Empty library state explaining that measurements are grouped by coffee and lot, with an analyse coffee button." loading="lazy" />
+                <figcaption>Nothing saved yet &mdash; the empty state explains how the library fills up</figcaption>
+              </figure>
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-search-focus.png" width="780" height="1688" alt="Search field focused but empty, showing recent searches, tags to browse and recently viewed coffees." loading="lazy" />
+                <figcaption>Before anything is typed &mdash; recent searches, tags and the last coffees opened</figcaption>
+              </figure>
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-search-tag.png" width="780" height="1688" alt="Library filtered by the Espresso tag, listing the three coffees carrying it." loading="lazy" />
+                <figcaption>Browsing by tag &mdash; the groupings roasters give their coffees themselves</figcaption>
+              </figure>
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-search.png" width="780" height="1688" alt="Search results split into coffees and lots, and individual measurements." loading="lazy" />
+                <figcaption>Searching by name &mdash; coffees and single measurements kept apart</figcaption>
+              </figure>
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-filters.png" width="780" height="1688" alt="Filter sheet with roast state, sort order and date range options." loading="lazy" />
+                <figcaption>Too much to scroll &mdash; filters narrow by state, order and date</figcaption>
+              </figure>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- 03 — comparison -->
+        <article class="rp-solution rp-solution--split">
+          <header class="rp-solution__head">
+            <span class="rp-solution__index">03</span>
+            <div class="rp-solution__intro">
+              <h3>Seeing what changed</h3>
+              <p>
+                This is the piece roasters asked for most directly. A single
+                measurement rarely answers a question on its own &mdash; what they
+                want to know is whether this batch came out different from the
+                last one, and in which direction.
+              </p>
+            </div>
+          </header>
+
+          <div class="rp-solution__body">
+            <div class="rp-solution__screens">
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-compare-picker.png" width="780" height="1688" alt="Compare picker inside one lot, with baseline A and current B selected from a list of past measurements." loading="lazy" />
+                <figcaption><span class="rp-shot__num">1</span> Choosing two</figcaption>
+              </figure>
+              <figure class="rp-shot">
+                <img src="assets/roastpic/ui-compare.png" width="780" height="1688" alt="Comparison result showing size up 0.3 millimetres, colour 2.2 darker and defect rate up 2.5 points." loading="lazy" />
+                <figcaption><span class="rp-shot__num">2</span> The difference</figcaption>
+              </figure>
+            </div>
+
+            <ol class="rp-notes rp-notes--stack">
+              <li>
+                <span class="rp-notes__num">1</span>
+                <div>
+                  <strong>Comparison starts inside a lot</strong>
+                  <p>
+                    Both readings come from the same coffee, so the app can
+                    never compare two things that were never comparable.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="rp-notes__num">2</span>
+                <div>
+                  <strong>The change is the headline</strong>
+                  <p>
+                    The change leads and the raw readings sit underneath. Colour
+                    carries meaning, not direction &mdash; a climbing defect rate
+                    turns red, a darker roast stays neutral.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+        </article>
+
+
+      </section>
+
+      <!-- ============================================================
+           OUTCOME
+      ============================================================= -->
+      <section class="case-section" id="outcome">
+        <p class="label">Outcome</p>
+        <h2>A measuring tool became a record a roastery could build on</h2>
+        <p>
+          The technology worked early. What changed was what it was for &mdash; not
+          a way to read three numbers off a photo, but a lightweight quality
+          record a small roastery could actually keep. A proven measurement and a
+          product that reached past it made a far stronger case together than
+          either did alone, and that is what the next round of funding was
+          raised against.
+        </p>
+
+        <div class="rp-stat-row">
+          <article class="rp-stat">
+            <strong>95%+</strong>
+            <span class="rp-stat__label">Agreement with lab equipment</span>
+            <p>
+              How closely the app's numbers matched the professional instruments
+              we tested it against.
+            </p>
+          </article>
+          <article class="rp-stat">
+            <strong>30+</strong>
+            <span class="rp-stat__label">Roasteries in the pilot</span>
+            <p>
+              Coffee roasters around Davis and Northern California who used it on
+              real batches.
+            </p>
+          </article>
+          <article class="rp-stat">
+            <strong>$250K</strong>
+            <span class="rp-stat__label">Raised off the back of it</span>
+            <p>Early funding helped support the next stage of development.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           REFLECTION
+      ============================================================= -->
+      <section class="case-section" id="reflection">
+        <p class="label">Reflection</p>
+        <h2>What I took away from being the only designer</h2>
+        <p>
+          Most of this project was spent deciding what not to do. As the only
+          designer at a startup, nobody hands you a scoped problem &mdash; you get
+          an ambiguous one, and the first real piece of work is turning it into
+          something small enough to build. Sitting with that ambiguity, rather
+          than rushing to draw screens, is the part I got better at.
+        </p>
+
+        <div class="rp-lessons">
+          <article class="rp-lesson">
+            <span class="rp-lesson__index">01</span>
+            <div>
+              <h3>Alignment is most of the job</h3>
+              <p>
+                In a small team it is easy for everyone to be enthusiastic about
+                slightly different products. Ambition arrives faster than
+                capacity, and the instinct is to build all of it at once. A lot
+                of my value came from keeping us pointed at one thing at a time
+                and making sure we all meant the same thing by it.
+              </p>
+            </div>
+          </article>
+          <article class="rp-lesson">
+            <span class="rp-lesson__index">02</span>
+            <div>
+              <h3>Understanding the business changes the design</h3>
+              <p>
+                Deciding not to build a full quality-control suite was as much a
+                business call as a design one: who we could realistically compete
+                with, what roasteries already paid for, and what we could support
+                with the team we had. I could only argue for the narrow scope
+                because I understood those constraints, not just the interface.
+              </p>
+            </div>
+          </article>
+          <article class="rp-lesson">
+            <span class="rp-lesson__index">03</span>
+            <div>
+              <h3>Design gets to shape direction</h3>
+              <p>
+                This work did not start as a design brief. It started with usage
+                going quiet and nobody being sure why. Going out and mapping the
+                work is what turned that into a direction the whole team could
+                get behind &mdash; which taught me that a designer at this stage is
+                shaping where the product goes, not only what it looks like.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js?v=roastpic-case"></script>
+  </body>
+</html>

@@ -474,6 +474,147 @@ if (sunwalkSteps.length && sunwalkVisuals.length) {
   sunwalkSteps.forEach((step) => sunwalkObserver.observe(step));
 }
 
+// Diagram tab groups used across the RoastPic case study. A group is a set of
+// [data-rp-tab] buttons inside [data-rp-group="name"], paired with matching
+// [data-rp-panel] elements inside [data-rp-group-panels="name"].
+document.querySelectorAll("[data-rp-group]").forEach((group) => {
+  const tabs = Array.from(group.querySelectorAll("[data-rp-tab]"));
+  const panelHost = document.querySelector(
+    `[data-rp-group-panels="${group.dataset.rpGroup}"]`,
+  );
+  const panels = panelHost
+    ? Array.from(panelHost.querySelectorAll("[data-rp-panel]"))
+    : [];
+
+  if (!tabs.length || !panels.length) return;
+
+  function activate(name, moveFocus) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.rpTab === name;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+
+      if (isActive && moveFocus) {
+        tab.focus();
+      }
+    });
+
+    panels.forEach((panel) => {
+      panel.classList.toggle("is-active", panel.dataset.rpPanel === name);
+    });
+
+    if (playing) runCycle();
+  }
+
+  // Groups marked [data-rp-autoplay="ms"] advance on their own, but only while
+  // they are on screen. The progress bar is animated here rather than in CSS so
+  // that it always restarts with the slide it belongs to, in every browser.
+  const interval = Number(group.dataset.rpAutoplay) || 0;
+  const canAutoplay = interval > 0 && !motionQuery.matches;
+  let playing = false;
+  let timer = null;
+  let frame = 0;
+  let startedAt = 0;
+
+  function fillFor(tab) {
+    return tab ? tab.querySelector(".rp-screen-tab__fill") : null;
+  }
+
+  function activeTab() {
+    return tabs.find((tab) => tab.classList.contains("is-active"));
+  }
+
+  function clearBars() {
+    tabs.forEach((tab) => {
+      const fill = fillFor(tab);
+      if (fill) fill.style.transform = "";
+    });
+  }
+
+  // The bar is painted from elapsed wall-clock time rather than accumulated
+  // frames, so if rendering is throttled it simply catches up instead of
+  // drifting away from the slide it belongs to.
+  function paint() {
+    const fill = fillFor(activeTab());
+    const elapsed = Math.min((performance.now() - startedAt) / interval, 1);
+    if (fill) fill.style.transform = `scaleY(${elapsed})`;
+    frame = elapsed < 1 ? requestAnimationFrame(paint) : 0;
+  }
+
+  // setTimeout stays the authority on advancing, so slides keep moving even
+  // where frames stop being produced.
+  function runCycle() {
+    cancelAnimationFrame(frame);
+    clearTimeout(timer);
+    clearBars();
+
+    startedAt = performance.now();
+    frame = requestAnimationFrame(paint);
+    timer = setTimeout(() => {
+      const next = tabs[(tabs.indexOf(activeTab()) + 1) % tabs.length];
+      activate(next.dataset.rpTab, false);
+    }, interval);
+  }
+
+  function stopAutoplay() {
+    playing = false;
+    clearTimeout(timer);
+    timer = null;
+    cancelAnimationFrame(frame);
+    frame = 0;
+    clearBars();
+  }
+
+  function startAutoplay() {
+    if (!canAutoplay || playing) return;
+    playing = true;
+    runCycle();
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activate(tab.dataset.rpTab, false);
+    });
+
+    tab.addEventListener("keydown", (event) => {
+      const step =
+        event.key === "ArrowRight" || event.key === "ArrowDown"
+          ? 1
+          : event.key === "ArrowLeft" || event.key === "ArrowUp"
+            ? -1
+            : 0;
+
+      if (!step) return;
+
+      event.preventDefault();
+      const next = tabs[(tabs.indexOf(tab) + step + tabs.length) % tabs.length];
+      activate(next.dataset.rpTab, true);
+    });
+  });
+
+  const initial = tabs.find((tab) => tab.classList.contains("is-active")) || tabs[0];
+  activate(initial.dataset.rpTab, false);
+
+  if (canAutoplay) {
+    const autoplayObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            startAutoplay();
+          } else {
+            stopAutoplay();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    autoplayObserver.observe(group.closest("figure") || group);
+  }
+});
+
+
 (() => {
   const widget = document.querySelector("[data-oneko-divider]");
   const cat = document.querySelector("[data-oneko-cat]");
