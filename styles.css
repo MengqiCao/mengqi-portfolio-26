@@ -503,6 +503,17 @@ h3 {
   line-height: 1.2;
 }
 
+.case-page h3 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+body.case-page h3 {
+  font-family: var(--font-display-sans);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
 .work-grid {
   grid-column: 2 / span 10;
   display: grid;
@@ -694,6 +705,108 @@ h3 {
   display: block;
   object-fit: cover;
   object-position: center;
+}
+
+/* --- RoastPic featured thumbnail -------------------------- */
+
+.rp-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  /* Faint dot grid over a cool wash, tinted with the case study's accent. */
+  background-color: #f2f5fa;
+  background-image:
+    radial-gradient(circle, rgba(19, 43, 120, 0.055) 1px, transparent 1.2px),
+    linear-gradient(155deg, #fafbfd 0%, #eef2f9 52%, #e4eaf5 100%);
+  background-size: 20px 20px, auto;
+}
+
+/* Every rule keeps the .rp-thumb prefix so it outranks
+   .featured-image--media img, which stretches media to fill the card. */
+.rp-thumb .rp-thumb__logo {
+  position: absolute;
+  top: 9%;
+  left: 6%;
+  width: 13%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* left/right + auto margins centre it without a transform, leaving transform
+   free for the hover lift. Sitting low crops the wrist off the bottom. */
+.rp-thumb .rp-thumb__hand {
+  position: absolute;
+  right: 2%;
+  bottom: -13%;
+  left: 16%;
+  width: auto;
+  height: 90%;
+  margin: 0 auto;
+  object-fit: contain;
+  transition: transform 700ms var(--ease);
+}
+
+.rp-thumb .rp-thumb__chip {
+  position: absolute;
+  width: 25%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  border-radius: 8px;
+  box-shadow: 0 14px 32px rgba(24, 36, 64, 0.16);
+  transform: translateY(14px);
+  transition:
+    opacity 550ms var(--ease),
+    transform 550ms var(--ease);
+}
+
+.rp-thumb .rp-thumb__chip--library {
+  top: 20%;
+  left: 3%;
+}
+
+.rp-thumb .rp-thumb__chip--size {
+  top: 56%;
+  left: 7%;
+}
+
+.rp-thumb .rp-thumb__chip--defect {
+  top: 38%;
+  right: 1%;
+}
+
+/* Hovering floats the whole scene up a touch and brings the pieces of the
+   product forward, one after another. */
+.featured-card a:hover .rp-thumb__hand {
+  transform: translateY(-8px);
+}
+
+.featured-card a:hover .rp-thumb__chip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.featured-card a:hover .rp-thumb__chip--defect {
+  transition-delay: 90ms;
+}
+
+.featured-card a:hover .rp-thumb__chip--size {
+  transition-delay: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rp-thumb .rp-thumb__hand,
+  .rp-thumb .rp-thumb__chip {
+    transition: none;
+  }
+
+  .featured-card a:hover .rp-thumb__hand {
+    transform: none;
+  }
+
+  .featured-card a:hover .rp-thumb__chip {
+    transform: none;
+  }
 }
 
 .featured-card__body {
@@ -1681,6 +1794,11 @@ figcaption,
 
 .case-hero h1 {
   margin-bottom: var(--space-4);
+  font-family: var(--font-display-sans);
+  font-size: clamp(38px, 3.6vw, 52px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
 }
 
 .case-hero--editorial h1 {
@@ -1760,6 +1878,11 @@ figcaption,
 
 .case-section h2 {
   margin-bottom: var(--space-3);
+  font-family: var(--font-display-sans);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .stat-grid {
@@ -1875,7 +1998,7 @@ figcaption,
 
 .case-narrative-block h3 {
   margin-bottom: var(--space-2);
-  font-size: 28px;
+  font-size: 20px;
 }
 
 .case-narrative-block p:last-child {
@@ -2702,9 +2825,7 @@ figcaption,
 
 .pourover-principles h3 {
   margin-bottom: 0;
-  font-family: var(--font-serif);
-  font-size: 28px;
-  font-weight: 400;
+  font-size: 20px;
 }
 
 .pourover-principles p {
@@ -3591,19 +3712,6 @@ figcaption,
   letter-spacing: -0.02em;
 }
 
-.rp-page .case-hero h1 {
-  font-size: clamp(38px, 3.6vw, 52px);
-  font-weight: 500;
-  line-height: 1.12;
-}
-
-.rp-page .case-section h2 {
-  margin-bottom: var(--space-3);
-  font-size: clamp(28px, 2.4vw, 36px);
-  font-weight: 500;
-  line-height: 1.2;
-}
-
 .rp-page .case-progress strong {
   font-size: 22px;
   font-weight: 500;
@@ -3751,8 +3859,7 @@ figcaption,
 
 .rp-block h3 {
   margin-bottom: var(--space-2);
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 20px;
 }
 
 .rp-block p {
@@ -4705,9 +4812,8 @@ figcaption,
 
 .rp-solution__intro h3 {
   margin: 0 0 var(--space-2);
-  font-size: clamp(24px, 2vw, 30px);
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: 20px;
+  line-height: 1.3;
 }
 
 .rp-solution__intro p {
