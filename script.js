@@ -169,9 +169,10 @@ const sunwalkStory = document.querySelector("[data-sunwalk-story]");
 const sunwalkOverview = document.querySelector("[data-sunwalk-overview]");
 const soundmapOverview = document.querySelector("[data-soundmap-overview]");
 const projectCarousels = document.querySelectorAll("[data-project-carousel]");
-const modalTriggers = document.querySelectorAll("[data-project]");
 const closeButtons = document.querySelectorAll("[data-modal-close]");
 let openedAt = 0;
+let activeProjectId = "";
+let pushedProjectEntry = false;
 
 const showcasePanel = modal ? modal.querySelector(".showcase-modal__panel") : null;
 
@@ -227,9 +228,44 @@ function resetModalPosition() {
   });
 }
 
-function openModal(projectId) {
+/* --- Shareable project URLs -------------------------------------------
+   Each vibe coding project lives in a modal, so without this the address
+   bar never leaves the bare home page and there is nothing to send anyone.
+   Opening a project writes ?project=<id>; closing clears it again. */
+const PROJECT_PARAM = "project";
+
+function projectIdFromUrl() {
+  const id = new URLSearchParams(window.location.search).get(PROJECT_PARAM);
+  return id && showcaseData[id] ? id : "";
+}
+
+function writeProjectToUrl(projectId, replace) {
+  const url = new URL(window.location.href);
+
+  if (projectId) {
+    url.searchParams.set(PROJECT_PARAM, projectId);
+  } else {
+    url.searchParams.delete(PROJECT_PARAM);
+  }
+
+  if (url.href === window.location.href) return;
+
+  window.history[replace ? "replaceState" : "pushState"]({}, "", url);
+}
+
+function openModal(projectId, { updateUrl = true } = {}) {
   const project = showcaseData[projectId];
   if (!modal || !project) return;
+  if (activeProjectId === projectId && modal.classList.contains("is-open")) {
+    return;
+  }
+
+  if (updateUrl && projectIdFromUrl() !== projectId) {
+    writeProjectToUrl(projectId, false);
+    pushedProjectEntry = true;
+  }
+
+  activeProjectId = projectId;
 
   modal.classList.remove("is-open");
   modal.classList.add("is-preparing");
@@ -304,9 +340,23 @@ function openModal(projectId) {
   }
 }
 
-function closeModal() {
+function closeModal({ updateUrl = true } = {}) {
   if (!modal) return;
   if (Date.now() - openedAt < 250) return;
+
+  activeProjectId = "";
+
+  if (updateUrl && projectIdFromUrl()) {
+    if (pushedProjectEntry) {
+      // We added the entry, so step back off it rather than stacking another.
+      pushedProjectEntry = false;
+      window.history.back();
+    } else {
+      // Arrived straight on a shared link: never send the visitor off-site.
+      writeProjectToUrl("", true);
+    }
+  }
+
   resetModalPosition();
   modal.classList.remove("is-open");
   modal.classList.remove("is-preparing");
@@ -318,13 +368,6 @@ function closeModal() {
   walkthroughVisuals.forEach((visual) => setVisualVideoState(visual, false));
   sunwalkVisuals.forEach((visual) => setVisualVideoState(visual, false));
 }
-
-modalTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", (event) => {
-    event.preventDefault();
-    openModal(trigger.dataset.project);
-  });
-});
 
 document.addEventListener("click", (event) => {
   const trigger = event.target.closest?.("[data-project]");
@@ -345,6 +388,20 @@ document
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeModal();
+});
+
+window.addEventListener("popstate", () => {
+  if (!modal) return;
+
+  const projectId = projectIdFromUrl();
+  pushedProjectEntry = false;
+  openedAt = 0; // Bypass the double-click guard; this is a deliberate nav.
+
+  if (projectId) {
+    openModal(projectId, { updateUrl: false });
+  } else if (activeProjectId) {
+    closeModal({ updateUrl: false });
+  }
 });
 
 const processLinks = document.querySelectorAll(".case-progress nav a");
@@ -867,3 +924,10 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     requestAnimationFrame(tick);
   });
 })();
+
+// Deep link: /?project=<id> opens that showcase straight away. Runs last
+// because openModal touches walkthrough state declared below it.
+if (modal) {
+  const sharedProjectId = projectIdFromUrl();
+  if (sharedProjectId) openModal(sharedProjectId, { updateUrl: false });
+}
