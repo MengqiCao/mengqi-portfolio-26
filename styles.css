@@ -470,16 +470,8 @@ h1 {
   font-size: 34px;
 }
 
-.section__title--featured {
-  margin-top: var(--space-5);
-}
-
 .work-section {
   padding-top: var(--space-5);
-}
-
-.work-section .section__title--featured:first-child {
-  margin-top: 0;
 }
 
 .work-divider {
