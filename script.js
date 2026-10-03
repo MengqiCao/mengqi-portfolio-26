@@ -679,12 +679,31 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
 
   if (!widget || !cat || !ball) return;
 
+  const heart = document.createElement("span");
+  heart.className = "oneko-heart";
+  heart.setAttribute("aria-hidden", "true");
+  widget.append(heart);
+
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const catSize = 40;
   const spriteFrameSize = 40;
   const ballSize = 16;
   const spriteSets = {
     idle: [[-3, -3]],
+    // Closed ^ ^ eyes, a little smile and blush, for after it has played.
+    happy: [[-8, 0]],
+    alert: [[-7, -3]],
+    // Paw raised; used for batting at the ball. oneko.png is the original
+    // sheet with the stray wall pixels beside these two poses erased, plus
+    // an extra ninth column holding the happy face below.
+    scratchWallE: [
+      [-2, -2],
+      [-2, -3],
+    ],
+    scratchWallW: [
+      [-4, 0],
+      [-4, -1],
+    ],
     scratchSelf: [
       [-5, 0],
       [-6, 0],
@@ -717,6 +736,7 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     ballResting: true,
     catMode: "idle",
     pauseUntil: 0,
+    playsLeft: 0,
     lastTime: performance.now(),
     lastSpriteAt: 0,
     walkFrame: 0,
@@ -763,7 +783,8 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     }
 
     if (state.ballResting && !state.launched && !state.initialBallPlaced) {
-      state.ballX = clamp(state.homeX + 64, 0, state.width - ballSize);
+      // Far enough from the cat that its walk over to play reads clearly.
+      state.ballX = clamp(state.homeX + 120, 0, state.width - ballSize);
       state.ballY = 0;
       state.initialBallPlaced = true;
     } else {
@@ -809,13 +830,7 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     setSprite("idle", 0);
   }
 
-  function stepBall(dt) {
-    if (!state.launched) return;
-
-    state.ballVY -= 1600 * dt;
-    state.ballX += state.ballVX * dt;
-    state.ballY += state.ballVY * dt;
-
+  function bounceOffWalls() {
     if (state.ballX <= 0) {
       state.ballX = 0;
       state.ballVX = Math.abs(state.ballVX) * 0.82;
@@ -823,21 +838,66 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
       state.ballX = state.width - ballSize;
       state.ballVX = -Math.abs(state.ballVX) * 0.82;
     }
+  }
 
-    if (state.ballY <= 0) {
-      state.ballY = 0;
+  function stepBall(dt) {
+    if (state.launched) {
+      state.ballVY -= 1600 * dt;
+      state.ballX += state.ballVX * dt;
+      state.ballY += state.ballVY * dt;
+      bounceOffWalls();
 
-      if (state.ballVY < 0 && state.bounces < 4 && Math.abs(state.ballVY) > 130) {
-        state.ballVY = -state.ballVY * 0.5;
-        state.ballVX *= 0.82;
-        state.bounces += 1;
-      } else if (state.bounces >= 2 || Math.abs(state.ballVY) <= 130) {
-        state.ballVY = 0;
-        state.ballVX = 0;
-        state.launched = false;
-        state.ballResting = true;
+      if (state.ballY <= 0) {
+        state.ballY = 0;
+
+        if (state.ballVY < 0 && state.bounces < 4 && Math.abs(state.ballVY) > 130) {
+          state.ballVY = -state.ballVY * 0.5;
+          state.ballVX *= 0.82;
+          state.bounces += 1;
+        } else if (state.bounces >= 2 || Math.abs(state.ballVY) <= 130) {
+          // Landed for good; keep a little speed so it rolls to a stop.
+          state.ballVY = 0;
+          state.ballVX *= 0.6;
+          state.launched = false;
+        }
       }
+      return;
     }
+
+    if (state.ballResting) return;
+
+    state.ballX += state.ballVX * dt;
+    bounceOffWalls();
+    const speed = Math.abs(state.ballVX) - 420 * dt;
+    state.ballVX = speed > 6 ? Math.sign(state.ballVX) * speed : 0;
+    if (state.ballVX === 0) state.ballResting = true;
+  }
+
+  // Where the cat stands to play: beside the ball with its paw just over it,
+  // on the side it's coming from (or the other side if that's off the line).
+  function playSpot() {
+    const reach = 10;
+    const spotFor = (side) =>
+      side < 0 ? state.ballX - catSize + reach : state.ballX + ballSize - reach;
+    let side = state.catX + catSize / 2 <= state.ballX + ballSize / 2 ? -1 : 1;
+    let x = spotFor(side);
+
+    if (x < 0 || x > state.width - catSize) {
+      side = -side;
+      x = spotFor(side);
+    }
+
+    return { side, x: clamp(x, 0, state.width - catSize) };
+  }
+
+  function batBall(direction) {
+    state.playsLeft -= 1;
+    state.launched = true;
+    state.ballResting = false;
+    state.bounces = 0;
+    state.ballVX = direction * (140 + Math.random() * 90);
+    state.ballVY = 170 + Math.random() * 130;
+    state.catMode = "chasing";
   }
 
   function stepCat(dt, now) {
@@ -846,28 +906,14 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
       return;
     }
 
-    const speed = 280;
-    const targetX = clamp(
-      state.ballX - Math.round((catSize - ballSize) / 2),
-      0,
-      state.width - catSize,
-    );
-    const distance = targetX - state.catX;
-
-    if (Math.abs(distance) <= speed * dt) {
-      state.catX = targetX;
-
-      if (state.catMode === "chasing" && state.ballResting) {
-        state.catMode = "pausing";
-        state.pauseUntil = now + 550;
-        setSprite("idle", 0);
-      }
-    } else {
-      state.catX += Math.sign(distance) * speed * dt;
+    if (state.catMode === "alert") {
+      setSprite("alert", 0);
+      if (now >= state.pauseUntil) state.catMode = "chasing";
+      return;
     }
 
-    if (state.catMode === "pausing") {
-      setSprite("idle", 0);
+    if (state.catMode === "content") {
+      setSprite("happy", 0);
       if (now >= state.pauseUntil) {
         state.homeX = state.catX;
         state.catMode = "idle";
@@ -876,10 +922,51 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
       return;
     }
 
-    if (now - state.lastSpriteAt > 120) {
-      state.lastSpriteAt = now;
-      state.walkFrame += 1;
-      setSprite(distance >= 0 ? "E" : "W", state.walkFrame);
+    const spot = playSpot();
+
+    if (state.catMode === "pawing") {
+      if (now - state.lastSpriteAt > 140) {
+        state.lastSpriteAt = now;
+        state.walkFrame += 1;
+        setSprite(spot.side < 0 ? "scratchWallE" : "scratchWallW", state.walkFrame);
+      }
+      if (now >= state.pauseUntil) batBall(-spot.side);
+      return;
+    }
+
+    // Chasing: run to the ball, then paw at it a few times before settling.
+    const speed = 280;
+    const distance = spot.x - state.catX;
+    const step = clamp(distance, -speed * dt, speed * dt);
+    state.catX += step;
+
+    if (Math.abs(step) > 0.5) {
+      if (now - state.lastSpriteAt > 120) {
+        state.lastSpriteAt = now;
+        state.walkFrame += 1;
+        setSprite(step > 0 ? "E" : "W", state.walkFrame);
+      }
+      return;
+    }
+
+    if (!state.ballResting) {
+      setSprite("idle", 0);
+      return;
+    }
+
+    if (state.playsLeft > 0) {
+      state.catMode = "pawing";
+      state.pauseUntil = now + 450 + Math.random() * 350;
+      state.lastSpriteAt = 0;
+    } else {
+      // Done playing: a satisfied smile and a little heart.
+      state.catMode = "content";
+      state.pauseUntil = now + 1800;
+      setSprite("happy", 0);
+      heart.style.left = `${Math.round(state.catX + 22)}px`;
+      heart.classList.remove("is-floating");
+      void heart.offsetWidth;
+      heart.classList.add("is-floating");
     }
   }
 
@@ -909,9 +996,33 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     state.bounces = 0;
     state.ballVX = (towardRight ? 1 : -1) * (240 + Math.random() * 140);
     state.ballVY = 560 + Math.random() * 110;
-    state.catMode = "chasing";
-    state.pauseUntil = 0;
+    // React to the throw rather than anticipate it: a beat of "!" first.
+    state.catMode = "alert";
+    state.pauseUntil = performance.now() + 400;
+    state.playsLeft = 1;
     resetIdleAnimation();
+  }
+
+  // First thing on the page: the cat walks over to the ball and plays with
+  // it, so people can tell the pair is interactive.
+  function playIntro() {
+    if (reduceMotion.matches || state.launched || state.catMode !== "idle") return;
+
+    state.playsLeft = 1;
+    state.catMode = "chasing";
+    resetIdleAnimation();
+  }
+
+  if ("IntersectionObserver" in window) {
+    const introObserver = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        introObserver.disconnect();
+        window.setTimeout(playIntro, 900);
+      },
+      { threshold: 1 },
+    );
+    introObserver.observe(ball);
   }
 
   ball.addEventListener("click", launchBall);

@@ -249,10 +249,41 @@ p {
   left: 0;
   width: 40px;
   height: 40px;
-  background: url("assets/oneko/oneko.gif") 0 0 / 320px 160px no-repeat;
+  background: url("assets/oneko/oneko.png") 0 0 / 360px 160px no-repeat;
   image-rendering: pixelated;
   pointer-events: none;
   transform: translate3d(0, 0, 0);
+}
+
+.oneko-heart {
+  position: absolute;
+  top: calc(var(--oneko-line-y) - 52px);
+  left: 0;
+  width: 11.25px;
+  height: 10px;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 8' shape-rendering='crispEdges'><rect x='1' y='0' width='1' height='1' fill='%23000'/><rect x='2' y='0' width='1' height='1' fill='%23000'/><rect x='6' y='0' width='1' height='1' fill='%23000'/><rect x='7' y='0' width='1' height='1' fill='%23000'/><rect x='0' y='1' width='1' height='1' fill='%23000'/><rect x='1' y='1' width='1' height='1' fill='%23f7a1b5'/><rect x='2' y='1' width='1' height='1' fill='%23f7a1b5'/><rect x='3' y='1' width='1' height='1' fill='%23000'/><rect x='5' y='1' width='1' height='1' fill='%23000'/><rect x='6' y='1' width='1' height='1' fill='%23f7a1b5'/><rect x='7' y='1' width='1' height='1' fill='%23f7a1b5'/><rect x='8' y='1' width='1' height='1' fill='%23000'/><rect x='0' y='2' width='1' height='1' fill='%23000'/><rect x='1' y='2' width='1' height='1' fill='%23f7a1b5'/><rect x='2' y='2' width='1' height='1' fill='%23f7a1b5'/><rect x='3' y='2' width='1' height='1' fill='%23f7a1b5'/><rect x='4' y='2' width='1' height='1' fill='%23000'/><rect x='5' y='2' width='1' height='1' fill='%23f7a1b5'/><rect x='6' y='2' width='1' height='1' fill='%23f7a1b5'/><rect x='7' y='2' width='1' height='1' fill='%23f7a1b5'/><rect x='8' y='2' width='1' height='1' fill='%23000'/><rect x='0' y='3' width='1' height='1' fill='%23000'/><rect x='1' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='2' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='3' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='4' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='5' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='6' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='7' y='3' width='1' height='1' fill='%23f7a1b5'/><rect x='8' y='3' width='1' height='1' fill='%23000'/><rect x='1' y='4' width='1' height='1' fill='%23000'/><rect x='2' y='4' width='1' height='1' fill='%23f7a1b5'/><rect x='3' y='4' width='1' height='1' fill='%23f7a1b5'/><rect x='4' y='4' width='1' height='1' fill='%23f7a1b5'/><rect x='5' y='4' width='1' height='1' fill='%23f7a1b5'/><rect x='6' y='4' width='1' height='1' fill='%23f7a1b5'/><rect x='7' y='4' width='1' height='1' fill='%23000'/><rect x='2' y='5' width='1' height='1' fill='%23000'/><rect x='3' y='5' width='1' height='1' fill='%23f7a1b5'/><rect x='4' y='5' width='1' height='1' fill='%23f7a1b5'/><rect x='5' y='5' width='1' height='1' fill='%23f7a1b5'/><rect x='6' y='5' width='1' height='1' fill='%23000'/><rect x='3' y='6' width='1' height='1' fill='%23000'/><rect x='4' y='6' width='1' height='1' fill='%23f7a1b5'/><rect x='5' y='6' width='1' height='1' fill='%23000'/><rect x='4' y='7' width='1' height='1' fill='%23000'/></svg>") 0 0 / 100% 100% no-repeat;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.oneko-heart.is-floating {
+  animation: oneko-heart-float 1400ms ease-out;
+}
+
+@keyframes oneko-heart-float {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.6);
+  }
+  20%,
+  70% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
 .oneko-ball {
