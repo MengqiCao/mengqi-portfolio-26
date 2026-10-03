@@ -343,41 +343,80 @@
           aria-labelledby="about-title"
         >
           <p class="label">About</p>
-          <h2 id="about-title">Beyond the portfolio</h2>
+          <h2 id="about-title">A little more about me</h2>
 
           <div class="about-grid">
             <div class="about-copy">
               <p>
-                I'm Mengqi, a designer who loves creative tools and the
-                small moments that make a product feel delightful.
+                What I love about design is solving problems: taking something
+                messy and making it feel simple. I care just as much about the
+                details, like the words, the spacing, and the way things move,
+                because that’s where people decide whether they trust a product.
               </p>
               <p>
-                Outside of design, I'm probably solving beta on a bouldering
-                wall, building weird little projects with code, shooting
-                through a disposable camera, or watching the sunset.
+                Outside of work, I’m usually
+                <span class="hobby-link hobby-link--climb" role="button" tabindex="0" data-hobby="climb">climbing outdoors</span>,
+                which is really just problem-solving on a rock. I enjoy
+                <span class="hobby-link hobby-link--sunset" role="button" tabindex="0" data-hobby="sunset">watching the sunset</span>,
+                and in the winter I go
+                <span class="hobby-link hobby-link--ski" role="button" tabindex="0" data-hobby="ski">snowboarding</span>
+                whenever I can.
               </p>
             </div>
 
-            <figure class="about-photo">
-<div class="figma-frame">
-                <span class="figma-frame__tag" aria-hidden="true">
-                  <span class="figma-frame__tag-icon"></span>
-                  Mengqi.jpg
-                </span>
-                <img src="assets/mengqi.jpg" alt="Photo of Mengqi" />
-                <span class="figma-frame__handle figma-frame__handle--tl" aria-hidden="true"></span>
-                <span class="figma-frame__handle figma-frame__handle--tr" aria-hidden="true"></span>
-                <span class="figma-frame__handle figma-frame__handle--bl" aria-hidden="true"></span>
-                <span class="figma-frame__handle figma-frame__handle--br" aria-hidden="true"></span>
-                <span class="figma-frame__dimension" aria-hidden="true">
-                  <svg class="figma-frame__crosshair" viewBox="0 0 16 16">
-                    <circle cx="8" cy="8" r="4.6" />
-                    <path d="M8 0v3.4M8 12.6V16M0 8h3.4M12.6 8H16" />
-                  </svg>
-                  1696 &times; 1749
-                </span>
+            <!--
+              Photo stack, listed bottom to top: the last card starts on top.
+              To add one, copy a <figure>, point it at a photo in assets/about/,
+              and give it a matching hobby-link in the copy above.
+            -->
+            <div class="photo-stack" data-photo-stack>
+              <div class="photo-stack__deck">
+                <figure class="photo-card" data-hobby="ski" data-file="ski.jpg" data-size="3840 &times; 2160">
+                  <img
+                    src="assets/about/ski.jpg"
+                    alt="Mengqi taking a break in the snow while snowboarding"
+                    style="object-position: 57% 50%"
+                    draggable="false"
+                  />
+                </figure>
+                <figure class="photo-card" data-hobby="sunset" data-file="sunset.jpg" data-size="3024 &times; 4032">
+                  <img
+                    src="assets/about/sunset.jpg"
+                    alt="A pink and purple sunset over a city street"
+                    draggable="false"
+                  />
+                </figure>
+                <figure class="photo-card" data-hobby="climb" data-file="climbing.jpg" data-size="3024 &times; 4032">
+                  <img
+                    src="assets/about/climbing.jpg"
+                    alt="Mengqi climbing a rock face above a forest"
+                    draggable="false"
+                  />
+                </figure>
+                <figure class="photo-card" data-hobby="me" data-file="Mengqi.jpg" data-size="2349 &times; 3132">
+                  <img src="assets/about/mengqi.jpg" alt="Photo of Mengqi" draggable="false" />
+                </figure>
+
+                <!-- Selection frame; script moves it onto whichever card is on top. -->
+                <div class="figma-frame" aria-hidden="true" data-photo-frame>
+                  <span class="figma-frame__tag">
+                    <span class="figma-frame__tag-icon"></span>
+                    <span data-photo-file>Mengqi.jpg</span>
+                  </span>
+                  <span class="figma-frame__handle figma-frame__handle--tl"></span>
+                  <span class="figma-frame__handle figma-frame__handle--tr"></span>
+                  <span class="figma-frame__handle figma-frame__handle--bl"></span>
+                  <span class="figma-frame__handle figma-frame__handle--br"></span>
+                  <span class="figma-frame__dimension">
+                    <svg class="figma-frame__crosshair" viewBox="0 0 16 16">
+                      <circle cx="8" cy="8" r="4.6" />
+                      <path d="M8 0v3.4M8 12.6V16M0 8h3.4M12.6 8H16" />
+                    </svg>
+                    <span data-photo-size>2349 &times; 3132</span>
+                  </span>
+                </div>
               </div>
-            </figure>
+            </div>
           </div>
         </section>
 

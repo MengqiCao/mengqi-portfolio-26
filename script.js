@@ -925,6 +925,240 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
   });
 })();
 
+// About photo stack: a vanilla port of React Bits' <Stack>. Drag, swipe or
+// click the top card to send it to the back; hobby links in the copy pull
+// their photo to the top.
+(() => {
+  const stack = document.querySelector("[data-photo-stack]");
+
+  if (!stack) return;
+
+  const deck = stack.querySelector(".photo-stack__deck");
+  const frame = stack.querySelector("[data-photo-frame]");
+  const fileLabel = stack.querySelector("[data-photo-file]");
+  const sizeLabel = stack.querySelector("[data-photo-size]");
+  const hobbyLinks = document.querySelectorAll(".hobby-link[data-hobby]");
+
+  // Bottom to top; the last card in the markup starts on top.
+  const order = Array.from(deck.querySelectorAll(".photo-card"));
+  // Resting pose by depth below the top card: [rotation in deg, x offset in %],
+  // so the cards underneath peek out like a held deck.
+  const fan = [
+    [0, 0],
+    [5, 5],
+    [-4, -4],
+    [8, 8],
+  ];
+  const flyTime = 260;
+  const dragThreshold = 90;
+  const flickSpeed = 0.6;
+  let busy = false;
+  let drag = null;
+
+  const topCard = () => order[order.length - 1];
+  const clamp = (value, limit) => Math.max(-limit, Math.min(limit, value));
+
+  function restingTransform(card) {
+    const depth = order.length - 1 - order.indexOf(card);
+    if (depth === 0) return "none";
+    const [rotation, offset] = fan[Math.min(depth, fan.length - 1)];
+    return `translateX(${offset}%) rotate(${rotation}deg) scale(${1 - depth * 0.04})`;
+  }
+
+  function layout() {
+    const top = topCard();
+
+    order.forEach((card, index) => {
+      card.classList.remove("is-hinting");
+      card.style.zIndex = String(index + 1);
+      card.style.transform = restingTransform(card);
+      card.classList.toggle("is-top", card === top);
+    });
+
+    if (frame.parentElement !== top) top.append(frame);
+    fileLabel.textContent = top.dataset.file;
+    sizeLabel.textContent = top.dataset.size;
+
+    hobbyLinks.forEach((link) => {
+      const isActive = link.dataset.hobby === top.dataset.hobby;
+      link.classList.toggle("is-active", isActive);
+      link.setAttribute("aria-pressed", String(isActive));
+    });
+  }
+
+  function moveCard(card, index) {
+    order.splice(order.indexOf(card), 1);
+    order.splice(index, 0, card);
+  }
+
+  // Throw `card` to `transform` while it keeps its current z-index, then
+  // re-slot it at `index` so it settles into its new place in the deck.
+  function flyThenSettle(card, transform, index) {
+    if (motionQuery.matches) {
+      moveCard(card, index);
+      layout();
+      return;
+    }
+
+    busy = true;
+    card.classList.remove("is-hinting");
+    card.classList.add("is-flying");
+    card.style.transform = transform;
+    window.setTimeout(() => {
+      card.classList.remove("is-flying");
+      moveCard(card, index);
+      layout();
+      busy = false;
+    }, flyTime);
+  }
+
+  function sendTopToBack(dirX, dirY) {
+    if (busy) return;
+    const length = Math.hypot(dirX, dirY) || 1;
+    const distance = deck.offsetWidth * 0.9;
+    const x = (dirX / length) * distance;
+    const y = (dirY / length) * distance;
+    flyThenSettle(
+      topCard(),
+      `translate3d(${x}px, ${y}px, 0) rotate(${dirX < 0 ? -12 : 12}deg)`,
+      0,
+    );
+  }
+
+  function bringToTop(card) {
+    if (busy || !card) return;
+
+    if (card === topCard()) {
+      card.classList.remove("is-wiggling");
+      void card.offsetWidth;
+      card.classList.add("is-wiggling");
+      return;
+    }
+
+    // Slide it out from under the deck first, then lay it on top.
+    const x = -deck.offsetWidth * 0.62;
+    flyThenSettle(card, `translate3d(${x}px, -4%, 0) rotate(-10deg)`, order.length - 1);
+  }
+
+  deck.addEventListener("animationend", (event) => {
+    event.target.classList.remove("is-wiggling", "is-hinting");
+  });
+
+  deck.addEventListener("pointerdown", (event) => {
+    const card = event.target.closest(".photo-card");
+    if (busy || card !== topCard() || event.button !== 0) return;
+
+    drag = {
+      card,
+      id: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      lastX: event.clientX,
+      lastY: event.clientY,
+      lastTime: event.timeStamp,
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      moved: false,
+    };
+    card.classList.remove("is-hinting");
+    card.setPointerCapture(event.pointerId);
+  });
+
+  deck.addEventListener("pointermove", (event) => {
+    if (!drag || event.pointerId !== drag.id) return;
+
+    const x = event.clientX - drag.startX;
+    const y = event.clientY - drag.startY;
+
+    if (!drag.moved) {
+      if (Math.hypot(x, y) < 5) return;
+      drag.moved = true;
+      drag.card.classList.add("is-dragging");
+    }
+
+    const elapsed = Math.max(event.timeStamp - drag.lastTime, 1);
+    drag.vx = (event.clientX - drag.lastX) / elapsed;
+    drag.vy = (event.clientY - drag.lastY) / elapsed;
+    drag.lastX = event.clientX;
+    drag.lastY = event.clientY;
+    drag.lastTime = event.timeStamp;
+    drag.x = x;
+    drag.y = y;
+
+    drag.card.style.transform =
+      `translate3d(${x}px, ${y}px, 0) rotateX(${clamp(-y * 0.12, 18)}deg) ` +
+      `rotateY(${clamp(x * 0.12, 18)}deg) rotate(${clamp(x * 0.04, 10)}deg)`;
+  });
+
+  function endDrag(event, cancelled) {
+    if (!drag || event.pointerId !== drag.id) return;
+
+    const { card, moved, x, y, vx, vy } = drag;
+    drag = null;
+    card.classList.remove("is-dragging");
+
+    if (!moved) {
+      if (!cancelled) sendTopToBack(Math.random() < 0.5 ? -1 : 1, -0.35);
+      return;
+    }
+
+    const isFlick = Math.hypot(vx, vy) > flickSpeed;
+    if (!cancelled && (isFlick || Math.hypot(x, y) > dragThreshold)) {
+      sendTopToBack(isFlick ? vx : x, isFlick ? vy : y);
+    } else {
+      card.style.transform = restingTransform(card);
+    }
+  }
+
+  deck.addEventListener("pointerup", (event) => endDrag(event, false));
+  deck.addEventListener("pointercancel", (event) => endDrag(event, true));
+
+  hobbyLinks.forEach((link) => {
+    const card = order.find((item) => item.dataset.hobby === link.dataset.hobby);
+    // Hobby links are spans so they wrap with the sentence; give them the
+    // keyboard behaviour a <button> would have.
+    link.addEventListener("click", () => bringToTop(card));
+    link.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      bringToTop(card);
+    });
+  });
+
+  layout();
+
+  if (motionQuery.matches || !("IntersectionObserver" in window)) return;
+
+  // Entrance: the squared-up deck fans out card by card, then the top card
+  // does a half swipe to show the stack can be swiped.
+  function playEntrance() {
+    order.forEach((card, index) => {
+      card.style.transitionDelay = `${(order.length - 1 - index) * 90}ms`;
+    });
+    deck.classList.remove("is-gathered");
+
+    window.setTimeout(() => {
+      order.forEach((card) => {
+        card.style.transitionDelay = "";
+      });
+      if (!drag && !busy) topCard().classList.add("is-hinting");
+    }, 900);
+  }
+
+  deck.classList.add("is-gathered");
+  const entranceObserver = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      entranceObserver.disconnect();
+      playEntrance();
+    },
+    { threshold: 0.6 },
+  );
+  entranceObserver.observe(deck);
+})();
+
 // Deep link: /?project=<id> opens that showcase straight away. Runs last
 // because openModal touches walkthrough state declared below it.
 if (modal) {
