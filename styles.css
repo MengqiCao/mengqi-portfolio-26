@@ -221,9 +221,29 @@ p {
 
 .hero {
   position: relative;
+  isolation: isolate;
   min-height: auto;
   align-content: start;
   padding: var(--space-4) 0 var(--space-5);
+  /* The divider is drawn full width by the dot layer below instead. */
+  border-bottom-color: transparent;
+}
+
+/* Dot grid behind the intro, bleeding out to the edges of the main column,
+   with the section divider along its bottom edge. */
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  inset: calc(-1 * var(--space-3)) calc(-1 * var(--space-4)) -1px;
+  content: "";
+  border-bottom: 1px solid var(--color-border);
+  background-image: radial-gradient(
+    circle,
+    rgba(26, 26, 26, 0.1) 0.8px,
+    transparent 1.2px
+  );
+  background-size: 18px 18px;
+  pointer-events: none;
 }
 
 .oneko-divider-widget {
@@ -3489,6 +3509,11 @@ figcaption,
     padding: var(--space-4) 0 var(--space-5);
   }
 
+  .hero::before {
+    right: calc(-1 * var(--space-3));
+    left: calc(-1 * var(--space-3));
+  }
+
   /* minmax(0, ...) lets wide media scroll or shrink inside its own
      container instead of widening the whole page. */
   .case-page {
@@ -3526,6 +3551,11 @@ figcaption,
   .case-progress {
     padding-right: var(--space-2);
     padding-left: var(--space-2);
+  }
+
+  .hero::before {
+    right: calc(-1 * var(--space-2));
+    left: calc(-1 * var(--space-2));
   }
 
   .hero,
