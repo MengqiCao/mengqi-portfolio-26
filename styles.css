@@ -755,6 +755,9 @@ body.case-page h3 {
 
 .rp-thumb {
   position: relative;
+  /* Without a definite width, min-height widens the card through
+     aspect-ratio and it spills out of the column. */
+  width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   /* Faint dot grid over a cool wash, tinted with the case study's accent. */
@@ -3486,26 +3489,41 @@ figcaption,
     padding: var(--space-4) 0 var(--space-5);
   }
 
+  /* minmax(0, ...) lets wide media scroll or shrink inside its own
+     container instead of widening the whole page. */
   .case-page {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
+  /* No progress rail on small screens: just the logo and the way back. */
   .case-progress {
     position: static;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
     height: auto;
+    padding: var(--space-2) var(--space-3);
     border-right: 0;
     border-bottom: 1px solid var(--color-border);
   }
 
+  .case-brand,
+  .back-link {
+    margin-bottom: 0;
+  }
+
+  .case-progress strong,
   .case-progress nav {
-    display: flex;
-    flex-wrap: wrap;
+    display: none;
   }
 }
 
 @media (max-width: 760px) {
   .site-nav,
-  .portfolio {
+  .portfolio,
+  .case-progress {
     padding-right: var(--space-2);
     padding-left: var(--space-2);
   }
@@ -3581,7 +3599,10 @@ figcaption,
     min-height: auto;
   }
 
+  /* A definite width keeps min-height from widening these through
+     aspect-ratio. */
   .project-image {
+    width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
   }
@@ -4200,9 +4221,17 @@ figcaption,
   .rp-phase-marker__rule {
     display: none;
   }
+
+  .rp-phase-marker__name {
+    flex-shrink: 1;
+  }
 }
 
 @media (max-width: 640px) {
+  .rp-page .case-meta-grid {
+    grid-template-columns: 1fr;
+  }
+
   .rp-role-impact {
     padding-left: var(--space-2);
   }
@@ -4893,12 +4922,6 @@ figcaption,
 .rp-map__scroll {
   min-width: 0;
   max-width: 100%;
-}
-
-@media (max-width: 900px) {
-  .rp-page.case-page {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 /* Scroll affordance, only where the chart actually overflows. */
