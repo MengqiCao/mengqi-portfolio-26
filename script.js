@@ -676,8 +676,9 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
   const widget = document.querySelector("[data-oneko-divider]");
   const cat = document.querySelector("[data-oneko-cat]");
   const ball = document.querySelector("[data-oneko-ball]");
+  const bowl = document.querySelector("[data-oneko-bowl]");
 
-  if (!widget || !cat || !ball) return;
+  if (!widget || !cat || !ball || !bowl) return;
 
   const heart = document.createElement("span");
   heart.className = "oneko-heart";
@@ -688,6 +689,11 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
   const catSize = 40;
   const spriteFrameSize = 40;
   const ballSize = 16;
+  const bowlWidth = 36;
+  // How far either side of the bowl the cat takes up while it eats.
+  const mealRoom = 38;
+  // bowl.svg holds the bowl empty, half full and full, in that order.
+  const bowlFull = 2;
   const spriteSets = {
     idle: [[-3, -3]],
     // Closed ^ ^ eyes, a little smile and blush, for after it has played.
@@ -721,6 +727,16 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
       [-4, -2],
       [-4, -3],
     ],
+    // Half crouched side-on with its head in the bowl, then lifted to chew.
+    // A tenth column, drawn after the pawing pose above and mirrored for west.
+    eatE: [
+      [-9, 0],
+      [-9, -1],
+    ],
+    eatW: [
+      [-9, -2],
+      [-9, -3],
+    ],
   };
 
   const state = {
@@ -734,7 +750,10 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     bounces: 0,
     launched: false,
     ballResting: true,
+    bowlX: 0,
+    bowlLevel: 0,
     catMode: "idle",
+    afterAlert: "chasing",
     pauseUntil: 0,
     playsLeft: 0,
     lastTime: performance.now(),
@@ -755,6 +774,11 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     cat.style.backgroundPosition = `${sprite[0] * spriteFrameSize}px ${
       sprite[1] * spriteFrameSize
     }px`;
+  }
+
+  function setBowlLevel(level) {
+    state.bowlLevel = level;
+    bowl.style.backgroundPosition = `${-level * bowlWidth}px 0`;
   }
 
   function positionElements() {
@@ -786,10 +810,17 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
       // Far enough from the cat that its walk over to play reads clearly.
       state.ballX = clamp(state.homeX + 120, 0, state.width - ballSize);
       state.ballY = 0;
+      // The bowl sits as far again past the ball.
+      state.bowlX = state.homeX + 240;
       state.initialBallPlaced = true;
     } else {
       state.ballX = clamp(state.ballX, 0, state.width - ballSize);
     }
+
+    state.bowlX = clamp(state.bowlX, 0, state.width - bowlWidth);
+    bowl.style.transform = `translate3d(${Math.round(state.bowlX)}px, 0, 0)`;
+    // The bowl may have moved under the cat; have it find its place again.
+    if (state.catMode === "eating") state.catMode = "toBowl";
 
     positionElements();
   }
@@ -868,18 +899,25 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
 
     state.ballX += state.ballVX * dt;
     bounceOffWalls();
-    const speed = Math.abs(state.ballVX) - 420 * dt;
+    // Coast on past the bowl and the spots the cat eats from, rather than
+    // stopping in front of either.
+    const nearBowl =
+      state.ballX + ballSize > state.bowlX - mealRoom &&
+      state.ballX < state.bowlX + bowlWidth + mealRoom;
+    const speed = nearBowl
+      ? Math.max(Math.abs(state.ballVX), 120)
+      : Math.abs(state.ballVX) - 420 * dt;
     state.ballVX = speed > 6 ? Math.sign(state.ballVX) * speed : 0;
     if (state.ballVX === 0) state.ballResting = true;
   }
 
-  // Where the cat stands to play: beside the ball with its paw just over it,
-  // on the side it's coming from (or the other side if that's off the line).
-  function playSpot() {
-    const reach = 10;
+  // Where the cat stands to use something on the line: beside it and
+  // overlapping it by `reach`, on the side it's coming from (or the other
+  // side if that's off the line).
+  function spotBeside(targetX, targetSize, reach) {
     const spotFor = (side) =>
-      side < 0 ? state.ballX - catSize + reach : state.ballX + ballSize - reach;
-    let side = state.catX + catSize / 2 <= state.ballX + ballSize / 2 ? -1 : 1;
+      side < 0 ? targetX - catSize + reach : targetX + targetSize - reach;
+    let side = state.catX + catSize / 2 <= targetX + targetSize / 2 ? -1 : 1;
     let x = spotFor(side);
 
     if (x < 0 || x > state.width - catSize) {
@@ -888,6 +926,16 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     }
 
     return { side, x: clamp(x, 0, state.width - catSize) };
+  }
+
+  // To play: with its paw just over the ball.
+  function playSpot() {
+    return spotBeside(state.ballX, ballSize, 10);
+  }
+
+  // To eat: with its head over the food.
+  function eatSpot() {
+    return spotBeside(state.bowlX, bowlWidth, 11);
   }
 
   function batBall(direction) {
@@ -900,15 +948,48 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     state.catMode = "chasing";
   }
 
+  // Runs the cat toward x; false once it's there.
+  function runTo(x, dt, now) {
+    const speed = 280;
+    const step = clamp(x - state.catX, -speed * dt, speed * dt);
+    state.catX += step;
+
+    if (Math.abs(step) <= 0.5) return false;
+
+    if (now - state.lastSpriteAt > 120) {
+      state.lastSpriteAt = now;
+      state.walkFrame += 1;
+      setSprite(step > 0 ? "E" : "W", state.walkFrame);
+    }
+    return true;
+  }
+
+  // A satisfied smile and a little heart.
+  function settleContent(now) {
+    state.catMode = "content";
+    state.pauseUntil = now + 1800;
+    setSprite("happy", 0);
+    heart.style.left = `${Math.round(state.catX + 22)}px`;
+    heart.classList.remove("is-floating");
+    void heart.offsetWidth;
+    heart.classList.add("is-floating");
+  }
+
   function stepCat(dt, now) {
     if (state.catMode === "idle") {
+      // Food left over from being called away mid-meal: go back for it.
+      if (state.bowlLevel > 0) {
+        state.catMode = "toBowl";
+        resetIdleAnimation();
+        return;
+      }
       runIdleSprite(now);
       return;
     }
 
     if (state.catMode === "alert") {
       setSprite("alert", 0);
-      if (now >= state.pauseUntil) state.catMode = "chasing";
+      if (now >= state.pauseUntil) state.catMode = state.afterAlert;
       return;
     }
 
@@ -918,6 +999,34 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
         state.homeX = state.catX;
         state.catMode = "idle";
         resetIdleAnimation();
+      }
+      return;
+    }
+
+    if (state.catMode === "toBowl") {
+      if (runTo(eatSpot().x, dt, now)) return;
+      state.catMode = "eating";
+      state.pauseUntil = now + 1200;
+      state.lastSpriteAt = 0;
+      return;
+    }
+
+    if (state.catMode === "eating") {
+      if (now - state.lastSpriteAt > 200) {
+        state.lastSpriteAt = now;
+        state.walkFrame += 1;
+        setSprite(eatSpot().side < 0 ? "eatE" : "eatW", state.walkFrame);
+      }
+      // The food goes down a level at a time; an empty bowl ends the meal.
+      if (now >= state.pauseUntil) {
+        setBowlLevel(state.bowlLevel - 1);
+        if (state.bowlLevel > 0) {
+          state.pauseUntil = now + 1200;
+        } else {
+          // Sit back up beside the bowl rather than half behind it.
+          state.catX = spotBeside(state.bowlX, bowlWidth, 4).x;
+          settleContent(now);
+        }
       }
       return;
     }
@@ -935,19 +1044,7 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     }
 
     // Chasing: run to the ball, then paw at it a few times before settling.
-    const speed = 280;
-    const distance = spot.x - state.catX;
-    const step = clamp(distance, -speed * dt, speed * dt);
-    state.catX += step;
-
-    if (Math.abs(step) > 0.5) {
-      if (now - state.lastSpriteAt > 120) {
-        state.lastSpriteAt = now;
-        state.walkFrame += 1;
-        setSprite(step > 0 ? "E" : "W", state.walkFrame);
-      }
-      return;
-    }
+    if (runTo(spot.x, dt, now)) return;
 
     if (!state.ballResting) {
       setSprite("idle", 0);
@@ -959,14 +1056,7 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
       state.pauseUntil = now + 450 + Math.random() * 350;
       state.lastSpriteAt = 0;
     } else {
-      // Done playing: a satisfied smile and a little heart.
-      state.catMode = "content";
-      state.pauseUntil = now + 1800;
-      setSprite("happy", 0);
-      heart.style.left = `${Math.round(state.catX + 22)}px`;
-      heart.classList.remove("is-floating");
-      void heart.offsetWidth;
-      heart.classList.add("is-floating");
+      settleContent(now);
     }
   }
 
@@ -998,8 +1088,26 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
     state.ballVY = 560 + Math.random() * 110;
     // React to the throw rather than anticipate it: a beat of "!" first.
     state.catMode = "alert";
+    state.afterAlert = "chasing";
     state.pauseUntil = performance.now() + 400;
     state.playsLeft = 1;
+    resetIdleAnimation();
+  }
+
+  function fillBowl() {
+    if (reduceMotion.matches) {
+      return;
+    }
+
+    setBowlLevel(bowlFull);
+    // Already on its way or eating: a refill just keeps it there longer.
+    if (state.catMode === "toBowl" || state.catMode === "eating") return;
+
+    // Food beats the ball: a beat of "!", then it drops everything to eat.
+    state.catMode = "alert";
+    state.afterAlert = "toBowl";
+    state.pauseUntil = performance.now() + 400;
+    state.playsLeft = 0;
     resetIdleAnimation();
   }
 
@@ -1026,6 +1134,7 @@ document.querySelectorAll("[data-rp-group]").forEach((group) => {
   }
 
   ball.addEventListener("click", launchBall);
+  bowl.addEventListener("click", fillBowl);
   window.addEventListener("resize", measure);
 
   measure();

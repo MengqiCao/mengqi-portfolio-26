@@ -249,7 +249,7 @@ p {
   left: 0;
   width: 40px;
   height: 40px;
-  background: url("assets/oneko/oneko.png") 0 0 / 360px 160px no-repeat;
+  background: url("assets/oneko/oneko.png") 0 0 / 400px 160px no-repeat;
   image-rendering: pixelated;
   pointer-events: none;
   transform: translate3d(0, 0, 0);
@@ -304,7 +304,29 @@ p {
   transform: translate3d(0, 0, 0);
 }
 
-.oneko-ball:focus-visible {
+.oneko-bowl {
+  position: absolute;
+  top: calc(var(--oneko-line-y) - 22px);
+  left: 0;
+  width: 36px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  background: url("assets/oneko/bowl.svg") 0 0 / 108px 22px no-repeat;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+/* A more forgiving click and tap target than the bowl's own outline. */
+.oneko-bowl::after {
+  position: absolute;
+  inset: -6px;
+  content: "";
+}
+
+.oneko-ball:focus-visible,
+.oneko-bowl:focus-visible {
   outline: 1px solid var(--color-text);
   outline-offset: 4px;
 }
