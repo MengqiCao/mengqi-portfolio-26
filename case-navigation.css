@@ -1,0 +1,34 @@
+/* Quiet project navigation: breadcrumb above, unconnected section markers. */
+.case-breadcrumb {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  padding: 20px 32px;
+  background: var(--color-bg);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.case-breadcrumb a { display: inline-flex; align-items: center; gap: 8px; color: var(--color-meta); }
+.case-breadcrumb a:hover { color: var(--color-text); }
+.case-breadcrumb svg { width: 16px; height: 16px; flex: 0 0 16px; }
+.case-breadcrumb__separator { color: #b9b6b1; }
+.site-nav { border-right: 0; }
+body.case-page .case-progress { display: block; position: sticky; top: 0; height: 100vh; padding: 184px 24px 32px 32px; border: 0; overflow-y: auto; }
+body.case-page .case-progress nav { display: grid; gap: 0; padding-left: 0; }
+body.case-page .case-progress nav::before { display: none; }
+body.case-page .case-progress nav a { padding: 7px 0; color: var(--color-meta); font-family: var(--font-sans); font-size: 14px; font-weight: 400; letter-spacing: 0; line-height: 1.5; text-transform: none; transition: color 180ms ease; }
+body.case-page .case-progress nav a::before { display: none; }
+body.case-page .case-progress nav a.is-active { color: #000; }
+body.case-page .case-progress nav a.is-active::before { display: block; content: ""; top: 15px; left: -14px; width: 4px; height: 4px; border-radius: 0; background: currentColor; }
+body.case-page .case-progress nav a:hover { color: var(--color-text); }
+body.case-page .case-study { padding-top: 128px; }
+@media (max-width: 760px) {
+  .case-breadcrumb { position: relative; min-height: 64px; padding: 20px 24px; flex-wrap: wrap; gap: 8px; }
+  body.case-page .case-progress { display: none; }
+  body.case-page .case-study { padding-top: 24px; }
+}

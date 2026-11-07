@@ -1,0 +1,212 @@
+/* Shared editorial system. RoastPic retains its approved page-specific layer. */
+:root {
+  --sidebar: 240px;
+  --reading: 760px;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display-sans: var(--font-sans);
+  --font-serif: var(--font-sans);
+  --color-text: #242321;
+  --color-secondary: #62615e;
+  --color-meta: #797671;
+  --color-border: #e8e6e2;
+}
+body { font-weight: 300; line-height: 1.7; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.025em; }
+.label, .nav-links, .resume-link, .project-card__meta, .back-link, .case-progress nav a {
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .06em;
+}
+/* Common case-study grid and hierarchy. */
+.case-page:not(.rp-page) .case-study { padding: 64px clamp(32px, 5.5vw, 88px) 96px; }
+.case-page:not(.rp-page) .case-hero,
+.case-page:not(.rp-page) .case-section { max-width: 1120px; }
+.case-page:not(.rp-page) .case-progress { padding: 32px; border: 0; overflow-y: auto; }
+.case-page:not(.rp-page) .case-brand { margin-bottom: 32px; }
+.case-page:not(.rp-page) .case-brand img { width: 88px; }
+.case-page:not(.rp-page) .back-link { border: 0; padding: 0; min-height: 32px; margin-bottom: 32px; }
+.case-page:not(.rp-page) .case-progress strong { font-family: var(--font-sans); font-size: 15px; font-weight: 400; margin-bottom: 32px; }
+.case-page:not(.rp-page) .case-progress nav { gap: 0; padding-left: 20px; }
+.case-page:not(.rp-page) .case-progress nav a { padding: 9px 0; font-size: 12px; letter-spacing: .025em; }
+.case-page:not(.rp-page) .case-progress nav a::before { top: 16px; left: -20px; width: 6px; height: 6px; }
+.case-page:not(.rp-page) .case-progress nav::before { left: 2px; top: 18px; bottom: 18px; }
+.case-page:not(.rp-page) .case-hero { display: grid; gap: 0; padding-bottom: 96px; }
+.case-page:not(.rp-page) .case-hero > .label { margin: 0 0 12px; }
+.case-page:not(.rp-page) .case-hero h1 { max-width: 850px; margin: 0 0 12px; font-size: 24px; line-height: 1.35; font-weight: 400; letter-spacing: -.025em; text-wrap: pretty; }
+.case-page:not(.rp-page) .case-deck { max-width: 760px; font-size: 16px; line-height: 1.6; margin: 0 0 32px; }
+.case-page:not(.rp-page) .case-meta-grid { gap: 32px; margin: 40px 0 0; }
+.case-page:not(.rp-page) .case-meta-grid .label { margin: 0 0 8px; }
+.case-page:not(.rp-page) .case-meta-grid p:not(.label) { font-size: 14px; font-weight: 400; line-height: 1.65; }
+.case-page:not(.rp-page) .case-hero-image { width: 100%; height: auto; aspect-ratio: 16 / 9; min-height: 0; margin: 24px 0 0; }
+.case-page:not(.rp-page) .case-section { padding: 0 0 112px; border-top: 0; scroll-margin-top: 40px; }
+.case-page:not(.rp-page) .case-section > .label { margin: 0 0 12px; }
+.case-page:not(.rp-page) .case-section h2 { max-width: 850px; margin-bottom: 28px; font-size: clamp(28px, 2.65vw, 38px); line-height: 1.3; font-weight: 400; letter-spacing: -.03em; text-wrap: pretty; }
+.case-page:not(.rp-page) .case-section > p:not(.label) { margin-bottom: 16px; }
+.case-page:not(.rp-page) h3 { font-weight: 400; }
+.case-page:not(.rp-page) .case-media { border: 0; border-radius: 8px; }
+.case-page:not(.rp-page) .case-media figcaption { padding: 12px 0; border-top: 0; font-size: 13px; letter-spacing: 0; text-transform: none; }
+.case-page:not(.rp-page) .case-media--wide { margin-top: 40px; }
+.case-page:not(.rp-page) .case-two-up { gap: 40px; }
+.case-page:not(.rp-page) .stat-grid strong { font-family: var(--font-sans); font-size: 48px; }
+/* Home: one consistent left edge from introduction to selected work. */
+.site-nav { border-right: 0; }
+.identity__logo { width: 88px; }
+.portfolio { padding: 64px clamp(32px, 5.5vw, 88px) 96px; }
+.hero, .section { max-width: 1120px; margin-inline: auto; column-gap: 24px; }
+.hero { padding: 32px 0 80px; }
+/* Keep the original dotted field; the cat widget owns the shared baseline. */
+.hero::before { display: block; inset: -32px 0 0; border-bottom: 0; }
+.oneko-divider-widget::before {
+  content: "";
+  position: absolute;
+  top: var(--oneko-line-y);
+  right: 0;
+  left: 0;
+  border-top: 1px solid var(--color-border);
+  pointer-events: none;
+}
+/* The sprite has three transparent pixels below its feet (scaled by 1.25). */
+.oneko-cat { top: calc(var(--oneko-line-y) - 36px); }
+.hero .label, .hero h1, .hero__text { grid-column: 1 / span 10; }
+#hero-title { font-size: clamp(32px, 3.3vw, 44px); line-height: 1.25; font-weight: 400; letter-spacing: -.035em; margin-bottom: 24px; text-wrap: pretty; }
+.hero-name { font-weight: 500; }
+.hero-name__sparkle { display: block; }
+.hero__text { max-width: 680px; line-height: 1.7; }
+.status-dot::before { display: none; }
+.nav-links { gap: 20px; }
+.resume-link { padding: 0; background: none; color: var(--color-text); }
+.section { padding: 80px 0; }
+.section__header, .section__title, .work-grid, .featured-list, .work-divider, .experience-list, .about-grid, .section--reading > * { grid-column: 1 / -1; }
+.section__header { grid-template-columns: 1fr; gap: 12px; margin-bottom: 32px; }
+.section__header .label, .section__header h2 { grid-column: 1; }
+.section__title { margin-bottom: 32px; }
+.section__title h2, .section__header h2, #about-title, .section--reading h2 { font-size: 32px; line-height: 1.3; font-weight: 400; letter-spacing: -.03em; }
+.work-divider { margin: 72px 0; }
+.work-grid { gap: 24px; }
+.project-card, .featured-card { border: 0; }
+.project-card a, .project-trigger { padding: 0; min-height: 0; }
+.project-card:hover, .featured-card:hover { opacity: 1; }
+.project-card h3 { font-size: 22px; }
+.project-image { margin-bottom: 24px; }
+.featured-list { gap: 56px; }
+.featured-card a { padding: 0; }
+.featured-card .project-card__meta { margin-bottom: 12px; }
+.featured-card h3 { font-size: 24px; font-weight: 400; margin-bottom: 12px; }
+.featured-card p { max-width: 760px; font-size: 15px; line-height: 1.7; }
+.about-grid { gap: 40px; }
+.section--reading p:not(.label) { line-height: 1.7; }
+/* Project overlays use the same typography and section rhythm. */
+.showcase-modal__panel { font-family: var(--font-sans); }
+.showcase-hero h2 { font-size: clamp(28px, 3vw, 38px); line-height: 1.3; font-weight: 400; }
+.showcase-content h3, .council-section h3, .sunwalk-section h3, .soundmap-section h3 { font-family: var(--font-sans); font-weight: 400; }
+.council-section, .sunwalk-section, .soundmap-section { padding-block: 72px; }
+@media (max-width: 1100px) {
+  :root { --sidebar: 200px; }
+  .case-page:not(.rp-page) .case-progress { padding: 32px 24px; }
+  .case-page:not(.rp-page) .case-study, .portfolio { padding: 48px 32px 64px; }
+  .case-page:not(.rp-page) .case-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .case-page:not(.rp-page) { display: block; }
+  .case-page:not(.rp-page) .case-progress { position: relative; height: auto; padding: 20px 24px; border-bottom: 1px solid var(--color-border); }
+  .case-page:not(.rp-page) .case-brand, .case-page:not(.rp-page) .case-progress strong, .case-page:not(.rp-page) .case-progress nav { display: none; }
+  .case-page:not(.rp-page) .back-link { margin: 0; }
+  .case-page:not(.rp-page) .case-study { padding: 32px 24px 48px; }
+  .case-page:not(.rp-page) .case-hero { padding-bottom: 64px; }
+  .case-page:not(.rp-page) .case-meta-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+  .case-page:not(.rp-page) .case-section { padding-bottom: 72px; }
+  .case-page:not(.rp-page) .case-two-up { grid-template-columns: 1fr; gap: 24px; }
+  .site-nav { position: relative; inset: auto; width: 100%; padding: 24px; }
+  .portfolio { width: 100%; margin-left: 0; padding: 24px; }
+  .hero, .section { grid-template-columns: 1fr; }
+  .hero .label, .hero h1, .hero__text { grid-column: 1; }
+  .hero { padding: 24px 0 56px; }
+  .section { padding: 56px 0; }
+  .work-grid, .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .featured-list { gap: 40px; }
+  .work-divider { margin: 48px 0; }
+  .featured-image { min-height: 0; }
+  .section__title h2, .section__header h2, #about-title { font-size: 28px; }
+}
+
+/* Homepage refinements: navigation, cover treatment and project captions. */
+.site-nav { border-right: 1px solid var(--color-border); }
+.identity__logo { width: 120px; }
+.case-page:not(.rp-page) .case-brand img { width: 120px; }
+.case-page:not(.rp-page) .case-progress { border-right: 1px solid var(--color-border); }
+.resume-link {
+  padding: 0 14px;
+  border-radius: 4px;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+.resume-link:hover, .resume-link:focus-visible { background: #242321; color: #fff; }
+.hero { padding-bottom: 104px; }
+.hero::before { background-image: none; }
+.featured-image { border-radius: 8px; overflow: hidden; }
+.rp-thumb { background-image: none; background-color: #f2f5fa; }
+.featured-card__heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 12px; }
+.featured-card__heading h3 { margin-bottom: 0; }
+.featured-card .featured-card__heading .project-card__meta { width: auto; margin-bottom: 0; }
+.amazon-retention-table, .amazon-retention-row { border: 0; }
+@media (max-width: 760px) {
+  .site-nav, .case-page:not(.rp-page) .case-progress { border-right: 0; }
+  .hero { padding-bottom: 80px; }
+  .featured-card__heading { gap: 8px 16px; }
+}
+.amazon-feature-detail article, .amazon-solution-caption { border-top: 0; }
+/* Right-aligned project categories and persistent Resume action. */
+.featured-card .featured-card__heading .project-card__meta { margin-left: auto; text-align: right; }
+.resume-link { background: #242321; color: #fff; }
+.resume-link:hover, .resume-link:focus-visible { background: #000; }
+/* A precise leading dot with a short, soft trail. White + difference remains
+   visible on both white pages and dark covers/buttons. */
+.portfolio-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transition: width 160ms ease, height 160ms ease, margin 160ms ease;
+  will-change: transform;
+}
+.portfolio-cursor--trail { width: 6px; height: 6px; margin: -3px 0 0 -3px; }
+.portfolio-cursor--trail:last-child { width: 4px; height: 4px; margin: -2px 0 0 -2px; }
+html.has-custom-cursor, html.has-custom-cursor * { cursor: none !important; }
+html.cursor-over-action .portfolio-cursor--lead { width: 14px; height: 14px; margin: -7px 0 0 -7px; }
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .portfolio-cursor { display: none; }
+}
+.site-nav { border-right: 0; }
+/* About copy occupies a compact reading column, with the photo at right. */
+.about-grid { grid-template-columns: minmax(0, 40%) minmax(0, 1fr); }
+.about-grid .photo-stack { width: min(100%, 300px); min-width: 0; justify-self: center; }
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: minmax(0, 1fr); }
+  .about-grid .photo-stack { justify-self: center; }
+}
+/* Lift cover artwork inside its clipped frame without moving the caption. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .featured-image--media > img,
+  .featured-image--media > video {
+    transition: transform 550ms cubic-bezier(.22, 1, .36, 1);
+  }
+  .featured-card a:hover .featured-image--media > img,
+  .featured-card a:hover .featured-image--media > video,
+  .featured-card a:focus-visible .featured-image--media > img,
+  .featured-card a:focus-visible .featured-image--media > video {
+    transform: translateY(-5px) scale(1.025);
+  }
+  /* The layered RoastPic artwork keeps its original framing and positions. */
+  .featured-card a:hover .rp-thumb > img,
+  .featured-card a:focus-visible .rp-thumb > img {
+    transform: translateY(-6px);
+  }
+}

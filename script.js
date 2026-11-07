@@ -4,25 +4,28 @@ const navSections = Array.from(navLinks)
   .filter(Boolean);
 
 if (navLinks.length && navSections.length) {
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (!visible) return;
-
-      navLinks.forEach((link) => {
-        link.classList.toggle(
-          "is-active",
-          link.getAttribute("href") === `#${visible.target.id}`,
-        );
-      });
-    },
-    { rootMargin: "-30% 0px -55% 0px", threshold: [0.1, 0.35, 0.65] },
-  );
-
-  navSections.forEach((section) => navObserver.observe(section));
+  let navFrame = 0;
+  function updateHomeNavigation() {
+    navFrame = 0;
+    const readingLine = Math.min(window.innerHeight * 0.3, 240);
+    let current = navSections[0];
+    for (const section of navSections) {
+      if (section.getBoundingClientRect().top <= readingLine) current = section;
+    }
+    navLinks.forEach((link) => {
+      const active = link.getAttribute("href") === `#${current.id}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function queueHomeNavigation() {
+    if (!navFrame) navFrame = requestAnimationFrame(updateHomeNavigation);
+  }
+  window.addEventListener("scroll", queueHomeNavigation, { passive: true });
+  window.addEventListener("resize", queueHomeNavigation, { passive: true });
+  window.addEventListener("load", queueHomeNavigation);
+  updateHomeNavigation();
 }
 
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -410,25 +413,31 @@ const processSections = Array.from(processLinks)
   .filter(Boolean);
 
 if (processLinks.length && processSections.length) {
-  const processObserver = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (!visible) return;
-
-      processLinks.forEach((link) => {
-        link.classList.toggle(
-          "is-active",
-          link.getAttribute("href") === `#${visible.target.id}`,
-        );
-      });
-    },
-    { rootMargin: "-25% 0px -55% 0px", threshold: [0.1, 0.4, 0.7] },
-  );
-
-  processSections.forEach((section) => processObserver.observe(section));
+  let processFrame = 0;
+  function updateProcessProgress() {
+    processFrame = 0;
+    const readingLine = Math.min(window.innerHeight * 0.28, 200);
+    let current = processSections[0];
+    for (const section of processSections) {
+      if (section.getBoundingClientRect().top <= readingLine) current = section;
+    }
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
+      current = processSections[processSections.length - 1];
+    }
+    processLinks.forEach((link) => {
+      const active = link.getAttribute("href") === `#${current.id}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  function queueProcessProgress() {
+    if (!processFrame) processFrame = requestAnimationFrame(updateProcessProgress);
+  }
+  window.addEventListener("scroll", queueProcessProgress, { passive: true });
+  window.addEventListener("resize", queueProcessProgress, { passive: true });
+  window.addEventListener("load", queueProcessProgress);
+  updateProcessProgress();
 }
 
 const walkthroughSteps = document.querySelectorAll("[data-walkthrough-step]");

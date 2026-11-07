@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;800&family=Noto+Serif+JP:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css" />
@@ -27,17 +27,19 @@
       new Lenis({ lerp: 0.1, anchors: true, autoRaf: true });
     </script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="editorial.css" />
+    <link rel="stylesheet" href="case-navigation.css" />
   </head>
   <body class="case-page">
+    <nav class="case-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html#work" aria-label="Back to work">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7" /></svg>
+        Work
+      </a>
+      <span class="case-breadcrumb__separator" aria-hidden="true">/</span>
+      <span aria-current="page">Amazon Music</span>
+    </nav>
     <aside class="case-progress" aria-label="Design process progress">
-      <a class="case-brand" href="index.html" aria-label="Mengqi Cao home">
-        <img src="mengqi-logo.svg" alt="Mengqi logo" />
-      </a>
-      <a class="back-link" href="index.html#work">
-        <span aria-hidden="true">&lt;-</span>
-        Back to projects
-      </a>
-      <strong>Amazon Music</strong>
       <nav>
         <a href="#challenge" class="is-active">Challenge</a>
         <a href="#solution">Solution</a>
@@ -51,13 +53,22 @@
 
     <main class="case-study">
       <header class="case-hero case-hero--editorial">
-        <p class="label">Retention strategy / Amazon Music</p>
         <h1>
           Improving User Retention on Amazon Music Through Fan Identity
         </h1>
         <p class="case-deck">
           A 1-month design sprint with Amazon Music exploring how music memory, fandom, and context can make users feel invested enough to stay.
         </p>
+
+        <figure class="case-media case-media--hero">
+          <video
+            src="assets/amazon%20music/am-thumbnail.mov"
+            autoplay
+            loop
+            muted
+            playsinline
+          ></video>
+        </figure>
         <div class="case-meta-grid">
           <div>
             <p class="label">Client</p>
@@ -76,15 +87,6 @@
             <p>1 month</p>
           </div>
         </div>
-        <figure class="case-media case-media--hero">
-          <video
-            src="assets/amazon%20music/am-thumbnail.mov"
-            autoplay
-            loop
-            muted
-            playsinline
-          ></video>
-        </figure>
       </header>
 
       <section class="case-section" id="challenge">
@@ -605,5 +607,6 @@
     </main>
 
     <script src="script.js?v=amazon-music-case"></script>
+    <script src="cursor.js"></script>
   </body>
 </html>

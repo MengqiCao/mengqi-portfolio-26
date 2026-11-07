@@ -1,0 +1,122 @@
+/* RoastPic pilot: typography and proportions informed by Georgia Lyu's Brix case. */
+.rp-page {
+  --sidebar: 240px;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display-sans: var(--font-sans);
+  --reading: 760px;
+  --color-text: #242321;
+  --color-secondary: #62615e;
+  --color-meta: #797671;
+  --color-border: #e8e6e2;
+  --rp-radius: 8px;
+  --rp-radius-sm: 6px;
+  font-weight: 300;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+.rp-page .case-study { padding: 64px clamp(32px, 5.5vw, 88px) 96px; }
+.rp-page .case-hero, .rp-page .case-section { max-width: 1120px; }
+.rp-page .case-progress { padding: 32px; border: 0; overflow-y: auto; }
+.rp-page .case-brand { margin-bottom: 32px; }
+.rp-page .case-brand img { width: 88px; }
+.rp-page .back-link { border: 0; padding: 0; min-height: 32px; margin-bottom: 32px; }
+.rp-page .case-progress strong { font-size: 15px; font-weight: 400; margin-bottom: 32px; }
+.rp-page .case-progress nav { gap: 0; padding-left: 20px; }
+.rp-page .case-progress nav a { padding: 9px 0; font-size: 12px; letter-spacing: .025em; }
+.rp-page .case-progress nav a::before { top: 16px; left: -20px; width: 6px; height: 6px; }
+.rp-page .case-progress nav::before { left: 2px; top: 18px; bottom: 18px; }
+.rp-page .case-progress nav a.is-active { color: var(--color-text); }
+.rp-page .case-progress nav a.is-active::before { background: var(--color-text); }
+.rp-page .label, .rp-page .back-link, .rp-page .case-progress nav a,
+.rp-page .rp-phase-marker, .rp-page .rp-stat__label, .rp-page .rp-project-tags {
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .06em;
+}
+.rp-page .case-hero--editorial { gap: 0; padding-bottom: 96px; }
+.rp-title-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.rp-page .case-hero h1 { font-size: 24px; line-height: 1.25; font-weight: 400; letter-spacing: -.025em; margin: 0; }
+.rp-page .rp-project-tags { display: flex; gap: 16px; margin: 0; color: var(--color-meta); text-transform: uppercase; }
+.rp-page .case-deck { max-width: none; font-size: 16px; line-height: 1.6; margin: 12px 0 32px; }
+.rp-page .rp-hero-shot { border: 0; border-radius: 8px; margin: 0 0 56px; }
+.rp-page .case-meta-grid { gap: 32px; margin: 0 0 40px; }
+.rp-page .case-meta-grid .label { margin: 0 0 8px; color: var(--color-meta); }
+.rp-page .case-meta-grid p:not(.label) { font-size: 14px; font-weight: 400; line-height: 1.65; max-width: 260px; }
+.rp-page .rp-role-impact { max-width: 760px; padding-left: 20px; border-left: 1px solid var(--color-border); }
+.rp-page .rp-role-impact .label { color: var(--color-meta); margin-bottom: 12px; }
+.rp-page .case-section { padding: 0 0 112px; border-top: 0; scroll-margin-top: 40px; }
+.rp-page .case-section > * + * { margin-top: 40px; }
+.rp-page .case-section > .label { margin-top: 0; margin-bottom: 12px; }
+.rp-page .case-section > .label + h2 { margin-top: 0; }
+.rp-page .case-section h2 { max-width: 850px; font-size: clamp(28px, 2.65vw, 38px); line-height: 1.3; font-weight: 400; letter-spacing: -.03em; margin-bottom: 28px; text-wrap: pretty; }
+.rp-page .case-section > h2 + p { margin-top: 0; }
+.rp-page .case-section > p + p { margin-top: 16px; }
+.rp-page .case-section h3 { font-weight: 400; letter-spacing: -.02em; }
+.rp-page .case-section > .rp-compare,
+.rp-page .case-section > .rp-map,
+.rp-page .case-section > .rp-matrix,
+.rp-page .case-section > .rp-screens,
+.rp-page .case-section > .rp-card-grid,
+.rp-page .case-section > .rp-stat-row,
+.rp-page .case-section > .rp-asks,
+.rp-page .case-section > .rp-photos-figure,
+.rp-page .case-section > .rp-diagram { margin-top: 40px; }
+.rp-page .rp-phase-marker { margin: 0 0 48px; padding-top: 24px; border-top: 1px solid var(--color-border); gap: 16px; }
+.rp-page .rp-phase-marker__index { background: none; padding: 0; border-radius: 0; color: var(--color-meta); letter-spacing: .06em; }
+.rp-page .rp-phase-marker__name { font-size: 12px; letter-spacing: .04em; text-transform: none; }
+.rp-page .rp-card { border: 0; border-top: 1px solid var(--color-border); border-radius: 0; padding: 24px 16px 0 0; gap: 16px; }
+.rp-page .rp-card:hover { background: none; border-color: var(--color-border); }
+.rp-page .rp-card__icon { display: none; }
+.rp-page .rp-card h3 { font-size: 19px; }
+.rp-page .case-section > .rp-solution { margin-top: 64px; padding-top: 48px; }
+.rp-page .rp-solution__head { grid-template-columns: 40px minmax(0, 1fr); gap: 16px; margin-bottom: 32px; }
+.rp-page .rp-solution__intro h3 { font-size: 24px; }
+.rp-page .rp-solution__index { color: var(--color-meta); letter-spacing: .04em; }
+.rp-page .rp-solution__screens { padding: 40px 32px; gap: 24px; border: 0; background: #f6f6f5; }
+.rp-page .rp-shot img { box-shadow: none; border: 1px solid #e5e5e5; border-radius: 12px; }
+.rp-page .rp-notes { gap: 28px 40px; margin-top: 32px; }
+.rp-page .rp-notes strong { font-size: 15px; font-weight: 500; }
+.rp-page .rp-notes p, .rp-page .rp-shot figcaption { line-height: 1.65; }
+.rp-page .rp-solution--split .rp-notes { margin-top: 0; }
+.rp-page .rp-lesson { border-color: var(--color-border); }
+@media (max-width: 1100px) {
+  .rp-page { --sidebar: 200px; }
+  .rp-page .case-progress { padding: 32px 24px; }
+  .rp-page .case-study { padding: 48px 32px 64px; }
+  .rp-title-row { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .rp-page .rp-solution--split .rp-solution__body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .rp-page { display: block; }
+  .rp-page .case-progress { position: relative; height: auto; padding: 20px 24px; border-bottom: 1px solid var(--color-border); }
+  .rp-page .case-brand, .rp-page .case-progress strong, .rp-page .case-progress nav { display: none; }
+  .rp-page .back-link { margin: 0; }
+  .rp-page .case-study { padding: 32px 24px 48px; }
+  .rp-page .rp-project-tags { gap: 12px; flex-wrap: wrap; font-size: 11px; }
+  .rp-page .case-section { padding-bottom: 72px; }
+  .rp-page .case-hero--editorial { padding-bottom: 64px; }
+  .rp-page .rp-hero-shot { margin-bottom: 32px; }
+  .rp-page .case-meta-grid { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+  .rp-page .case-meta-grid p:not(.label) { max-width: none; }
+  .rp-page .rp-solution__head { grid-template-columns: 28px minmax(0, 1fr); gap: 8px; }
+  .rp-page .rp-solution__screens { grid-auto-columns: 70%; padding: 24px; gap: 24px; }
+  .rp-page .rp-phase-marker { flex-wrap: wrap; margin-bottom: 32px; }
+  .rp-page .rp-notes { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Keep case-study chapters open, without decorative separator rules. */
+.rp-page .case-progress { border-right: 1px solid var(--color-border); }
+.rp-page .case-brand img { width: 120px; }
+.rp-page .rp-phase-marker { border-top: 0; padding-top: 0; }
+.rp-page .rp-phase-marker__rule { display: none; }
+.rp-page .rp-phase-marker { justify-content: space-between; }
+.rp-page .case-section > .rp-solution,
+.rp-page .rp-card,
+.rp-page .rp-stat-row,
+.rp-page .rp-statement,
+.rp-page .rp-lesson { border-top: 0; border-bottom: 0; }
+@media (max-width: 760px) {
+  .rp-page .case-progress { border-right: 0; }
+}

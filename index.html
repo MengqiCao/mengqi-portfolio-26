@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;800&family=Noto+Serif+JP:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Sans+Condensed:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link
@@ -35,6 +35,7 @@
       new Lenis({ lerp: 0.1, anchors: true, autoRaf: true });
     </script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="editorial.css" />
   </head>
   <body>
     <div class="page-shell">
@@ -171,11 +172,10 @@
                   <img class="rp-thumb__chip rp-thumb__chip--defect" src="assets/roastpic/comp-defect.png" alt="" />
                 </div>
                 <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>01</span>
-                    <span>B2B · COMPLEX WORKFLOWS</span>
+                  <div class="featured-card__heading">
+                    <h3>RoastPic</h3>
+                    <div class="project-card__meta">B2B · COMPLEX WORKFLOWS</div>
                   </div>
-                  <h3>RoastPic</h3>
                   <p>
                     Taking a computer-vision coffee analysis app from MVP to a
                     persistent quality-control system for small roasteries.
@@ -199,11 +199,10 @@
                   ></video>
                 </div>
                 <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>02</span>
-                    <span>CONSUMER PRODUCT · GROWTH & RETENTION</span>
+                  <div class="featured-card__heading">
+                    <h3>Amazon Music</h3>
+                    <div class="project-card__meta">CONSUMER PRODUCT · GROWTH & RETENTION</div>
                   </div>
-                  <h3>Amazon Music</h3>
                   <p>
                     A one-month design sprint exploring emotional engagement
                     and long-term retention for Amazon Music.
@@ -223,11 +222,10 @@
                   />
                 </div>
                 <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>03</span>
-                    <span>Digital Accessibility</span>
+                  <div class="featured-card__heading">
+                    <h3>Wikipedia Accessibility Audit</h3>
+                    <div class="project-card__meta">Digital Accessibility</div>
                   </div>
-                  <h3>Wikipedia Accessibility Audit</h3>
                   <p>
                     A WCAG 2.2 audit and redesign of Wikipedia's iOS discovery
                     experience.
@@ -247,11 +245,10 @@
                   />
                 </div>
                 <div class="featured-card__body">
-                  <div class="project-card__meta">
-                    <span>04</span>
-                    <span>Design Systems</span>
+                  <div class="featured-card__heading">
+                    <h3>Pour Over Design System</h3>
+                    <div class="project-card__meta">Design Systems</div>
                   </div>
-                  <h3>Pour Over Design System</h3>
                   <p>
                     A unified UI kit and documentation system for Blue Bottle
                     Coffee's digital experience.
@@ -1257,5 +1254,6 @@
     </div>
 
     <script src="script.js?v=soundmap-project"></script>
+    <script src="cursor.js"></script>
   </body>
 </html>

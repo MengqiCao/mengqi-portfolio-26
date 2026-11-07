@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-06
+
+- Restored the desktop navigation divider and larger logos; added a dark Resume hover/focus treatment.
+- Simplified RoastPic chapter rules and Amazon retention table separators. Homepage covers now have 8px corners and no decorative grids, featured titles share a row with their tags, and the introduction has more space above the cat baseline.
+
+- Restored the homepage silver name treatment and sparkles at weight 500, plus the dotted field and a divider anchored to the cat widget baseline. Adjusted the cat for the transparent padding below its feet.
+
+- Extended the approved RoastPic typography and spacing direction across the homepage, all six other case studies, and project overlays.
+- Added `editorial.css` for shared DM Sans typography, IBM Plex Sans Condensed labels, 240px desktop navigation, aligned content grids, restrained cards, and responsive layouts.
+- Moved case-study metadata after cover media, preserving existing content and interactions. RoastPic retains its dedicated visual layer.
+- Verified all eight HTML pages for section structure, duplicate IDs, local asset links, and stylesheet references. Browser visual QA remains unavailable in this session.
+
 ## 2026-06-13
 
 - Added project documentation so future sessions can start from concise source
