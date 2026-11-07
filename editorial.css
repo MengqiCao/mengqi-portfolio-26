@@ -215,7 +215,7 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
   }
 }
 /* Effects never modify the native cursor suppression selector. */
-.site-pointer { transition: width 180ms ease, height 180ms ease, margin 180ms ease; }
+.site-pointer { transition: transform 85ms ease-out, width 180ms ease, height 180ms ease, margin 180ms ease; }
 .site-pointer.is-hovering { width: 14px; height: 14px; margin: -7px 0 0 -7px; }
 .site-pointer--trail { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border: 0; opacity: 0; z-index: 2147483646; transition: none; }
 .site-pointer--trail-1 { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; }
