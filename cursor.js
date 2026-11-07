@@ -13,6 +13,7 @@
       document.body.append(dot);
       return { node: dot, x: 0, y: 0 };
     });
+    root.classList.add('has-custom-cursor');
     let x = 0, y = 0, frame = 0, visible = false;
     function draw() {
       frame = 0;
@@ -32,7 +33,7 @@
       visible = false;
       cancelAnimationFrame(frame);
       frame = 0;
-      root.classList.remove('has-custom-cursor', 'cursor-over-action');
+      root.classList.remove('cursor-over-action');
       dots.forEach(dot => { dot.node.style.opacity = 0; });
     }
     function move(event) {
@@ -40,16 +41,18 @@
       x = event.clientX; y = event.clientY;
       if (!visible) dots.forEach(dot => { dot.x = x; dot.y = y; });
       visible = true;
-      root.classList.add('has-custom-cursor');
       root.classList.toggle('cursor-over-action', !!event.target.closest('a, button, [role="button"], input, textarea, select, summary'));
       if (!frame) frame = requestAnimationFrame(draw);
     }
-    document.addEventListener('pointermove', move, { passive: true });
+    document.addEventListener('pointermove', move, { passive: true, capture: true });
+    document.addEventListener('pointerover', move, { passive: true, capture: true });
     document.documentElement.addEventListener('pointerleave', hide);
     window.addEventListener('blur', hide);
     cleanup = () => {
       hide();
-      document.removeEventListener('pointermove', move);
+      root.classList.remove('has-custom-cursor');
+      document.removeEventListener('pointermove', move, true);
+      document.removeEventListener('pointerover', move, true);
       document.documentElement.removeEventListener('pointerleave', hide);
       window.removeEventListener('blur', hide);
       dots.forEach(dot => dot.node.remove());
