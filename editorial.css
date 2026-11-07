@@ -159,11 +159,34 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
 .featured-card .featured-card__heading .project-card__meta { margin-left: auto; text-align: right; }
 .resume-link { background: #242321; color: #fff; }
 .resume-link:hover, .resume-link:focus-visible { background: #000; }
-/* One browser-native pointer. No DOM cursor overlays or pointermove repainting. */
+/* The native cursor stays hidden throughout movement and hover. Only the
+   plain, non-interactive circle below is painted; no cursor image caching. */
 @media (hover: hover) and (pointer: fine) {
-  html, html *, html *::before, html *::after {
-    cursor: url("assets/cursor/circle.png") 8 8, none !important;
+  html[data-circle-cursor="ready"],
+  html[data-circle-cursor="ready"] *,
+  html[data-circle-cursor="ready"] *::before,
+  html[data-circle-cursor="ready"] *::after {
+    cursor: none !important;
   }
+}
+.site-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: #171717;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 2147483647;
+  contain: layout style paint;
+  will-change: transform;
+}
+@media (hover: none), (pointer: coarse) {
+  .site-pointer { display: none; }
 }
 .site-nav { border-right: 0; }
 /* About copy occupies a compact reading column, with the photo at right. */
