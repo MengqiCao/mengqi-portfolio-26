@@ -1,4 +1,4 @@
-/* Small pointer with a short trailing motion; no external dependency. */
+/* The pointer is a native CSS circle cursor; these dots provide only its trail. */
 (() => {
   const enabled = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
   const root = document.documentElement;

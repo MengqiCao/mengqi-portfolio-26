@@ -179,15 +179,14 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
 }
 .portfolio-cursor--trail { width: 6px; height: 6px; margin: -3px 0 0 -3px; }
 .portfolio-cursor--trail:last-child { width: 4px; height: 4px; margin: -2px 0 0 -2px; }
-/* Explicit transparent image avoids native hand/text-pointer flashes during
-   hover repaints. Cover pseudo-elements as well as ordinary descendants. */
-html.has-custom-cursor,
-html.has-custom-cursor *,
-html.has-custom-cursor *::before,
-html.has-custom-cursor *::after {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E") 0 0, none !important;
+/* Use a real browser cursor image: the OS draws the circle directly.
+   JavaScript supplies only the trailing dots, never the pointer itself. */
+@media (hover: hover) and (pointer: fine) {
+  html, html *, html *::before, html *::after {
+    cursor: url("assets/cursor/circle.png") 8 8, none !important;
+  }
 }
-html.cursor-over-action .portfolio-cursor--lead { width: 14px; height: 14px; margin: -7px 0 0 -7px; }
+.portfolio-cursor--lead { display: none; }
 @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
   .portfolio-cursor { display: none; }
 }
