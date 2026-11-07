@@ -159,36 +159,11 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
 .featured-card .featured-card__heading .project-card__meta { margin-left: auto; text-align: right; }
 .resume-link { background: #242321; color: #fff; }
 .resume-link:hover, .resume-link:focus-visible { background: #000; }
-/* A precise leading dot with a short, soft trail. White + difference remains
-   visible on both white pages and dark covers/buttons. */
-.portfolio-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2147483647;
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
-  border-radius: 50%;
-  background: #fff;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  opacity: 0;
-  transition: width 160ms ease, height 160ms ease, margin 160ms ease;
-  will-change: transform;
-}
-.portfolio-cursor--trail { width: 6px; height: 6px; margin: -3px 0 0 -3px; }
-.portfolio-cursor--trail:last-child { width: 4px; height: 4px; margin: -2px 0 0 -2px; }
-/* Use a real browser cursor image: the OS draws the circle directly.
-   JavaScript supplies only the trailing dots, never the pointer itself. */
+/* One browser-native pointer. No DOM cursor overlays or pointermove repainting. */
 @media (hover: hover) and (pointer: fine) {
   html, html *, html *::before, html *::after {
     cursor: url("assets/cursor/circle.png") 8 8, none !important;
   }
-}
-.portfolio-cursor--lead { display: none; }
-@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
-  .portfolio-cursor { display: none; }
 }
 .site-nav { border-right: 0; }
 /* About copy occupies a compact reading column, with the photo at right. */
