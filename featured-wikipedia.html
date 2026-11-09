@@ -27,8 +27,8 @@
       new Lenis({ lerp: 0.1, anchors: true, autoRaf: true });
     </script>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="editorial.css?v=circle-effects-8" />
-    <link rel="stylesheet" href="case-navigation.css" />
+    <link rel="stylesheet" href="editorial.css?v=case-nav-9" />
+    <link rel="stylesheet" href="case-navigation.css?v=case-nav-9" />
   </head>
   <body class="case-page">
     <nav class="case-breadcrumb" aria-label="Breadcrumb">
@@ -41,7 +41,8 @@
     </nav>
     <aside class="case-progress" aria-label="Design process progress">
       <nav>
-        <a href="#context" class="is-active">Context</a>
+        <a href="#overview" class="is-active">Overview</a>
+        <a href="#context">Context</a>
         <a href="#method">Method</a>
         <a href="#finding-1">Solution</a>
         <a href="#handoff">Handoff</a>
@@ -50,7 +51,7 @@
     </aside>
 
     <main class="case-study">
-      <header class="case-hero case-hero--editorial">
+      <header class="case-hero case-hero--editorial" id="overview">
         <h1>Enhancing Accessibility in Wikipedia's Discovery Experience</h1>
         <p class="case-deck">
           A WCAG 2.2 accessibility audit and redesign of the Wikipedia iOS app,
@@ -358,7 +359,7 @@
       </section>
     </main>
 
-    <script src="script.js?v=wikipedia-case"></script>
+    <script src="script.js?v=case-nav-9"></script>
     <script src="cursor.js?v=circle-effects-6"></script>
   </body>
 </html>

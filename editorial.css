@@ -19,18 +19,18 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
   letter-spacing: .06em;
 }
 /* Common case-study grid and hierarchy. */
-.case-page:not(.rp-page) .case-study { padding: 64px clamp(32px, 5.5vw, 88px) 96px; }
+.case-page .case-study { padding: 64px clamp(32px, 5.5vw, 88px) 96px; }
 .case-page:not(.rp-page) .case-hero,
 .case-page:not(.rp-page) .case-section { max-width: 1120px; }
-.case-page:not(.rp-page) .case-progress { padding: 32px; border: 0; overflow-y: auto; }
+.case-page .case-progress { padding: 32px; border: 0; overflow-y: auto; }
 .case-page:not(.rp-page) .case-brand { margin-bottom: 32px; }
 .case-page:not(.rp-page) .case-brand img { width: 88px; }
 .case-page:not(.rp-page) .back-link { border: 0; padding: 0; min-height: 32px; margin-bottom: 32px; }
-.case-page:not(.rp-page) .case-progress strong { font-family: var(--font-sans); font-size: 15px; font-weight: 400; margin-bottom: 32px; }
-.case-page:not(.rp-page) .case-progress nav { gap: 0; padding-left: 20px; }
-.case-page:not(.rp-page) .case-progress nav a { padding: 9px 0; font-size: 12px; letter-spacing: .025em; }
-.case-page:not(.rp-page) .case-progress nav a::before { top: 16px; left: -20px; width: 6px; height: 6px; }
-.case-page:not(.rp-page) .case-progress nav::before { left: 2px; top: 18px; bottom: 18px; }
+.case-page .case-progress strong { font-family: var(--font-sans); font-size: 15px; font-weight: 400; margin-bottom: 32px; }
+.case-page .case-progress nav { gap: 0; padding-left: 20px; }
+.case-page .case-progress nav a { padding: 9px 0; font-size: 12px; letter-spacing: .025em; }
+.case-page .case-progress nav a::before { top: 16px; left: -20px; width: 6px; height: 6px; }
+.case-page .case-progress nav::before { left: 2px; top: 18px; bottom: 18px; }
 .case-page:not(.rp-page) .case-hero { display: grid; gap: 0; padding-bottom: 96px; }
 .case-page:not(.rp-page) .case-hero > .label { margin: 0 0 12px; }
 .case-page:not(.rp-page) .case-hero h1 { max-width: 850px; margin: 0 0 12px; font-size: 24px; line-height: 1.35; font-weight: 400; letter-spacing: -.025em; text-wrap: pretty; }
@@ -103,16 +103,16 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
 .council-section, .sunwalk-section, .soundmap-section { padding-block: 72px; }
 @media (max-width: 1100px) {
   :root { --sidebar: 200px; }
-  .case-page:not(.rp-page) .case-progress { padding: 32px 24px; }
-  .case-page:not(.rp-page) .case-study, .portfolio { padding: 48px 32px 64px; }
+  .case-page .case-progress { padding: 32px 24px; }
+  .case-page .case-study, .portfolio { padding: 48px 32px 64px; }
   .case-page:not(.rp-page) .case-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
   .case-page:not(.rp-page) { display: block; }
-  .case-page:not(.rp-page) .case-progress { position: relative; height: auto; padding: 20px 24px; border-bottom: 1px solid var(--color-border); }
-  .case-page:not(.rp-page) .case-brand, .case-page:not(.rp-page) .case-progress strong, .case-page:not(.rp-page) .case-progress nav { display: none; }
+  .case-page .case-progress { position: relative; height: auto; padding: 20px 24px; border-bottom: 1px solid var(--color-border); }
+  .case-page:not(.rp-page) .case-brand, .case-page .case-progress strong, .case-page .case-progress nav { display: none; }
   .case-page:not(.rp-page) .back-link { margin: 0; }
-  .case-page:not(.rp-page) .case-study { padding: 32px 24px 48px; }
+  .case-page .case-study { padding: 32px 24px 48px; }
   .case-page:not(.rp-page) .case-hero { padding-bottom: 64px; }
   .case-page:not(.rp-page) .case-meta-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
   .case-page:not(.rp-page) .case-section { padding-bottom: 72px; }
@@ -134,7 +134,7 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
 .site-nav { border-right: 1px solid var(--color-border); }
 .identity__logo { width: 120px; }
 .case-page:not(.rp-page) .case-brand img { width: 120px; }
-.case-page:not(.rp-page) .case-progress { border-right: 1px solid var(--color-border); }
+.case-page .case-progress { border-right: 1px solid var(--color-border); }
 .resume-link {
   padding: 0 14px;
   border-radius: 4px;
@@ -150,7 +150,7 @@ h1, h2, h3 { font-family: var(--font-sans); font-weight: 400; letter-spacing: -.
 .featured-card .featured-card__heading .project-card__meta { width: auto; margin-bottom: 0; }
 .amazon-retention-table, .amazon-retention-row { border: 0; }
 @media (max-width: 760px) {
-  .site-nav, .case-page:not(.rp-page) .case-progress { border-right: 0; }
+  .site-nav, .case-page .case-progress { border-right: 0; }
   .hero { padding-bottom: 80px; }
   .featured-card__heading { gap: 8px 16px; }
 }
